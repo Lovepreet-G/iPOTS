@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Header from "./components/header";
+import HomePage from "./pages/homepage";
+
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
@@ -9,9 +11,9 @@ function App() {
     <>
       <BrowserRouter>
         <main id="main">
-          {/* <Header /> */}
+          <Header />
           <Routes>
-            {/* <Route path="/" element={<Home />} /> */}
+            <Route path="/" element={<HomePage />} />
           </Routes>
         </main>
       </BrowserRouter>
