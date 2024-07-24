@@ -2,6 +2,7 @@ import { useState } from "react";
 import Header from "./components/header";
 import HomePage from "./pages/homepage";
 import LegalPage from "./pages/legal";
+import AccessMenu from "./pages/accessmenu";
 
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/legal" element={<LegalPage />} />
+            <Route path="/accessmenu" element={<AccessMenu />} />
           </Routes>
         </main>
       </BrowserRouter>
