@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/accessmenu.css";
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
@@ -20,10 +21,23 @@ import medicalImg from "../../public/medical.png";
 
 const AccessMenu = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
+  const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
   };
+
+  const handleCategoryClick = (category) => {
+    if (selectedLocation) {
+      const url = `/data_page.php?location=${encodeURIComponent(
+        selectedLocation
+      )}&category=${encodeURIComponent(category.name)}`;
+      navigate(url);
+    } else {
+      alert("select a location first");
+    }
+  };
+
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -71,7 +85,11 @@ const AccessMenu = () => {
         </div>
         <div className="categories-container">
           {categories.map((category) => (
-            <div key={category.name} className="category">
+            <div
+              key={category.name}
+              className="category"
+              onClick={() => handleCategoryClick(category)}
+            >
               <img
                 src={category.img}
                 alt={category.name}
