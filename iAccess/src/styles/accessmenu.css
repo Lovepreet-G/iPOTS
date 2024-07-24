@@ -11,7 +11,7 @@
 }
 
 .header-title {
-  width: 1671px;
+  width: 1671.38px;
   height: 146px;
   font-family: "Plus Jakarta Sans", sans-serif;
   font-size: 110px;
@@ -69,6 +69,7 @@
   font-size: 35px;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
+  color: black;
 }
 
 .categories-container {
@@ -83,14 +84,14 @@
 
 .category {
   display: flex;
-  flex-direction: column; /* Stack children vertically */
-  align-items: center; /* Center the children horizontally */
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   background-color: #0fc0fc;
   color: black;
   width: 241px;
   height: 240px;
-  padding: 20px; /* Padding adjusted to be consistent */
+  padding: 20px;
   margin: 43px;
   border-radius: 10px;
   font-size: 35px;
@@ -108,12 +109,15 @@
 .category-icon {
   width: 144.01px;
   height: 143.74px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .category-names {
   font-size: 35px;
   line-height: 40px;
-  width: 156px;
+  width: 195.18px;
+  padding-top: 2px;
   height: 57px;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
