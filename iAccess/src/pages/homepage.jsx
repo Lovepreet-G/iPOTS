@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/homepage.css';
 
 import homeImg from '../../public/home.png';
@@ -17,10 +18,26 @@ import backImg from '../../public/Back.png';
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState('');
+  const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
   };
+
+  const checkBeforeNavigate = (url,event) => {   
+    
+    //checking if the user selected the location
+    if (!selectedLocation) {
+        alert('Please select a location first');
+        event.preventDefault(); // Prevent the default link click behavior
+        return;
+    }
+
+    const newUrl = url + "?location="+ selectedLocation;
+
+    navigate(newUrl);
+
+  }
   const locations = [
     { name: 'Home', img: homeImg },
     { name: 'Work', img: briefcaseImg },
@@ -31,12 +48,14 @@ const HomePage = () => {
   ];
 
   const categories = [
-    { name: 'Accessibility Category', img: assistiveTechImg },
-    { name: 'Medical Conditions', img: caduceusImg },
-    { name: 'Legal', img: lawImg },
-    { name: 'Dictionary', img: dictionaryImg },
-    { name: 'My Accommodations', img: saveImg },
+    { name: 'Accessibility Category', img: assistiveTechImg ,url: '/accessmenu'},
+    { name: 'Medical Conditions', img: caduceusImg , url: '' },
+    { name: 'Legal', img: lawImg , url: ''},
+    { name: 'Dictionary', img: dictionaryImg , url: ''},
+    { name: 'My Accommodations', img: saveImg , url: '' },
   ];
+
+
 
   return (
     <div className="homepage">
@@ -53,12 +72,12 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-      <div className="categories-container">
+      <div className="accessibility-categories-container">
         {categories.map((category) => (
-          <div key={category.name} className="category">
-            <img src={category.img} alt={category.name} className="category-icon" />
-            <span className="category-name">{category.name}</span>
-            <img src={backImg} alt="Back" className="category-back" />
+          <div key={category.name} className="accessibility-category" onClick={(event) => checkBeforeNavigate(category.url,event)}>
+            <img src={category.img} alt={category.name} className="accessibility-category-icon" />
+            <span className="accessibility-category-name">{category.name}</span>
+            <img src={backImg} alt="Back" className="accessibility-category-back" />
           </div>
         ))}
       </div>
