@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
-.access-page {
+.total-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -10,17 +10,21 @@
   padding-top: 10px;
 }
 
-.header-title {
+.page-title {
   width: 104.461rem;
   height: 9.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 6.875rem;
+  font-size: 2.5rem; /*40px*/
   font-weight: bold;
   color: #000;
   margin: 0;
 }
 
-.navbar-container {
+.page-name {
+  padding-left: 1.25rem;
+}
+
+.nav-container {
   display: flex;
   justify-content: center;
   width: 82.813rem;
@@ -72,27 +76,27 @@
   color: black;
 }
 
-.categories-container {
+.letters-container {
   margin-top: 3.75rem;
-  width: 100%;
-  display: flex;
+  width: 68.75rem; /* Had I use the Figma width, the screen would */
+  height: 90.321rem; /* have been 2x2, instead of the 4x4 in the */
+  display: flex; /* design on the Figma. */
   flex-direction: row;
   align-items: center;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.category {
+.letter {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  background-color: #0fc0fc;
+  background-color: #c0c0c0;
   color: black;
-  width: 15.063rem;
-  height: 15rem;
-  padding: 1.25rem;
-  margin: 2.688rem;
+  width: 8.742rem;
+  height: 9.974rem;
+  margin: 3.919rem;
   border-radius: 0.625rem;
   font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;
@@ -101,24 +105,19 @@
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.category:hover {
+.letter:hover {
   background-color: #0fc0fc;
   transform: scale(1.02);
 }
 
-.category-icon {
-  width: 9.001rem;
-  height: 9.984rem;
-  margin-left: auto;
-  margin-right: auto;
+.letter.selected {
+  background-color: #0fc0fc;
 }
 
-.category-names {
-  font-size: 2.188rem;
-  line-height: 2.5rem;
-  width: 12.199rem;
-  padding-top: 0.125rem;
-  height: 3.563rem;
+.the-letters {
+  font-size: 6.25rem;
+  height: 3.023rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
+  text-align: center;
 }
