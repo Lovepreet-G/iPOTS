@@ -24,8 +24,7 @@ const HomePage = () => {
     setSelectedLocation(location);
   };
 
-  const checkBeforeNavigate = (url,event) => {
-    
+  const checkBeforeNavigate = (url,event) => {   
     
     //checking if the user selected the location
     if (!selectedLocation) {

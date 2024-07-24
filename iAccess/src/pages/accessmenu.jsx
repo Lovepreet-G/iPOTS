@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 import "../styles/accessmenu.css";
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
@@ -19,11 +22,30 @@ import safetyImg from "../../public/prevention.png";
 import medicalImg from "../../public/medical.png";
 
 const AccessMenu = () => {
-  const [selectedLocation, setSelectedLocation] = useState("");
+
+  const locat = useLocation(); // Get the current location object
+  const queryParams = new URLSearchParams(locat.search); // Parse the query string
+  const location = queryParams.get('location');
+  const [selectedLocation, setSelectedLocation] = useState(location);
+  const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
   };
+
+  const checkBeforeNavigate = (category, event) => {   
+    //checking if the user selected the location
+    if (!selectedLocation) {
+        alert('Please select a location first');
+        event.preventDefault(); // Prevent the default link click behavior
+        return;
+    }
+
+    const Url = "/accomodation?location="+ selectedLocation +"&category="+category;
+
+    navigate(Url);
+
+  }
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -71,7 +93,7 @@ const AccessMenu = () => {
         </div>
         <div className="categories-container">
           {categories.map((category) => (
-            <div key={category.name} className="category">
+            <div key={category.name} className="category" onClick={(event) => checkBeforeNavigate(category.name,event)}>
               <img
                 src={category.img}
                 alt={category.name}
