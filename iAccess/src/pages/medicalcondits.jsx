@@ -79,7 +79,7 @@ const MedicalCondits = () => {
           <span className="logo">
             <img src="../../public/Caduceus.png" className="caduceus" />
           </span>
-          <span className="page-name">Medical Condition</span>
+          <span className="page-name"> My Medical Conditions</span>
         </div>
         <div className="nav-container">
           {locations.map((location) => (
