@@ -1,7 +1,8 @@
 import { useState } from "react";
 //import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/medicalcondits.css";
-
+import { CiSearch } from "react-icons/ci";
+import { PiMicrophoneFill } from "react-icons/pi";
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
 import backpackImg from "../../public/backpack.png";
@@ -98,7 +99,13 @@ const MedicalCondits = () => {
             </div>
           ))}
         </div>
-        <div className="search-bar"></div>
+        <div className="search-bar-container">
+          <div className="search-bar">
+            <CiSearch className="search-icon" />
+            <input type="search" className="searchbox" placeholder="Search" />
+            <PiMicrophoneFill className="microphone-icon" />
+          </div>
+        </div>
         <div className="letters-container">
           {letters.map((letter) => (
             <div
