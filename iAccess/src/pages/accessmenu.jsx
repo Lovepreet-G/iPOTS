@@ -33,7 +33,7 @@ const AccessMenu = () => {
   };
 
   const checkBeforeNavigate = (category, event) => {
-    //checking if the user selected the location
+    // checking if the user selected the location
     if (!selectedLocation) {
       alert("Please select a location first");
       event.preventDefault(); // Prevent the default link click behavior
@@ -41,10 +41,11 @@ const AccessMenu = () => {
     }
 
     const Url =
-      "/accommodation?location=" + selectedLocation + "&category=" + category;
+      "/accommodations?location=" + selectedLocation + "&category=" + category;
 
     navigate(Url);
   };
+
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -55,59 +56,73 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg }, // 1
-    { name: "Hearing", img: earImg }, // 2
-    { name: "Cognitive", img: brainImg }, // 3
-    { name: "Mental Health", img: mentalImg }, // 4
-    { name: "Sensory", img: sensorImg }, // 5
-    { name: "Allergy", img: allergyImg }, // 6
-    { name: "Vision", img: visionImg }, // 7
-    { name: "Pain", img: painImg }, // 8
-    { name: "Digestion", img: stomachImg }, // 9
-    { name: "Safety", img: safetyImg }, // 10
-    { name: "Medical Devices", img: medicalImg }, // 11
+    { name: "Mobility", img: mobilityImg },
+    { name: "Hearing", img: earImg },
+    { name: "Cognitive", img: brainImg },
+    { name: "MentalHealth", img: mentalImg },
+    { name: "Sensory", img: sensorImg },
+    { name: "Allergy", img: allergyImg },
+    { name: "Vision", img: visionImg },
+    { name: "Pain", img: painImg },
+    { name: "Digestion", img: stomachImg },
+    { name: "Safety", img: safetyImg },
+    { name: "MedicalDevices", img: medicalImg },
   ];
 
+  const displayNames = {
+    Mobility: "Mobility",
+    Hearing: "Hearing",
+    Cognitive: "Cognitive",
+    MentalHealth: "Mental Health",
+    Sensory: "Sensory",
+    Allergy: "Allergy",
+    Vision: "Vision",
+    Pain: "Pain",
+    Digestion: "Digestion",
+    Safety: "Safety",
+    MedicalDevices: "Medical Devices",
+  };
+
   return (
-    <>
-      <div className="access-page">
-        <h1 className="header-title">Choose Your Accessibility</h1>
-        <div className="navbar-container">
-          {locations.map((location) => (
-            <div
-              key={location.name}
-              className={`location ${
-                selectedLocation === location.name ? "selected" : ""
-              }`}
-              onClick={() => handleLocationClick(location.name)}
-            >
-              <img
-                src={location.img}
-                alt={location.name}
-                className="location-img"
-              />
-              <span className="location-name">{location.name}</span>
-            </div>
-          ))}
-        </div>
-        <div className="categories-container">
-          {categories.map((category) => (
-            <div
-              key={category.name}
-              className="category"
-              onClick={(event) => checkBeforeNavigate(category.name, event)}
-            >
-              <img
-                src={category.img}
-                alt={category.name}
-                className="category-icon"
-              />
-              <span className="category-names">{category.name}</span>
-            </div>
-          ))}
-        </div>
+    <div className="access-page">
+      <h1 className="header-title">Choose Your Accessibility</h1>
+      <div className="navbar-container">
+        {locations.map((location) => (
+          <div
+            key={location.name}
+            className={`location ${
+              selectedLocation === location.name ? "selected" : ""
+            }`}
+            onClick={() => handleLocationClick(location.name)}
+          >
+            <img
+              src={location.img}
+              alt={location.name}
+              className="location-img"
+            />
+            <span className="location-name">{location.name}</span>
+          </div>
+        ))}
       </div>
-    </>
+      <div className="categories-container">
+        {categories.map((category) => (
+          <div
+            key={category.name}
+            className="category"
+            onClick={(event) => checkBeforeNavigate(category.name, event)}
+          >
+            <img
+              src={category.img}
+              alt={category.name}
+              className="category-icon"
+            />
+            <span className="category-names">
+              {displayNames[category.name]}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
