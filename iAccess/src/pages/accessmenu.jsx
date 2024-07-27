@@ -41,7 +41,7 @@ const AccessMenu = () => {
     }
 
     const Url =
-      "/accommodations?location=" + selectedLocation + "&category=" + category;
+      "/accommodation2?location=" + selectedLocation + "&category=" + category;
 
     navigate(Url);
   };
@@ -85,7 +85,7 @@ const AccessMenu = () => {
 
   return (
     <div className="access-page">
-      <h1 className="header-title">Choose Your Accessibility</h1>
+      <h1 className="header-title">Accessibility Categories</h1>
       <div className="navbar-container">
         {locations.map((location) => (
           <div
