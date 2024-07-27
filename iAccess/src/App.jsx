@@ -19,7 +19,7 @@ function App() {
             <Route path="/accessmenu" element={<AccessMenu />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
             <Route
-              path="/medicalconditsreview"
+              path="/medicalconditreview/:letter"
               element={<MedicalConditsReview />}
             />
           </Routes>
