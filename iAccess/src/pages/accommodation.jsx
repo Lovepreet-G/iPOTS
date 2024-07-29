@@ -50,7 +50,7 @@ const Accommodation2 = () => {
                     params.medicalCondition = medicalCondition;
                 }
 
-                const url = 'http://localhost/iPots/iAccess-Server/accommodation.php';
+                const url = host + '/iPots/iAccess-Server/accommodation.php';
                 const response = await axios.get(url, { params });
                 if (Array.isArray(response.data)) {
                     setAccommodations(response.data);
