@@ -12,7 +12,8 @@ import backpackImg from "../../public/backpack.png";
 import transitImg from "../../public/image 18.png";
 import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
-import saveImg from '../../public/save-instagram.png';
+import unsaveImg from '../../public/unsave.png';
+import saveImg from '../../public/save.png';
 import mobilityImg from "../../public/mobility.png";
 import earImg from "../../public/ear.png";
 import brainImg from "../../public/brain.png";
@@ -27,6 +28,7 @@ import medicalImg from "../../public/medical.png";
 
 const Accommodation2 = () => {
     const host = "http://localhost";
+    const userId = '1';
     const [accommodations, setAccommodations] = useState([]);
     const locat = useLocation();
     const queryParams = new URLSearchParams(locat.search);
@@ -35,10 +37,20 @@ const Accommodation2 = () => {
     const medicalCondition = queryParams.get('medicalCondition');
     const [selectedLocation, setSelectedLocation] = useState(location);
     const [selectedItem, setSelectedItem] = useState(null);
+    const [bookmarks, setBookmarks] = useState([]);
 
 
     useEffect(() => {
-        // for fetching data from database when page loads accoording to the accessibilty and location
+        const bookmark = async () => {
+            // Fetch the user's accessibilty
+            const url = host + "/iPots/iAccess-Server/myAccessibility.php?method=All&userId="+userId ; 
+            const response = await axios.get(url) 
+            if(Array.isArray(response.data)){
+                setBookmarks(response.data);
+            }           
+            
+        }
+        // for fetching data from database when page loads 
         const fetchData = async () => {
             try {
                 const params = {
@@ -62,9 +74,42 @@ const Accommodation2 = () => {
             }
         };
 
+        bookmark();
         fetchData();
     }, [location, category]);
 
+     // to add accommodation to myAccessibility
+     const handleBookmark = async (accommodationId) => {
+        const url = host + "/iPots/iAccess-Server/myAccessibility.php";
+        const params ={
+            userId: userId, 
+            accommodationId: accommodationId,
+            method: 'Add'
+        } 
+        const response = await axios.get(url, {params})
+        console.log(response);
+        setBookmarks([...bookmarks, accommodationId]);
+        };
+    
+    // to add accommodation to myAccessibility
+    const handleUnbookmark =  async (accommodationId) => {
+        const url = host + "/iPots/iAccess-Server/myAccessibility.php";
+        const params = {
+            userId: userId,
+            accommodationId: accommodationId,
+            method:"Delete"
+        }
+        const response = await axios.get(url, {params})
+        console.log(response);
+        
+        setBookmarks(bookmarks.filter(id => id !== accommodationId));
+        
+    };
+
+    const isBookmarked = (accommodationId) => {
+        return bookmarks.includes(accommodationId);
+    };
+    // to handle the location change
     const handleLocationClick = async (location) => {
         setSelectedLocation(location);
         try {
@@ -154,7 +199,12 @@ const Accommodation2 = () => {
                         >
                             <div className={`item-header ${selectedItem === accommodation.id ? 'expanded' : ''}`}>
                                 <span>{accommodation.accommodation}</span>
-                                <img src={saveImg} alt="Save" className="acommodation-save" />
+                                {isBookmarked(accommodation.id) ? (                                     
+                                    <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save"  />
+                                ) : (
+                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Save"  />
+                                )}
+                               
                             </div>
                             {selectedItem === accommodation.id && (
                                 <div className="item-details">

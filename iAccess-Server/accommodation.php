@@ -9,9 +9,10 @@ header('Content-Type: application/json');
 require_once('includes/database.php');
 // include('includes/config.php');
 
-$category = isset($_GET['category']) ? $_GET['category'] : 'Work';
-$location = isset($_GET['location']) ? $_GET['location'] : 'All';
-$medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :'Autism';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$location = isset($_GET['location']) ? $_GET['location'] : '';
+$medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
+
 
 
 $response = [];
@@ -25,7 +26,7 @@ if($location=="All")
             $stmt->execute();
             $result = $stmt->get_result();
         
-            // Fetch data and process as needed
+            // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
             }
@@ -41,13 +42,12 @@ if($location=="All")
             $stmt->execute();
             $result = $stmt->get_result();
         
-            // Fetch data and process as needed
+            // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
             }
             $stmt->close();
         }
-
     }
 }
 else
@@ -61,7 +61,7 @@ else
             $stmt->execute();
             $result = $stmt->get_result();
         
-            // Fetch data and process as needed
+            // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
             }
@@ -77,7 +77,7 @@ else
             $stmt->execute();
             $result = $stmt->get_result();
         
-            // Fetch data and process as needed
+            // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
             }
