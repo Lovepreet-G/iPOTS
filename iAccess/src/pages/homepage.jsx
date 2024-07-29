@@ -59,7 +59,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-title">Homepage</h1>
+      <h1 className="homepage-title">iAccess</h1>
       <div className="navbar-container">
         {locations.map((location) => (
           <div
