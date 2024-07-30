@@ -34,70 +34,42 @@ const MedicalConditsReview = () => {
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
           <div className="condition-box">
             <div className="condition">Condition</div>
             <div className="icons">
               <CiIcons.CiBookmark className="bookmark" size={36} />
-              <PiIcons.PiDotsThreeOutlineLight
-                className="three-dots"
-                size={36}
-              />
             </div>
           </div>
         </div>
