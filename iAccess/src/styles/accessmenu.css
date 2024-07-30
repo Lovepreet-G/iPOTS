@@ -75,10 +75,8 @@
 .categories-container {
   margin-top: 3.75rem;
   width: 38rem;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
 }
 

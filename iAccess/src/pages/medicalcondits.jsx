@@ -27,10 +27,10 @@ const MedicalCondits = () => {
       alert("Please select a location first");
       event.preventDefault();
       return;
-    }
-    else { //
-      navigate(`/medicalconditreview/${letter}`);//
-    }//
+    } else {
+      //
+      navigate(`/medicalconditreview/${letter}`); //
+    } //
   };
 
   const handleLetterClick = (letter) => {
