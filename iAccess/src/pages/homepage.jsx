@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 import "../styles/homepage.css";
 
 import homeImg from "../../public/home.png";
@@ -18,6 +19,8 @@ import backImg from "../../public/Back.png";
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
@@ -27,15 +30,15 @@ const HomePage = () => {
   const checkBeforeNavigate = (url, event) => {
     //checking if the user selected the location
     if (!selectedLocation) {
-      alert("Please select a location first");
+      setOpen(true);
       event.preventDefault(); // Prevent the default link click behavior
       return;
     }
 
     const newUrl = url + "?location=" + selectedLocation;
-
     navigate(newUrl);
   };
+
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -99,6 +102,34 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+      <Popup
+        open={open}
+        closeOnDocumentClick
+        onClose={closeModal}
+        overlayClassName="popup-overlay"
+        contentClassName="popup-content"
+      >
+        <div className="popup-message">
+          <ul className="popup-location-list">
+            {locations.map((location) => (
+              <li key={location.name} className="popup-location-item">
+                <img
+                  src={location.img}
+                  alt={location.name}
+                  className="popup-location-img"
+                />
+                <span className="popup-location-name">{location.name}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="message">
+            Select the location where these accommodations will be used
+          </div>
+          <button className="close" onClick={closeModal}>
+            OK
+          </button>
+        </div>
+      </Popup>
     </div>
   );
 };
