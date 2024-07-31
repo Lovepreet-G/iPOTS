@@ -41,7 +41,7 @@ const AccessMenu = () => {
     }
 
     const Url =
-      "/accommodation2?location=" + selectedLocation + "&category=" + category;
+      "/accommodation?location=" + selectedLocation + "&category=" + category;
 
     navigate(Url);
   };
