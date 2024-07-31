@@ -195,10 +195,10 @@ const Accommodation2 = () => {
                         <div
                             key={accommodation.id}
                             className={`item ${selectedItem === accommodation.id ? 'selected' : ''}`}
-                            onClick={() => handleItemClick(accommodation)}
+                            
                         >
                             <div className={`item-header ${selectedItem === accommodation.id ? 'expanded' : ''}`}>
-                                <span>{accommodation.accommodation}</span>
+                                <span onClick={() => handleItemClick(accommodation)}>{accommodation.accommodation}</span>
                                 {isBookmarked(accommodation.id) ? (                                     
                                     <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save"  />
                                 ) : (
@@ -207,7 +207,7 @@ const Accommodation2 = () => {
                                
                             </div>
                             {selectedItem === accommodation.id && (
-                                <div className="item-details">
+                                <div className="item-details" onClick={() => handleItemClick(accommodation)}>
                                     <img src={iconImg} alt={accommodation.title} className="item-image" />
                                     <p>{accommodation.description}</p>
                                 </div>
