@@ -9,12 +9,13 @@ import transitImg from "../../public/image 18.png";
 import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
 
-import assistiveTechImg from "../../public/Assistive Technology.png";
-import caduceusImg from "../../public/Caduceus.png";
-import lawImg from "../../public/Law.png";
-import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/save-instagram.png";
-import backImg from "../../public/Back.png";
+import assistiveTechImg from '../../public/Assistive Technology.png';
+import caduceusImg from '../../public/Caduceus.png';
+import lawImg from '../../public/Law.png';
+import dictionaryImg from '../../public/Dictionary.png';
+import saveImg from '../../public/unsave.png';
+import backImg from '../../public/Back.png';
+
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -59,7 +60,7 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-title">Homepage</h1>
+      <h1 className="homepage-title">iAccess</h1>
       <div className="navbar-container">
         {locations.map((location) => (
           <div

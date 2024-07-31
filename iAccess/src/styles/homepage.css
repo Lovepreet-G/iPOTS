@@ -9,10 +9,10 @@
   }
   
   .homepage-title {
-    width: 1671px;
-    height: 146px;
+    width: 192px;
+    height: 50px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 110px;
+    font-size: 40px;
     font-weight: bold;
     color: #000000;
     margin: 0;
@@ -21,9 +21,9 @@
   .navbar-container {
     display: flex;
     justify-content: center;
-    width: 1325px;
-    height: 228px;
-    margin-top: 83px; 
+    width: 56.625rem;
+    height: 9.744rem;
+    margin-top: 2.5rem; 
   }
   
   .location {
@@ -31,10 +31,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 196px;
-    height: 228px;
-    margin: 0 15px;
-    padding: 10px;
+    width: 8.375rem;
+    height: 9.688rem;
+    margin: 0 10px;
+    /* padding: 10px; */
     cursor: pointer;
     border-radius: 10px;
     background-color: #C0C0C0;
@@ -51,8 +51,8 @@
   }
 
 .location-img {
-    width: 144.01px;
-    height: 143.74px;
+  width: 6.125rem;
+  height: 125rem;
     margin-top: 16px;
     margin-left: 26px;
     margin-right: 26px;
@@ -70,7 +70,7 @@
     font-weight: bold;
   }
   .accessibility-categories-container {
-    margin-top: 60px; 
+    margin-top: 40px; 
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -83,12 +83,12 @@
     justify-content: space-between;
     background-color: #0FC0FC;
     color: black;
-    width: 760px;
-    height: 129px; 
-    padding: 0 20px;
-    margin: 12px 0; 
+    width: 25.625rem;
+    height: 4rem; 
+    padding: 0 10px;
+    margin: 4px 0; 
     border-radius: 10px;
-    font-size: 45px;
+    font-size: 24px;
     font-family: 'Montserrat', sans-serif;
     font-weight: bold;
     cursor: pointer;
@@ -101,21 +101,21 @@
   }
   
   .accessibility-category-icon {
-    width: 85px;
-    height: 85px;
-    margin-right: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-right: 15px;
   }
   
   .accessibility-category-name {
-    width: 526px;
-    height: 46px;
+    width: 17.563rem;
+    height: 2.438rem;
     text-align: left;
     display: flex;
-  align-items: center;
+    align-items: center;
   }
   
   .accessibility-category-back {
-    width: 33.63px;
-    height: 43.73px;
+    width: 1.875rem;
+    height: 1.875rem;
     margin-left: 20px;
   }
