@@ -59,14 +59,14 @@ const AccessMenu = () => {
     { name: "Mobility", img: mobilityImg },
     { name: "Hearing", img: earImg },
     { name: "Cognitive", img: brainImg },
-    { name: "MentalHealth", img: mentalImg },
+    { name: "Mental Health", img: mentalImg },
     { name: "Sensory", img: sensorImg },
     { name: "Allergy", img: allergyImg },
     { name: "Vision", img: visionImg },
     { name: "Pain", img: painImg },
     { name: "Digestion", img: stomachImg },
     { name: "Safety", img: safetyImg },
-    { name: "MedicalDevices", img: medicalImg },
+    { name: "Medical Devices", img: medicalImg },
   ];
 
   const displayNames = {
@@ -85,13 +85,15 @@ const AccessMenu = () => {
 
   return (
     <>
-      <div className="access-page">
-        <h1 className="header-title">My Accessibility Categories</h1>
-        <div className="navbar-container">
+      <div className="access-menu-page">
+        <h1 className="header-access-menu-title">
+          My Accessibility Categories
+        </h1>
+        <div className="navbar-access-menu-container">
           {locations.map((location) => (
             <div
               key={location.name}
-              className={`location ${
+              className={`location-access-menu ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
               onClick={() => handleLocationClick(location.name)}
@@ -99,30 +101,32 @@ const AccessMenu = () => {
               <img
                 src={location.img}
                 alt={location.name}
-                className="location-img"
+                className="location-access-menu-img"
               />
-              <span className="location-name">{location.name}</span>
+              <span className="location-access-menu-name">{location.name}</span>
             </div>
           ))}
         </div>
-        <div className="categories-container">
+        <div className="categories-access-menu-container">
           {categories.map((category) => (
             <div
               key={category.name}
-              className="category"
+              className="category-access-menu"
               onClick={(event) => checkBeforeNavigate(category.name, event)}
             >
               <img
                 src={category.img}
                 alt={category.name}
-                className="category-icon"
+                className="category-access-menu-icon"
               />
-              <span className="category-names">{category.name}</span>
+              <span className="category-access-menu-names">
+                {category.name}
+              </span>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -9,13 +9,12 @@ import transitImg from "../../public/image 18.png";
 import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
 
-import assistiveTechImg from '../../public/Assistive Technology.png';
-import caduceusImg from '../../public/Caduceus.png';
-import lawImg from '../../public/Law.png';
-import dictionaryImg from '../../public/Dictionary.png';
-import saveImg from '../../public/unsave.png';
-import backImg from '../../public/Back.png';
-
+import assistiveTechImg from "../../public/Assistive Technology.png";
+import caduceusImg from "../../public/Caduceus.png";
+import lawImg from "../../public/Law.png";
+import dictionaryImg from "../../public/Dictionary.png";
+import saveImg from "../../public/unsave.png";
+import backImg from "../../public/Back.png";
 
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -60,12 +59,12 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-title">iAccess</h1>
-      <div className="navbar-container">
+      <h1 className="homepage-home-title">iAccess</h1>
+      <div className="navbar-home-container">
         {locations.map((location) => (
           <div
             key={location.name}
-            className={`location ${
+            className={`location-home ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
@@ -73,9 +72,9 @@ const HomePage = () => {
             <img
               src={location.img}
               alt={location.name}
-              className="location-img"
+              className="location-home-img"
             />
-            <span className="location-name">{location.name}</span>
+            <span className="location-home-name">{location.name}</span>
           </div>
         ))}
       </div>

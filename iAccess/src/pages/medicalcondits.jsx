@@ -88,7 +88,7 @@ const MedicalCondits = () => {
           {locations.map((location) => (
             <div
               key={location.name}
-              className={`location ${
+              className={`location-condits ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
               onClick={() => handleLocationClick(location.name)}
@@ -96,9 +96,9 @@ const MedicalCondits = () => {
               <img
                 src={location.img}
                 alt={location.name}
-                className="location-img"
+                className="location-condits-img"
               />
-              <span className="location-name">{location.name}</span>
+              <span className="location-condits-name">{location.name}</span>
             </div>
           ))}
         </div>
