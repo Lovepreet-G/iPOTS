@@ -71,7 +71,7 @@ const AccessMenu = () => {
   return (
     <>
       <div className="access-page">
-        <h1 className="header-title">Choose Your Accessibility</h1>
+        <h1 className="header-title">My Accessibility Categories</h1>
         <div className="navbar-container">
           {locations.map((location) => (
             <div

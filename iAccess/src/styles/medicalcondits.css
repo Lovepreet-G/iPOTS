@@ -8,7 +8,7 @@
   justify-content: flex-start;
   text-align: center;
   height: 100vh;
-  padding-top: 10px;
+  padding-top: 0.625rem;
 }
 
 .page-title {
@@ -79,12 +79,11 @@
 
 .letters-container {
   margin-top: 3.75rem;
-  width: 68.75rem; /* Had I use the Figma width, the screen would */
-  height: 90.321rem; /* have been 2x2, instead of the 4x4 in the */
-  display: flex; /* design on the Figma. */
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
+  width: 53rem; /* Had I use the Figma width, the screen would */
+  height: 79rem; /* have been 2x2, instead of the 4x4 in the */
+  display: grid; /* design on the Figma. */
+  grid-template-columns: repeat(4, 0.01fr);
+  grid-gap: 0.5rem;
   justify-content: center;
 }
 
@@ -145,7 +144,7 @@ input {
   color: black;
   width: 8.742rem;
   height: 9.974rem;
-  margin: 3.919rem;
+  margin: 1rem; /*adjusted from figma to 24px*/
   border-radius: 0.625rem;
   font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;

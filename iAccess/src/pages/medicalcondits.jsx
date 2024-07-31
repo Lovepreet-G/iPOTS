@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"; //
 import "../styles/medicalcondits.css";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
@@ -16,7 +16,7 @@ const MedicalCondits = () => {
   //const location = queryParams.get("location");
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedLetter, setSelectedLetter] = useState("");
-  //const navigate = useNavigate();
+  const navigate = useNavigate(); //
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -27,7 +27,10 @@ const MedicalCondits = () => {
       alert("Please select a location first");
       event.preventDefault();
       return;
-    }
+    } else {
+      //
+      navigate(`/medicalconditreview/${letter}`); //
+    } //
   };
 
   const handleLetterClick = (letter) => {
@@ -79,7 +82,7 @@ const MedicalCondits = () => {
           <span className="logo">
             <img src="../../public/Caduceus.png" className="caduceus" />
           </span>
-          <span className="page-name">Medical Condition</span>
+          <span className="page-name"> My Medical Conditions</span>
         </div>
         <div className="nav-container">
           {locations.map((location) => (
@@ -114,7 +117,7 @@ const MedicalCondits = () => {
                 selectedLetter === letter.num ? "selected" : ""
               }`}
               onClick={(event) => {
-                checkBeforeNavigate(letter.num, event);
+                checkBeforeNavigate(letter.char, event); //
                 handleLetterClick(letter.num);
               }}
             >
