@@ -33,13 +33,13 @@
   margin-top: 5.188rem;
 }
 
-.location {
+.location-condits {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 12.25rem;
-  height: 14.25rem;
+  width: 8.4rem;
+  height: 9.7rem;
   margin: 0 0.938rem;
   padding: 0.625rem;
   cursor: pointer;
@@ -48,30 +48,30 @@
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.location:hover {
+.location-condits:hover {
   background-color: #b0b0b0;
   transform: scale(1.05);
 }
 
-.location.selected {
+.location-condits.selected {
   background-color: #0fc0fc;
 }
 
-.location-img {
-  width: 9.001rem;
-  height: 8.984rem;
+.location-condits-img {
+  width: 6.125rem;
+  height: 6.125rem;
   margin-top: 1rem;
   margin-left: 1.625rem;
   margin-right: 1.625rem;
 }
 
-.location-icon {
+.location-condits-icon {
   font-size: 1.5rem;
 }
 
-.location-name {
+.location-condits-name {
   margin-top: 0.313rem;
-  font-size: 2.188rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   color: black;
@@ -142,10 +142,10 @@ input {
   text-align: center;
   background-color: #c0c0c0;
   color: black;
-  width: 8.742rem;
-  height: 9.974rem;
+  width: 8.813rem;
+  height: 9.875rem;
   margin: 1rem; /*adjusted from figma to 24px*/
-  border-radius: 0.625rem;
+  border-radius: 1.25rem;
   font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
