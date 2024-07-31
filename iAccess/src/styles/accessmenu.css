@@ -14,7 +14,7 @@
   width: 34.5rem;
   height: 3.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #000;
   margin: 0;
@@ -23,9 +23,9 @@
 .navbar-container {
   display: flex;
   justify-content: center;
-  width: 56.625rem;
-    height: 9.744rem;
-    margin-top: 2.5rem; 
+  width: 82.813rem;
+  height: 14.25rem;
+  margin-top: 5.188rem;
 }
 
 .location {
@@ -33,12 +33,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 8.375rem;
-  height: 9.688rem;
-  margin: 0 10px;
-  /* padding: 10px; */
+  width: 8.4rem;
+  height: 9.7rem;
+  margin: 0 0.938rem;
+  padding: 0.625rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
 }
@@ -54,36 +54,30 @@
 
 .location-img {
   width: 6.125rem;
-  height: 125rem;
-  margin-top: 16px;
-  margin-left: 26px;
-  margin-right: 26px;
+  height: 6.125rem;
+  margin-top: 1rem;
+  margin-left: 1.625rem;
+  margin-right: 1.625rem;
 }
 
 .location-icon {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 .location-name {
-  margin-top: 5px;
-  font-size: 35px;
+  margin-top: 0.313rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   color: black;
 }
 
 .categories-container {
-  margin-top: 60px;
-  /* width: 100%; */
+  margin-top: 3.75rem;
+  width: 38rem;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 33.938rem;
-  height: 45.6rem;
-  /* display: flex; */
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
-  justify-content: left;
+  justify-content: center;
 }
 
 .category {
@@ -93,12 +87,12 @@
   text-align: center;
   background-color: #0fc0fc;
   color: black;
-  width: 10.438rem;
-  height: 10.438rem;
-  padding: 20px;
-  margin: 10px;
-  border-radius: 16px;
-  /* font-size: 35px; */
+  width: 10.5rem;
+  height: 10.5rem;
+  padding: 1.25rem;
+  margin: 1rem;
+  border-radius: 0.625rem;
+  font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   cursor: pointer;
@@ -111,18 +105,18 @@
 }
 
 .category-icon {
-  width: 5.736rem;
-  height: 5.736rem;
+  width: 6.25rem;
+  height: 6.25rem;
   margin-left: auto;
   margin-right: auto;
 }
 
 .category-names {
-  font-size: 24px;
-  line-height: 40px;
-  width: 7.22rem;
-  /* padding-top: 2px; */
-  height: 1.694rem;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  width: 8rem;
+  padding-top: 0.125rem;
+  height: 3.563rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }

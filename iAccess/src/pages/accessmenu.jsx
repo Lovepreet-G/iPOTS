@@ -84,45 +84,45 @@ const AccessMenu = () => {
   };
 
   return (
-    <div className="access-page">
-      <h1 className="header-title">Accessibility Categories</h1>
-      <div className="navbar-container">
-        {locations.map((location) => (
-          <div
-            key={location.name}
-            className={`location ${
-              selectedLocation === location.name ? "selected" : ""
-            }`}
-            onClick={() => handleLocationClick(location.name)}
-          >
-            <img
-              src={location.img}
-              alt={location.name}
-              className="location-img"
-            />
-            <span className="location-name">{location.name}</span>
-          </div>
-        ))}
+    <>
+      <div className="access-page">
+        <h1 className="header-title">My Accessibility Categories</h1>
+        <div className="navbar-container">
+          {locations.map((location) => (
+            <div
+              key={location.name}
+              className={`location ${
+                selectedLocation === location.name ? "selected" : ""
+              }`}
+              onClick={() => handleLocationClick(location.name)}
+            >
+              <img
+                src={location.img}
+                alt={location.name}
+                className="location-img"
+              />
+              <span className="location-name">{location.name}</span>
+            </div>
+          ))}
+        </div>
+        <div className="categories-container">
+          {categories.map((category) => (
+            <div
+              key={category.name}
+              className="category"
+              onClick={(event) => checkBeforeNavigate(category.name, event)}
+            >
+              <img
+                src={category.img}
+                alt={category.name}
+                className="category-icon"
+              />
+              <span className="category-names">{category.name}</span>
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="categories-container">
-        {categories.map((category) => (
-          <div
-            key={category.name}
-            className="category"
-            onClick={(event) => checkBeforeNavigate(category.name, event)}
-          >
-            <img
-              src={category.img}
-              alt={category.name}
-              className="category-icon"
-            />
-            <span className="category-names">
-              {displayNames[category.name]}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 };
 
