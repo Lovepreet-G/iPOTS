@@ -4,6 +4,7 @@ import HomePage from "./pages/homepage";
 import AccessMenu from "./pages/accessmenu";
 import MedicalCondits from "./pages/medicalcondits";
 import MedicalConditsReview from "./pages/medicalconditreview";
+import MyAccommodations from "./pages/myAccommodations";
 
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/accessmenu" element={<AccessMenu />} />
+            <Route path="/myaccommodations" element={<MyAccommodations />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
             <Route
               path="/medicalconditreview/:letter"
