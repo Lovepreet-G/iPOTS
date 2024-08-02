@@ -3,11 +3,15 @@ import { useLocation , useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
 import * as PiIcons from "react-icons/pi";
+import unsaveImg from '../../public/unsave.png';
+import saveImg from '../../public/save.png';
 import "../styles/medicalconditreview.css";
 
 const MedicalConditsReview = () => {
   const host = "http://localhost";
+  const userId = '1'; 
   const [conditions, setConditions] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
   const locat = useLocation();
   const navigate = useNavigate();
 
@@ -22,17 +26,53 @@ const MedicalConditsReview = () => {
         const url = host + '/iPots/iAccess-Server/medical_conditions.php?method='+method +"&letter="+letter;
         const response = await axios.get(url);
         setConditions(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching medical conditions:", error);
       }
     };
 
+    const fetchBookmarks = async () => {
+      const url = host + "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" + userId; 
+      const response = await axios.get(url);
+      if (Array.isArray(response.data)) {
+        setBookmarks(response.data);
+      }           
+    }
+
     fetchConditions();
+    fetchBookmarks();
   }, [method, letter]);
-// to redirct the user to accessmenu page 
+
   const handleConditionClick = (condition) => {
     navigate(`/accessmenu?medicalCondition=${condition.term}&location=${location}`);
+  };
+
+  const handleBookmark = async (conditionId) => {
+    const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
+    const params = {
+      userId: userId, 
+      medicalConditionId: conditionId,
+      method: 'Add'
+    };
+    const response = await axios.get(url, { params });
+    console.log(response);
+    setBookmarks([...bookmarks, conditionId]);
+  };
+
+  const handleUnbookmark = async (conditionId) => {
+    const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
+    const params = {
+      userId: userId,
+      medicalConditionId: conditionId,
+      method: "Delete"
+    };
+    const response = await axios.get(url, { params });
+    console.log(response);
+    setBookmarks(bookmarks.filter(id => id !== conditionId));
+  };
+
+  const isBookmarked = (conditionId) => {
+    return bookmarks.includes(conditionId);
   };
 
   return (
@@ -55,14 +95,22 @@ const MedicalConditsReview = () => {
           </div>
         </div>
         <div className="conditions-container">
-          {conditions.map((condition) => (
-            <div key={condition.id} className="condition-box">
-              <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
-              <div className="icons">
-                <CiIcons.CiBookmark className="bookmark" size={36} />
+        {conditions.length > 0 ? (
+            conditions.map((condition) => (
+              <div key={condition.id} className="condition-box">
+                <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
+                <div className="icons">
+                  {isBookmarked(condition.id) ? (
+                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
+                  ) : (
+                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            <p className='Error'>No medical conditions starting with {letter}.</p>
+          )}
         </div>
       </div>
     </>
