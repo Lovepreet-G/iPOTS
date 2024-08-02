@@ -1,25 +1,40 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation , useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
 import * as PiIcons from "react-icons/pi";
 import "../styles/medicalconditreview.css";
 
 const MedicalConditsReview = () => {
-  const { letter } = useParams();
+  const host = "http://localhost";
   const [conditions, setConditions] = useState([]);
+  const locat = useLocation();
+  const navigate = useNavigate();
 
-  //useEffect and axios to get data from backend
+  const queryParams = new URLSearchParams(locat.search);
+  const method = queryParams.get("Method");
+  const letter = queryParams.get("letter");
+  const location = queryParams.get("location");
+
   useEffect(() => {
-    axios
-      .get(`http://localhost:8880/iPOTS/iAccess-Server/medical_conditions.php?letter=${letter}`)
-      .then((response) => {
+    const fetchConditions = async () => {
+      try {
+        const url = host + '/iPots/iAccess-Server/medical_conditions.php?method='+method +"&letter="+letter;
+        const response = await axios.get(url);
         setConditions(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the data!", error);
-      });
-  }, [letter]);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching medical conditions:", error);
+      }
+    };
+
+    fetchConditions();
+  }, [method, letter]);
+// to redirct the user to accessmenu page 
+  const handleConditionClick = (condition) => {
+    navigate(`/accessmenu?medicalCondition=${condition.term}&location=${location}`);
+  };
+
   return (
     <>
       <div className="all-page">
@@ -40,57 +55,14 @@ const MedicalConditsReview = () => {
           </div>
         </div>
         <div className="conditions-container">
-        {/* {conditions.map((condition) => (
+          {conditions.map((condition) => (
             <div key={condition.id} className="condition-box">
-              <div className="condition">{condition.term}</div>
+              <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
               <div className="icons">
                 <CiIcons.CiBookmark className="bookmark" size={36} />
-                <PiIcons.PiDotsThreeOutlineLight className="three-dots" size={36} />
               </div>
             </div>
-          ))} */}
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
-          <div className="condition-box">
-            <div className="condition">Condition</div>
-            <div className="icons">
-              <CiIcons.CiBookmark className="bookmark" size={36} />
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </>

@@ -21,8 +21,7 @@ function App() {
             <Route path="/accommodation" element={<Accommodation />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
             <Route
-              path="/medicalconditreview/:letter"
-              element={<MedicalConditsReview />}
+              path="/medicalconditreview" element={<MedicalConditsReview />}
             />
           </Routes>
         </main>

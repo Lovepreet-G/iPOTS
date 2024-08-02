@@ -1,5 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; //
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from 'react-router-dom';
+
+import axios from "axios";
 import "../styles/medicalcondits.css";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
@@ -11,12 +14,29 @@ import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
 
 const MedicalCondits = () => {
-  //const locat = useLocation();
-  //const queryParams = new URLSearchParams(locat.search);
-  //const location = queryParams.get("location");
-  const [selectedLocation, setSelectedLocation] = useState("");
+  const host = "http://localhost";
+  const locat = useLocation();
+  const queryParams = new URLSearchParams(locat.search);
+  const location = queryParams.get('location');
+  const [selectedLocation, setSelectedLocation] = useState(location);
   const [selectedLetter, setSelectedLetter] = useState("");
-  const navigate = useNavigate(); //
+  const [medicalConditions, setMedicalConditions] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchMedicalConditions = async () => {
+      try {
+        const url = host + '/iPots/iAccess-Server/medical_conditions.php?method=All';
+        const response = await axios.get(url);
+        setMedicalConditions(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching medical conditions:", error);
+      }
+    };
+
+    fetchMedicalConditions();
+  }, []);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -27,10 +47,12 @@ const MedicalCondits = () => {
       alert("Please select a location first");
       event.preventDefault();
       return;
-    } else {
-      //
-      navigate(`/medicalconditreview/${letter}`); //
-    } //
+    } else 
+    {
+      const Url =
+      "/medicalconditreview?Method=Letter&letter=" + letter +"&location=" + selectedLocation ;
+      navigate(Url);
+    }
   };
 
   const handleLetterClick = (letter) => {
@@ -117,7 +139,7 @@ const MedicalCondits = () => {
                 selectedLetter === letter.num ? "selected" : ""
               }`}
               onClick={(event) => {
-                checkBeforeNavigate(letter.char, event); //
+                checkBeforeNavigate(letter.char, event);
                 handleLetterClick(letter.num);
               }}
             >
