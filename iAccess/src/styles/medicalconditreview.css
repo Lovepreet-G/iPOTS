@@ -116,6 +116,7 @@ input {
   line-height: 150%;
   padding-right: 1rem;
   text-align: left;
+  cursor: pointer;
 }
 
 .condition-box:hover {

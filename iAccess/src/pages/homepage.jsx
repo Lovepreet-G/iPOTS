@@ -51,7 +51,7 @@ const HomePage = () => {
       img: assistiveTechImg,
       url: "/accessmenu",
     },
-    { name: "Medical Conditions", img: caduceusImg, url: "" },
+    { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
     { name: "Legal", img: lawImg, url: "" },
     { name: "Dictionary", img: dictionaryImg, url: "" },
     { name: "My Accommodations", img: saveImg, url: "" },

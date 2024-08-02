@@ -25,6 +25,7 @@ const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
   const queryParams = new URLSearchParams(locat.search); // Parse the query string
   const location = queryParams.get("location");
+  const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
 
@@ -40,8 +41,12 @@ const AccessMenu = () => {
       return;
     }
 
-    const Url =
+    let Url =
       "/accommodation?location=" + selectedLocation + "&category=" + category;
+
+    if (medicalCondition) {
+      Url += `&medicalCondition=${medicalCondition}`;
+    }
 
     navigate(Url);
   };

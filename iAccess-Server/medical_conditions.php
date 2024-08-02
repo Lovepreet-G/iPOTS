@@ -1,33 +1,45 @@
 <?php
+// CORS headers
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 header('Content-Type: application/json');
 
 // Include config file
-// require_once __DIR__ . '../includes/';
-include('includes/database.php');
-include('includes/config.php');
+require_once('includes/database.php');
 
-$letter = $_GET['letter'];
-$sql = "SELECT id, term FROM medical_conditions WHERE term LIKE '$letter%'";
+$method = isset($_GET['method']) ? $_GET['method'] : '';
+$letter = isset($_GET['letter']) ? $_GET['letter'] : '';
 
-$result = mysqli_query($connect, $sql);
-// $result = $conn->query($sql);
+if ($method == 'All') {
+    $stmt = $connect->prepare("SELECT * FROM medical_conditions");
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-$conditions = array();
+    $conditions = [];
+    while ($row = $result->fetch_assoc()) {
+        $conditions[] = $row;
+    }
 
-if ($result->num_rows > 0) {
-  while ($row = $result->fetch_assoc()) {
-    $conditions[] = $row;
-  }
+    echo json_encode($conditions);
+
+} elseif ($method == 'Letter' && $letter) {
+    $stmt = $connect->prepare("SELECT * FROM medical_conditions WHERE term LIKE ?");
+    $searchLetter = $letter . '%';
+    $stmt->bind_param("s", $searchLetter);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $conditions = [];
+    while ($row = $result->fetch_assoc()) {
+        $conditions[] = $row;
+    }
+
+    echo json_encode($conditions);
+
+} else {
+    echo json_encode(["error" => "Invalid method or missing parameters"]);
 }
 
-echo json_encode($conditions);
-
-mysqli_close($connect);
+$connect->close();
 ?>
-
-
-
-
-
-
-
