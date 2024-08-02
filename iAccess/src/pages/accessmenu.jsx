@@ -25,6 +25,7 @@ const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
   const queryParams = new URLSearchParams(locat.search); // Parse the query string
   const location = queryParams.get("location");
+  const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
 
@@ -33,18 +34,23 @@ const AccessMenu = () => {
   };
 
   const checkBeforeNavigate = (category, event) => {
-    //checking if the user selected the location
+    // checking if the user selected the location
     if (!selectedLocation) {
       alert("Please select a location first");
       event.preventDefault(); // Prevent the default link click behavior
       return;
     }
 
-    const Url =
+    let Url =
       "/accommodation?location=" + selectedLocation + "&category=" + category;
+
+    if (medicalCondition) {
+      Url += `&medicalCondition=${medicalCondition}`;
+    }
 
     navigate(Url);
   };
+
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -55,28 +61,44 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg }, // 1
-    { name: "Hearing", img: earImg }, // 2
-    { name: "Cognitive", img: brainImg }, // 3
-    { name: "Mental Health", img: mentalImg }, // 4
-    { name: "Sensory", img: sensorImg }, // 5
-    { name: "Allergy", img: allergyImg }, // 6
-    { name: "Vision", img: visionImg }, // 7
-    { name: "Pain", img: painImg }, // 8
-    { name: "Digestion", img: stomachImg }, // 9
-    { name: "Safety", img: safetyImg }, // 10
-    { name: "Medical Devices", img: medicalImg }, // 11
+    { name: "Mobility", img: mobilityImg },
+    { name: "Hearing", img: earImg },
+    { name: "Cognitive", img: brainImg },
+    { name: "Mental Health", img: mentalImg },
+    { name: "Sensory", img: sensorImg },
+    { name: "Allergy", img: allergyImg },
+    { name: "Vision", img: visionImg },
+    { name: "Pain", img: painImg },
+    { name: "Digestion", img: stomachImg },
+    { name: "Safety", img: safetyImg },
+    { name: "Medical Devices", img: medicalImg },
   ];
+
+  const displayNames = {
+    Mobility: "Mobility",
+    Hearing: "Hearing",
+    Cognitive: "Cognitive",
+    MentalHealth: "Mental Health",
+    Sensory: "Sensory",
+    Allergy: "Allergy",
+    Vision: "Vision",
+    Pain: "Pain",
+    Digestion: "Digestion",
+    Safety: "Safety",
+    MedicalDevices: "Medical Devices",
+  };
 
   return (
     <>
-      <div className="access-page">
-        <h1 className="header-title">Choose Your Accessibility</h1>
-        <div className="navbar-container">
+      <div className="access-menu-page">
+        <h1 className="header-access-menu-title">
+          My Accessibility Categories
+        </h1>
+        <div className="navbar-access-menu-container">
           {locations.map((location) => (
             <div
               key={location.name}
-              className={`location ${
+              className={`location-access-menu ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
               onClick={() => handleLocationClick(location.name)}
@@ -84,25 +106,27 @@ const AccessMenu = () => {
               <img
                 src={location.img}
                 alt={location.name}
-                className="location-img"
+                className="location-access-menu-img"
               />
-              <span className="location-name">{location.name}</span>
+              <span className="location-access-menu-name">{location.name}</span>
             </div>
           ))}
         </div>
-        <div className="categories-container">
+        <div className="categories-access-menu-container">
           {categories.map((category) => (
             <div
               key={category.name}
-              className="category"
+              className="category-access-menu"
               onClick={(event) => checkBeforeNavigate(category.name, event)}
             >
               <img
                 src={category.img}
                 alt={category.name}
-                className="category-icon"
+                className="category-access-menu-icon"
               />
-              <span className="category-names">{category.name}</span>
+              <span className="category-access-menu-names">
+                {category.name}
+              </span>
             </div>
           ))}
         </div>

@@ -46,7 +46,7 @@
 .search-bar-container {
   margin-top: 2rem;
   padding-top: 2.5rem;
-  padding-bottom: 0;
+  padding-bottom: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -58,7 +58,7 @@
 }
 
 .searchbox {
-  width: 49rem;
+  width: 47.625rem;
   height: 4rem;
   border-radius: 0.5rem;
   color: #b0b0b0;
@@ -89,7 +89,7 @@ input {
   width: 50px;
   height: 50px;
   pointer-events: none;
-  color: #000;
+  color: #c0c0c0;
 }
 
 .conditions-container {
@@ -104,9 +104,9 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 2.5rem;
+  /* margin-top: 2.5rem; */
   border-top: 1px solid #ddd;
-  padding: 0.5rem;
+  padding: 1rem;
 }
 
 .condition {
@@ -115,6 +115,14 @@ input {
   font-weight: 500;
   line-height: 150%;
   padding-right: 1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.condition-box:hover {
+  border: 2px solid #0fc0fc;
+  border-radius: 16px;
+  background-color: #0fc0fc;
 }
 
 .icons {

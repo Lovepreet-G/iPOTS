@@ -13,7 +13,7 @@ import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
 import lawImg from "../../public/Law.png";
 import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/save-instagram.png";
+import saveImg from "../../public/unsave.png";
 import backImg from "../../public/Back.png";
 
 const HomePage = () => {
@@ -51,7 +51,7 @@ const HomePage = () => {
       img: assistiveTechImg,
       url: "/accessmenu",
     },
-    { name: "Medical Conditions", img: caduceusImg, url: "" },
+    { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
     { name: "Legal", img: lawImg, url: "" },
     { name: "Dictionary", img: dictionaryImg, url: "" },
     { name: "My Accommodations", img: saveImg, url: "" },
@@ -59,12 +59,12 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-title">Homepage</h1>
-      <div className="navbar-container">
+      <h1 className="homepage-home-title">iAccess</h1>
+      <div className="navbar-home-container">
         {locations.map((location) => (
           <div
             key={location.name}
-            className={`location ${
+            className={`location-home ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
@@ -72,9 +72,9 @@ const HomePage = () => {
             <img
               src={location.img}
               alt={location.name}
-              className="location-img"
+              className="location-home-img"
             />
-            <span className="location-name">{location.name}</span>
+            <span className="location-home-name">{location.name}</span>
           </div>
         ))}
       </div>
