@@ -12,6 +12,7 @@ const MedicalConditsReview = () => {
   const userId = '1'; 
   const [conditions, setConditions] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const locat = useLocation();
   const navigate = useNavigate();
 
@@ -75,6 +76,14 @@ const MedicalConditsReview = () => {
     return bookmarks.includes(conditionId);
   };
 
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredConditions = conditions.filter((condition) =>
+    condition.term.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <>
       <div className="all-page">
@@ -82,7 +91,7 @@ const MedicalConditsReview = () => {
           <span className="icon">
             <img src="../../public/Caduceus.png" className="caduceus" />
           </span>
-          <span className="name-page">My Medical Conditions</span>
+          <span className="name-page">Medical Conditions</span>
         </div>
         <div className="letter-area">
           <h1 className="letter-style">{letter}</h1>
@@ -90,13 +99,19 @@ const MedicalConditsReview = () => {
         <div className="search-bar-container">
           <div className="search-bar">
             <CiIcons.CiSearch className="search-icon" />
-            <input type="search" className="searchbox" placeholder="Search" />
+            <input 
+              type="search" 
+              className="searchbox" 
+              placeholder="Search" 
+              value={searchTerm}
+              onChange={handleSearchChange}
+            />
             <PiIcons.PiMicrophoneFill className="microphone-icon" />
           </div>
         </div>
         <div className="conditions-container">
-        {conditions.length > 0 ? (
-            conditions.map((condition) => (
+        {filteredConditions.length > 0 ? (
+            filteredConditions.map((condition) => (
               <div key={condition.id} className="condition-box">
                 <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
                 <div className="icons">
@@ -109,7 +124,7 @@ const MedicalConditsReview = () => {
               </div>
             ))
           ) : (
-            <p className='Error'>No medical conditions starting with {letter}.</p>
+            <p className='Error'>No medical conditions match your search.</p>
           )}
         </div>
       </div>
