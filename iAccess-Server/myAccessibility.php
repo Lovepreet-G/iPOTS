@@ -15,6 +15,7 @@ $userId = isset($_GET['userId']) ? $_GET['userId'] : ''  ;
 $accommodationId = isset($_GET['accommodationId']) ? $_GET['accommodationId'] : ''  ;
 $location = isset($_GET['location']) ? $_GET['location'] : '';
 $medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
+$category = isset($_GET['category']) ? $_GET['category'] : '';
 
 
 if ($method == 'All') {
@@ -42,10 +43,11 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.medical_condition = ?");
+                AND a.medical_condition = ?
+                And a.disability_category=?");
             
             if ($stmt) {
-                $stmt->bind_param("is", $userId, $medicalCondition);
+                $stmt->bind_param("iss", $userId, $medicalCondition,$category);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -59,10 +61,11 @@ if ($method == 'All') {
                 SELECT a.* 
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
-                WHERE ma.user_id = ?");
+                WHERE ma.user_id = ?
+                And a.disability_category=?");
             
             if ($stmt) {
-                $stmt->bind_param("i", $userId);
+                $stmt->bind_param("is", $userId,$category);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -81,10 +84,11 @@ if ($method == 'All') {
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
                 AND a.location = ? 
-                AND a.medical_condition = ?");
+                AND a.medical_condition = ?
+                And a.disability_category=?");
             
             if ($stmt) {
-                $stmt->bind_param("iss", $userId, $location, $medicalCondition);
+                $stmt->bind_param("isss", $userId, $location, $medicalCondition,$category);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -99,10 +103,11 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.location = ?");
+                AND a.location = ?
+                And a.disability_category=?");
             
             if ($stmt) {
-                $stmt->bind_param("is", $userId, $location);
+                $stmt->bind_param("iss", $userId, $location,$category);
                 $stmt->execute();
                 $result = $stmt->get_result();
     

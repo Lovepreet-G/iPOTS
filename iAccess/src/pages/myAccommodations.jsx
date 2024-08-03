@@ -56,7 +56,8 @@ const Accommodation2 = () => {
                 const params = {
                     method: 'showAll',
                     userId: userId,
-                    location: location
+                    location: location,
+                    category:category
                 };
                 
                 // Checking if the user is coming from the medical page
@@ -113,11 +114,13 @@ const Accommodation2 = () => {
     const handleLocationClick = async (location) => {
         setSelectedLocation(location);
         try {
-            const url =  host + '/iPots/iAccess-Server/accommodation.php'
+            const url =  host + '/iPots/iAccess-Server/myAccessibility.php'
             const response = await axios.get(url , {
                 params: {
-                    category: category,
+                    method: 'showAll',
+                    userId: userId,
                     location: location,
+                    category:category
                 },
             });
 

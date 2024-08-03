@@ -90,6 +90,7 @@ const MedicalCondits = () => {
   const handleConditionClick = (condition) => {
     navigate(`/myaccessmenu?medicalCondition=${condition.term}&location=${location}`);
   };
+  
 
   
 
