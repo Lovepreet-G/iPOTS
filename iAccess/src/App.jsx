@@ -5,6 +5,8 @@ import AccessMenu from "./pages/accessmenu";
 import Accommodation from "./pages/accommodation";
 import MedicalCondits from "./pages/medicalcondits";
 import MedicalConditsReview from "./pages/medicalconditreview";
+import Dictionary from "./pages/dictionary";
+import DictionaryReview from "./pages/dictionaryreview";
 
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -21,8 +23,11 @@ function App() {
             <Route path="/accommodation" element={<Accommodation />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
             <Route
-              path="/medicalconditreview" element={<MedicalConditsReview />}
+              path="/medicalconditreview"
+              element={<MedicalConditsReview />}
             />
+            <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="/dictionaryreview" element={<DictionaryReview />} />
           </Routes>
         </main>
       </BrowserRouter>
