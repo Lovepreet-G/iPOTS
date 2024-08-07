@@ -26,10 +26,11 @@ import stomachImg from "../../public/stomach.png";
 import safetyImg from "../../public/prevention.png";
 import medicalImg from "../../public/medical.png";
 
-const Accommodation2 = () => {
+const myAccommodations = () => {
     const host = "http://localhost";
     const userId = '1';
     const [accommodations, setAccommodations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
     const locat = useLocation();
     const queryParams = new URLSearchParams(locat.search);
     const location = queryParams.get('location');
@@ -139,6 +140,14 @@ const Accommodation2 = () => {
         setSelectedItem(accommodation.id === selectedItem ? null : accommodation.id);
     };
 
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const filteredAccommodations = accommodations.filter(accommodation =>
+        accommodation.accommodation.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     const locations = [
         { name: "Home", img: homeImg },
         { name: "Work", img: briefcaseImg },
@@ -188,13 +197,19 @@ const Accommodation2 = () => {
                 <div className="search-bar-container">
                     <div className="search-bar">
                         <CiSearch className="search-icon" />
-                        <input type="search" className="searchbox" placeholder="Search" />
+                        <input 
+                            type="search" 
+                            className="searchbox" 
+                            placeholder="Search" 
+                            value={searchQuery}
+                            onChange={handleSearchChange}
+                        />
                         <PiMicrophoneFill className="microphone-icon" />
                     </div>
                 </div>
                 <div className="item-list">
-                    {accommodations.length > 0 ? (
-                    accommodations.map((accommodation) => (
+                    {filteredAccommodations.length > 0 ? (
+                    filteredAccommodations.map((accommodation) => (
                         <div
                             key={accommodation.id}
                             className={`item ${selectedItem === accommodation.id ? 'selected' : ''}`}
@@ -226,4 +241,4 @@ const Accommodation2 = () => {
         );
     };
 
-    export default Accommodation2;
+    export default myAccommodations;
