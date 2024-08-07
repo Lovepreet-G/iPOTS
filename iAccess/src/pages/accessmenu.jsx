@@ -81,6 +81,9 @@ const AccessMenu = () => {
         <h1 className="header-access-menu-title">
           Accessibility Categories
         </h1>
+        {medicalCondition && (
+                        <h1 className="header-access-menu-title">  {medicalCondition}</h1>
+                    )}
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
             <div

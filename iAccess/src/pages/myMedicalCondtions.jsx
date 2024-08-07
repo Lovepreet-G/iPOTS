@@ -13,7 +13,7 @@ import earthImg from "../../public/planet-earth.png";
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 
-const MedicalCondits = () => {
+const myMedicalCondits = () => {
   const host = "http://localhost";
   const userId = '1'; 
   const locat = useLocation();
@@ -78,21 +78,21 @@ const MedicalCondits = () => {
     return bookmarks.includes(conditionId);
   };
 
-
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
   };
 
-
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
+
   const handleConditionClick = (condition) => {
     navigate(`/myaccessmenu?medicalCondition=${condition.term}&location=${location}`);
   };
-  
 
-  
+  const filteredConditions = medicalConditions.filter(condition =>
+    condition.term.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   const locations = [
     { name: "Home", img: homeImg },
@@ -144,28 +144,27 @@ const MedicalCondits = () => {
           </div>
         </div>
         
-          <div className="conditions-container">
-            {medicalConditions.length > 0 ? (
-              medicalConditions.map((condition) => (
-                <div key={condition.id} className="condition-box">
-                  <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
-                  <div className="icons">
-                    {isBookmarked(condition.id) ? (
-                      <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
-                    ) : (
-                      <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
-                    )}
-                  </div>
+        <div className="conditions-container">
+          {filteredConditions.length > 0 ? (
+            filteredConditions.map((condition) => (
+              <div key={condition.id} className="condition-box">
+                <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
+                <div className="icons">
+                  {isBookmarked(condition.id) ? (
+                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
+                  ) : (
+                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                  )}
                 </div>
-              ))
-            ) : (
-              <p className="Error">No medical conditions matchs {searchTerm}.</p>
-            )}
-          </div>
-      
+              </div>
+            ))
+          ) : (
+            <p className="Error">No medical conditions match "{searchTerm}".</p>
+          )}
+        </div>
       </div>
     </>
   );
 };
 
-export default MedicalCondits;
+export default myMedicalCondits;

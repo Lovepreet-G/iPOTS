@@ -175,7 +175,10 @@ const myAccommodations = () => {
             <div className="accommodations-page">
                 <div className="header-container2">
                     <img src={iconImg} alt="Vision" className="vision-image" />
-                    <h1 className="accommodation-title">{category}</h1>
+                    <h1 className="accommodation-title">{category} </h1>
+                    {medicalCondition && (
+                        <h2 className="accommodation-title">  ({medicalCondition})</h2>
+                    )}
                 </div>
                 <div className="navbar-container">
                     {locations.map((location) => (
