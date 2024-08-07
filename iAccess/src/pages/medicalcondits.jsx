@@ -46,7 +46,7 @@ const MedicalCondits = () => {
     }
 
     fetchMedicalConditions();
-    fetchMedicalConditions();
+    fetchBookmarks();
   }, []);
 
   const handleBookmark = async (conditionId) => {
@@ -88,8 +88,7 @@ const MedicalCondits = () => {
       event.preventDefault();
       return;
     } else {
-      const Url =
-      "/medicalconditreview?Method=Letter&letter=" + letter + "&location=" + selectedLocation;
+      const Url ="/medicalconditreview?Method=Letter&letter=" + letter + "&location=" + selectedLocation;
       navigate(Url);
     }
   };
