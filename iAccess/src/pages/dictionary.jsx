@@ -27,58 +27,58 @@ const Dictionary = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   const fetchDefinitions = async () => {
-  //     try {
-  //       const url = host + "/iPots/iAccess-Server/definitions.php?method=All";
-  //       const response = await axios.get(url);
-  //       setDefinition(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching medical conditions:", error);
-  //     }
-  //   };
-  //   const fetchBookmarks = async () => {
-  //     const url =
-  //       host +
-  //       "/iPots/iAccess-Server/myDefinitions.php?method=All&userId=" +
-  //       userId;
-  //     const response = await axios.get(url);
-  //     if (Array.isArray(response.data)) {
-  //       setBookmarks(response.data);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchDefinitions = async () => {
+      try {
+        const url = host + "/iPots/iAccess-Server/definitions.php?method=All";
+        const response = await axios.get(url);
+        setDefinition(response.data);
+      } catch (error) {
+        console.error("Error fetching medical conditions:", error);
+      }
+    };
+    const fetchBookmarks = async () => {
+      const url =
+        host +
+        "/iPots/iAccess-Server/myDefinitions.php?method=All&userId=" +
+        userId;
+      const response = await axios.get(url);
+      if (Array.isArray(response.data)) {
+        setBookmarks(response.data);
+      }
+    };
 
-  //   fetchDefinitions();
-  //   fetchDefinitions();
-  // }, []);
+    fetchDefinitions();
+    fetchDefinitions();
+  }, []);
 
-  // const handleBookmark = async (conditionId) => {
-  //   const url = host + "/iPots/iAccess-Server/myDefinitions.php";
-  //   const params = {
-  //     userId: userId,
-  //     medicalConditionId: conditionId,
-  //     method: "Add",
-  //   };
-  //   const response = await axios.get(url, { params });
+  const handleBookmark = async (conditionId) => {
+    const url = host + "/iPots/iAccess-Server/myDefinitions.php";
+    const params = {
+      userId: userId,
+      medicalConditionId: conditionId,
+      method: "Add",
+    };
+    const response = await axios.get(url, { params });
 
-  //   setBookmarks([...bookmarks, conditionId]);
-  // };
+    setBookmarks([...bookmarks, conditionId]);
+  };
 
-  // const handleUnbookmark = async (conditionId) => {
-  //   const url = host + "/iPots/iAccess-Server/myDefinitions.php";
-  //   const params = {
-  //     userId: userId,
-  //     medicalConditionId: conditionId,
-  //     method: "Delete",
-  //   };
-  //   const response = await axios.get(url, { params });
+  const handleUnbookmark = async (conditionId) => {
+    const url = host + "/iPots/iAccess-Server/myDefinitions.php";
+    const params = {
+      userId: userId,
+      medicalConditionId: conditionId,
+      method: "Delete",
+    };
+    const response = await axios.get(url, { params });
 
-  //   setBookmarks(bookmarks.filter((id) => id !== conditionId));
-  // };
+    setBookmarks(bookmarks.filter((id) => id !== conditionId));
+  };
 
-  // const isBookmarked = (conditionId) => {
-  //   return bookmarks.includes(conditionId);
-  // };
+  const isBookmarked = (conditionId) => {
+    return bookmarks.includes(conditionId);
+  };
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -91,7 +91,7 @@ const Dictionary = () => {
       return;
     } else {
       const Url =
-        "/definitionreview?Method=Letter&letter=" +
+        "/dictionaryreview?Method=Letter&letter=" +
         letter +
         "&location=" +
         selectedLocation;
