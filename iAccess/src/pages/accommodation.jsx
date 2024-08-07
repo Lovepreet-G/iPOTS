@@ -30,38 +30,32 @@ const Accommodation2 = () => {
     const host = "http://localhost";
     const userId = '1';
     const [accommodations, setAccommodations] = useState([]);
+    const [bookmarks, setBookmarks] = useState([]);
+    const [selectedItem, setSelectedItem] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
     const locat = useLocation();
     const queryParams = new URLSearchParams(locat.search);
     const location = queryParams.get('location');
     const category = queryParams.get('category');
     const medicalCondition = queryParams.get('medicalCondition');
     const [selectedLocation, setSelectedLocation] = useState(location);
-    const [selectedItem, setSelectedItem] = useState(null);
-    const [bookmarks, setBookmarks] = useState([]);
 
 
     useEffect(() => {
-        const bookmark = async () => {
-            // Fetch the user's accessibilty
-            const url = host + "/iPots/iAccess-Server/myAccessibility.php?method=All&userId="+userId ; 
-            const response = await axios.get(url) 
-            if(Array.isArray(response.data)){
+        const fetchBookmarks = async () => {
+            const url = host + "/iPots/iAccess-Server/myAccessibility.php?method=All&userId=" + userId;
+            const response = await axios.get(url);
+            if (Array.isArray(response.data)) {
                 setBookmarks(response.data);
-            }           
-            
-        }
-        // for fetching data from database when page loads 
+            }
+        };
+
         const fetchData = async () => {
             try {
-                const params = {
-                    category: category,
-                    location: location,
-                };
-                // checking if the user is coming from medical page
+                const params = { category: category, location: location };
                 if (medicalCondition) {
                     params.medicalCondition = medicalCondition;
                 }
-
                 const url = host + '/iPots/iAccess-Server/accommodation.php';
                 const response = await axios.get(url, { params });
                 if (Array.isArray(response.data)) {
@@ -74,53 +68,35 @@ const Accommodation2 = () => {
             }
         };
 
-        bookmark();
+        fetchBookmarks();
         fetchData();
     }, [location, category]);
 
-     // to add accommodation to myAccessibility
-     const handleBookmark = async (accommodationId) => {
+    const handleBookmark = async (accommodationId) => {
         const url = host + "/iPots/iAccess-Server/myAccessibility.php";
-        const params ={
-            userId: userId, 
-            accommodationId: accommodationId,
-            method: 'Add'
-        } 
-        const response = await axios.get(url, {params})
+        const params = { userId: userId, accommodationId: accommodationId, method: 'Add' };
+        const response = await axios.get(url, { params });
         console.log(response);
         setBookmarks([...bookmarks, accommodationId]);
-        };
-    
-    // to add accommodation to myAccessibility
-    const handleUnbookmark =  async (accommodationId) => {
+    };
+
+    const handleUnbookmark = async (accommodationId) => {
         const url = host + "/iPots/iAccess-Server/myAccessibility.php";
-        const params = {
-            userId: userId,
-            accommodationId: accommodationId,
-            method:"Delete"
-        }
-        const response = await axios.get(url, {params})
+        const params = { userId: userId, accommodationId: accommodationId, method: "Delete" };
+        const response = await axios.get(url, { params });
         console.log(response);
-        
         setBookmarks(bookmarks.filter(id => id !== accommodationId));
-        
     };
 
     const isBookmarked = (accommodationId) => {
         return bookmarks.includes(accommodationId);
     };
-    // to handle the location change
+
     const handleLocationClick = async (location) => {
         setSelectedLocation(location);
         try {
-            const url =  host + '/iPots/iAccess-Server/accommodation.php'
-            const response = await axios.get(url , {
-                params: {
-                    category: category,
-                    location: location,
-                },
-            });
-
+            const url = host + '/iPots/iAccess-Server/accommodation.php';
+            const response = await axios.get(url, { params: { category: category, location: location } });
             if (Array.isArray(response.data)) {
                 setAccommodations(response.data);
             } else {
@@ -129,12 +105,19 @@ const Accommodation2 = () => {
         } catch (error) {
             console.error('There was an error fetching the data!', error);
         }
-
     };
 
     const handleItemClick = (accommodation) => {
         setSelectedItem(accommodation.id === selectedItem ? null : accommodation.id);
     };
+
+    const handleSearchChange = (event) => {
+        setSearchTerm(event.target.value);
+    };
+
+    const filteredAccommodations = accommodations.filter((accommodation) =>
+        accommodation.accommodation.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     const locations = [
         { name: "Home", img: homeImg },
@@ -143,7 +126,8 @@ const Accommodation2 = () => {
         { name: "Transit", img: transitImg },
         { name: "Medical", img: hospitalImg },
         { name: "All", img: earthImg },
-    ];  
+    ];
+
     const categories = [
         { name: "Mobility", img: mobilityImg },
         { name: "Hearing", img: earImg },
@@ -156,55 +140,56 @@ const Accommodation2 = () => {
         { name: "Digestion", img: stomachImg },
         { name: "Safety", img: safetyImg },
         { name: "MedicalDevices", img: medicalImg },
-      ];  
+    ];
+
     const categoryObject = categories.find(cat => cat.name === category);
     const iconImg = categoryObject ? categoryObject.img : null;
-        return (
-            <div className="accommodations-page">
-                <div className="header-container2">
-                    <img src={iconImg} alt="Vision" className="vision-image" />
-                    <h1 className="accommodation-title">{category}</h1>
-                </div>
-                <div className="navbar-container">
-                    {locations.map((location) => (
-                        <div
-                            key={location.name}
-                            className={`location ${selectedLocation === location.name ? "selected" : ""
-                                }`}
-                            onClick={() => handleLocationClick(location.name)}
-                        >
-                            <img
-                                src={location.img}
-                                alt={location.name}
-                                className="location-img"
-                            />
-                            <span className="location-name">{location.name}</span>
-                        </div>
-                    ))}
-                </div>
-                <div className="search-bar-container">
-                    <div className="search-bar">
-                        <CiSearch className="search-icon" />
-                        <input type="search" className="searchbox" placeholder="Search" />
-                        <PiMicrophoneFill className="microphone-icon" />
+
+    return (
+        <div className="accommodations-page">
+            <div className="header-container2">
+                <img src={iconImg} alt="Vision" className="vision-image" />
+                <h1 className="accommodation-title">{category}</h1>
+            </div>
+            <div className="navbar-container">
+                {locations.map((location) => (
+                    <div
+                        key={location.name}
+                        className={`location ${selectedLocation === location.name ? "selected" : ""}`}
+                        onClick={() => handleLocationClick(location.name)}
+                    >
+                        <img src={location.img} alt={location.name} className="location-img" />
+                        <span className="location-name">{location.name}</span>
                     </div>
+                ))}
+            </div>
+            <div className="search-bar-container">
+                <div className="search-bar">
+                    <CiSearch className="search-icon" />
+                    <input 
+                        type="search" 
+                        className="searchbox" 
+                        placeholder="Search" 
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                    />
+                    <PiMicrophoneFill className="microphone-icon" />
                 </div>
-                <div className="item-list">
-                    {accommodations.length > 0 ? (
-                    accommodations.map((accommodation) => (
+            </div>
+            <div className="item-list">
+                {filteredAccommodations.length > 0 ? (
+                    filteredAccommodations.map((accommodation) => (
                         <div
                             key={accommodation.id}
                             className={`item ${selectedItem === accommodation.id ? 'selected' : ''}`}
-                            
                         >
                             <div className={`item-header ${selectedItem === accommodation.id ? 'expanded' : ''}`}>
                                 <span onClick={() => handleItemClick(accommodation)}>{accommodation.accommodation}</span>
-                                {isBookmarked(accommodation.id) ? (                                     
-                                    <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save"  />
+                                {isBookmarked(accommodation.id) ? (
+                                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save" />
                                 ) : (
-                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Save"  />
+                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Save" />
                                 )}
-                               
                             </div>
                             {selectedItem === accommodation.id && (
                                 <div className="item-details" onClick={() => handleItemClick(accommodation)}>
@@ -214,13 +199,12 @@ const Accommodation2 = () => {
                             )}
                         </div>
                     ))
-                    ) : (
-                        <p className='Error'>No accommodations available for {category} at {selectedLocation}.</p>
-                    )}
-                </div>
+                ) : (
+                    <p className='Error'>No accommodations available for {category} at {selectedLocation}.</p>
+                )}
             </div>
+        </div>
+    );
+};
 
-        );
-    };
-
-    export default Accommodation2;
+export default Accommodation2;
