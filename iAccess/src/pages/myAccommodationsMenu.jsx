@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Popup from "reactjs-popup";
-import "../styles/homepage.css";
+import { useLocation } from 'react-router-dom';
+import "../styles/myAccommodations.css";
 
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
@@ -14,13 +14,16 @@ import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
 import lawImg from "../../public/Law.png";
 import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/unsave.png";
+import saveImg from "../../public/save.png";
 import backImg from "../../public/Back.png";
 
-const HomePage = () => {
-  const [selectedLocation, setSelectedLocation] = useState("");
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+const MyAccommodations = () => {
+
+  const locat = useLocation();
+  const queryParams = new URLSearchParams(locat.search);
+  const location = queryParams.get('location');
+
+  const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
@@ -30,15 +33,15 @@ const HomePage = () => {
   const checkBeforeNavigate = (url, event) => {
     //checking if the user selected the location
     if (!selectedLocation) {
-      setOpen(true);
+      alert("Please select a location first");
       event.preventDefault(); // Prevent the default link click behavior
       return;
     }
 
     const newUrl = url + "?location=" + selectedLocation;
+
     navigate(newUrl);
   };
-
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -52,22 +55,19 @@ const HomePage = () => {
     {
       name: "Accessibility Category",
       img: assistiveTechImg,
-      url: "/accessmenu",
+      url: "/myaccessmenu",
     },
-    { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
-    { name: "Legal", img: lawImg, url: "" },
-    { name: "Dictionary", img: dictionaryImg, url: "" },
-    { name: "My Accommodations", img: saveImg, url: "/myaccommodationsmenu" },
+    { name: "Medical Conditions", img: caduceusImg, url: "/mymedicalconditions" },
   ];
 
   return (
-    <div className="homepage">
-      <h1 className="homepage-home-title">iAccess</h1>
-      <div className="navbar-home-container">
+    <div className="myAccommodations">
+      <h1 className="myAccommodations-title">My Accommodations</h1>
+      <div className="navbar-container">
         {locations.map((location) => (
           <div
             key={location.name}
-            className={`location-home ${
+            className={`location ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
@@ -75,9 +75,9 @@ const HomePage = () => {
             <img
               src={location.img}
               alt={location.name}
-              className="location-home-img"
+              className="location-img"
             />
-            <span className="location-home-name">{location.name}</span>
+            <span className="location-name">{location.name}</span>
           </div>
         ))}
       </div>
@@ -102,36 +102,8 @@ const HomePage = () => {
           </div>
         ))}
       </div>
-      <Popup
-        open={open}
-        closeOnDocumentClick
-        onClose={closeModal}
-        overlayClassName="popup-overlay"
-        contentClassName="popup-content"
-      >
-        <div className="popup-message">
-          <ul className="popup-location-list">
-            {locations.map((location) => (
-              <li key={location.name} className="popup-location-item">
-                <img
-                  src={location.img}
-                  alt={location.name}
-                  className="popup-location-img"
-                />
-                <span className="popup-location-name">{location.name}</span>
-              </li>
-            ))}
-          </ul>
-          <div className="message">
-            Select the location where these accommodations will be used
-          </div>
-          <button className="close" onClick={closeModal}>
-            OK
-          </button>
-        </div>
-      </Popup>
     </div>
   );
 };
 
-export default HomePage;
+export default MyAccommodations;

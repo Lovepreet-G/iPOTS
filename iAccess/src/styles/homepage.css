@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
 .homepage {
   display: flex;
   flex-direction: column;
@@ -6,72 +8,66 @@
   justify-content: flex-start;
   text-align: center;
   height: 100vh;
-  padding-top: 10px; /*changed it */
+  padding-top: 0.625rem; /*changed it */
 }
 
 .homepage-title {
-  width: 1671px;
-  height: 146px;
+  width: 12rem;
+  height: 3.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 110px;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #000000;
   margin: 0;
 }
 
-.navbar-container {
+.navbar-home-container {
   display: flex;
   justify-content: center;
-  width: 1325px;
-  height: 228px;
-  margin-top: 83px;
+  width: 56.625rem;
+  height: 9.744rem;
+  margin-top: 2.5rem;
 }
 
-.location {
+.location-home {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 196px;
-  height: 228px;
-  margin: 0 15px;
-  padding: 10px;
+  width: 8.375rem;
+  height: 9.688rem;
+  margin: 0 0.625rem;
   cursor: pointer;
-  border-radius: 10px;
+  border-radius: 0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.location:hover {
+.location-home:hover {
   background-color: #b0b0b0;
   transform: scale(1.05);
 }
 
-.location.selected {
+.location-home.selected {
   background-color: #0fc0fc;
 }
 
-.location-img {
-  width: 144.01px;
-  height: 143.74px;
-  margin-top: 16px;
-  margin-left: 26px;
-  margin-right: 26px;
+.location-home-img {
+  width: 6.2rem;
+  height: 6.2rem;
+  margin-top: 1rem;
+  margin-left: 1.625rem;
+  margin-right: 1.625rem;
 }
 
-.location-icon {
-  font-size: 24px;
-}
-
-.location-name {
-  margin-top: 5px;
-  font-size: 35px;
+.location-home-name {
+  margin-top: 0.313rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }
-
 .accessibility-categories-container {
-  margin-top: 60px;
+  margin-top: 2.5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -84,12 +80,12 @@
   justify-content: space-between;
   background-color: #0fc0fc;
   color: black;
-  width: 760px;
-  height: 129px;
-  padding: 0 20px;
-  margin: 12px 0;
-  border-radius: 10px;
-  font-size: 45px;
+  width: 25.625rem;
+  height: 4rem;
+  padding: 0 0.625rem;
+  margin: 0.25rem 0;
+  border-radius: 0.625rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   cursor: pointer;
@@ -102,14 +98,14 @@
 }
 
 .accessibility-category-icon {
-  width: 85px;
-  height: 85px;
-  margin-right: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.938rem;
 }
 
 .accessibility-category-name {
-  width: 526px;
-  height: 46px;
+  width: 17.563rem;
+  height: 2.438rem;
   text-align: left;
   display: flex;
   align-items: center;
