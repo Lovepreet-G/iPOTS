@@ -13,6 +13,9 @@ require_once('includes/database.php');
 $method = isset($_GET['method']) ? $_GET['method'] : ''; 
 $userId = isset($_GET['userId']) ? $_GET['userId'] : ''  ;
 $accommodationId = isset($_GET['accommodationId']) ? $_GET['accommodationId'] : ''  ;
+$location = isset($_GET['location']) ? $_GET['location'] : '';
+$medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
+$category = isset($_GET['category']) ? $_GET['category'] : '';
 
 
 if ($method == 'All') {
@@ -28,7 +31,98 @@ if ($method == 'All') {
 
     echo json_encode($bookmarks);
 
-} elseif ($method == 'Add') {
+}elseif ($method == 'showAll') {
+    $response = [];
+
+    // Check if the location is "All"
+    if ($location == "All") {
+        // If medicalCondition is set
+        if (isset($medicalCondition)) {
+            $stmt = $connect->prepare("
+                SELECT a.* 
+                FROM accommodations a 
+                JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+                WHERE ma.user_id = ? 
+                AND a.medical_condition = ?
+                And a.disability_category=?");
+            
+            if ($stmt) {
+                $stmt->bind_param("iss", $userId, $medicalCondition,$category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+    
+                while ($row = $result->fetch_assoc()) {
+                    $response[] = $row;
+                }
+                $stmt->close();
+            }
+        } else {
+            $stmt = $connect->prepare("
+                SELECT a.* 
+                FROM accommodations a 
+                JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+                WHERE ma.user_id = ?
+                And a.disability_category=?");
+            
+            if ($stmt) {
+                $stmt->bind_param("is", $userId,$category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+    
+                while ($row = $result->fetch_assoc()) {
+                    $response[] = $row;
+                }
+                $stmt->close();
+            }
+        }
+    } else {
+        // If medicalCondition is set
+        if (isset($medicalCondition)) {
+            $stmt = $connect->prepare("
+                SELECT a.* 
+                FROM accommodations a 
+                JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+                WHERE ma.user_id = ? 
+                AND a.location = ? 
+                AND a.medical_condition = ?
+                And a.disability_category=?");
+            
+            if ($stmt) {
+                $stmt->bind_param("isss", $userId, $location, $medicalCondition,$category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+    
+                while ($row = $result->fetch_assoc()) {
+                    $response[] = $row;
+                }
+                $stmt->close();
+            }
+        } else {
+            $stmt = $connect->prepare("
+                SELECT a.* 
+                FROM accommodations a 
+                JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+                WHERE ma.user_id = ? 
+                AND a.location = ?
+                And a.disability_category=?");
+            
+            if ($stmt) {
+                $stmt->bind_param("iss", $userId, $location,$category);
+                $stmt->execute();
+                $result = $stmt->get_result();
+    
+                while ($row = $result->fetch_assoc()) {
+                    $response[] = $row;
+                }
+                $stmt->close();
+            }
+        }
+    }
+    
+    echo json_encode($response);    
+}
+ 
+elseif ($method == 'Add') {
     
 
     $stmt = $connect->prepare("INSERT INTO my_accessibilties (user_id, accommodation_id) VALUES (?, ?)");
@@ -50,6 +144,50 @@ if ($method == 'All') {
     } else {
         echo json_encode(["error" => $stmt->error]);
     }
+}
+elseif ($method == 'Category')
+{
+    $response = [];
+    // If medicalCondition is set
+    if (isset($medicalCondition)) {
+        $stmt = $connect->prepare("
+            SELECT DISTINCT a.disability_category
+            FROM accommodations a 
+            JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+            WHERE ma.user_id = ? 
+            AND a.location = ? 
+            AND a.medical_condition = ?");
+        
+        if ($stmt) {
+            $stmt->bind_param("iss", $userId, $location, $medicalCondition);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row;
+            }
+            $stmt->close();
+        }
+    } else {
+        $stmt = $connect->prepare("
+            SELECT DISTINCT a.disability_category 
+            FROM accommodations a 
+            JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
+            WHERE ma.user_id = ? 
+            AND a.location = ?");
+        
+        if ($stmt) {
+            $stmt->bind_param("is", $userId, $location);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row;
+            }
+            $stmt->close();
+        }
+    }
+    echo json_encode($response);
 }
 
 
