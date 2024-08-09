@@ -157,6 +157,11 @@
   align-items: center;
   justify-content: center;
 }
+.popup-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0;
+}
 .message {
   text-wrap: wrap;
   max-width: 13.125rem;
@@ -173,10 +178,42 @@
   cursor: pointer;
   background-color: #0fc0fc;
   border: none;
-  border-radius: 16px;
+  border-radius: 10px;
   color: black;
   width: 27.713rem;
   margin-top: 4.07rem;
+}
+.sign-in {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  /* margin-bottom: 2.502rem; */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0fc0fc;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  width: 27.713rem;
+  margin-top: 4.07rem;
+}
+.cancel {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  /* margin-bottom: 2.502rem; */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0fc0fc;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  width: 27.713rem;
+  margin-top: 0.518rem;
 }
 .popup-location-list {
   display: flex;

@@ -20,7 +20,9 @@ import backImg from "../../public/Back.png";
 const HomePage = () => {
   const [selectedLocation, setSelectedLocation] = useState("");
   const [open, setOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState("");
   const closeModal = () => setOpen(false);
+  const closeSignInModal = () => setSignInOpen(false);
   const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
@@ -28,6 +30,13 @@ const HomePage = () => {
   };
 
   const checkBeforeNavigate = (url, event) => {
+    //Check if the user is trying to access "My Accommodations"
+    if (url === "/myaccommodationsmenu") {
+      setSignInOpen(true);
+      event.preventDefault();
+      return;
+    }
+
     //checking if the user selected the location
     if (!selectedLocation) {
       setOpen(true);
@@ -127,6 +136,26 @@ const HomePage = () => {
           </div>
           <button className="close" onClick={closeModal}>
             OK
+          </button>
+        </div>
+      </Popup>
+      <Popup
+        open={signInOpen}
+        closeOnDocumentClick
+        onClose={closeSignInModal}
+        overlayClassName="popup-overlay"
+        contentClassName="popup-content"
+      >
+        <div className="popup-message">
+          <h2 className="popup-title">SIGN IN REQUIRED</h2>
+          <div className="message">
+            Please sign in to access My Accommodation
+          </div>
+          <button className="sign-in" onClick={closeSignInModal}>
+            Sign In
+          </button>
+          <button className="cancel" onClick={closeSignInModal}>
+            Cancel
           </button>
         </div>
       </Popup>
