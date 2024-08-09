@@ -132,14 +132,14 @@ const Accommodation2 = () => {
         { name: "Mobility", img: mobilityImg },
         { name: "Hearing", img: earImg },
         { name: "Cognitive", img: brainImg },
-        { name: "MentalHealth", img: mentalImg },
+        { name: "Mental Health", img: mentalImg },
         { name: "Sensory", img: sensorImg },
         { name: "Allergy", img: allergyImg },
         { name: "Vision", img: visionImg },
         { name: "Pain", img: painImg },
         { name: "Digestion", img: stomachImg },
         { name: "Safety", img: safetyImg },
-        { name: "MedicalDevices", img: medicalImg },
+        { name: "Medical Devices", img: medicalImg },
     ];
 
     const categoryObject = categories.find(cat => cat.name === category);
@@ -196,7 +196,7 @@ const Accommodation2 = () => {
                             </div>
                             {selectedItem === accommodation.id && (
                                 <div className="item-details" onClick={() => handleItemClick(accommodation)}>
-                                    <img src={iconImg} alt={accommodation.title} className="item-image" />
+                                    <img src={iconImg} alt={accommodation.accommodation} className="item-image" />
                                     <p>{accommodation.description}</p>
                                 </div>
                             )}
