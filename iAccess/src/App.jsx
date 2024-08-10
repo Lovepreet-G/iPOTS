@@ -9,6 +9,7 @@ import MyAccommodationsMenu from "./pages/myAccommodationsMenu";
 import MyMedicalConditions from "./pages/myMedicalCondtions";
 import MyAccommodations from "./pages/myAccommodations";
 import MyAccessMenu from "./pages/myaccessmenu";
+import MyAllergies from "./pages/myallergies";
 
 
 
@@ -33,6 +34,7 @@ function App() {
             <Route
               path="/medicalconditreview" element={<MedicalConditsReview />}
             />
+            <Route path="/myallergies" element={<MyAllergies />} />
           </Routes>
         </main>
       </BrowserRouter>

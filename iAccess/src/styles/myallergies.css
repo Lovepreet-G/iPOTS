@@ -1,0 +1,54 @@
+.allergies-page {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  .page-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .allergies-icon {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .category {
+    background-color: #e0e0e0;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .category-content {
+    background-color: #0FC0FC;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+  }
+  
+  .allergy-item {
+    padding: 5px 0;
+    color: #000000;
+  }
+  
