@@ -13,7 +13,6 @@ import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
 import lawImg from "../../public/Law.png";
 import dictionaryImg from "../../public/Dictionary.png";
-import allergiesImg from "../../public/allergies.png";
 import saveImg from "../../public/unsave.png";
 import backImg from "../../public/Back.png";
 
@@ -56,7 +55,6 @@ const HomePage = () => {
     { name: "Legal", img: lawImg, url: "" },
     { name: "Dictionary", img: dictionaryImg, url: "" },
     { name: "My Accommodations", img: saveImg, url: "/myaccommodationsmenu" },
-    { name: "My Allergies", img: allergiesImg, url: "/myallergies" },
   ];
 
   return (
