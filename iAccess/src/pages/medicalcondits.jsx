@@ -145,14 +145,14 @@ const MedicalCondits = () => {
 
   return (
     <>
-      <div className="total-page">
-        <div className="page-title">
-          <span className="logo">
+      <div className="medical-condit-page">
+        <div className="medical-condit-title">
+          <span className="medical-condit-logo">
             <img src="../../public/Caduceus.png" className="caduceus" />
           </span>
-          <span className="page-name"> Medical Conditions</span>
+          <span className="medical-condit-name"> Medical Conditions</span>
         </div>
-        <div className="nav-container">
+        <div className="nav-medical-condit-container">
           {locations.map((location) => (
             <div
               key={location.name}
@@ -170,26 +170,26 @@ const MedicalCondits = () => {
             </div>
           ))}
         </div>
-        <div className="search-bar-container">
-          <div className="search-bar">
-            <CiSearch className="search-icon" />
+        <div className="medical-search-bar-container">
+          <div className="medical-search-bar">
+            <CiSearch className="medical-search-icon" />
             <input
               type="search"
-              className="searchbox"
+              className="medical-searchbox"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <PiMicrophoneFill className="microphone-icon" />
+            <PiMicrophoneFill className="medical-microphone-icon" />
           </div>
         </div>
         {searchTerm ? (
-          <div className="conditions-container">
+          <div className="medical-conditions-container">
             {filteredConditions.length > 0 ? (
               filteredConditions.map((condition) => (
-                <div key={condition.id} className="condition-box">
-                  <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
-                  <div className="icons">
+                <div key={condition.id} className="medical-condition-box">
+                  <div className="medical-condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
+                  <div className="medical-icons">
                     {isBookmarked(condition.id) ? (
                       <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
                     ) : (
@@ -203,11 +203,11 @@ const MedicalCondits = () => {
             )}
           </div>
         ) : (
-          <div className="letters-container">
+          <div className="medical-letters-container">
             {letters.map((letter) => (
               <div
                 key={letter.num}
-                className={`letter ${
+                className={`medical-letter ${
                   selectedLetter === letter.num ? "selected" : ""
                 }`}
                 onClick={(event) => {
@@ -215,7 +215,7 @@ const MedicalCondits = () => {
                   handleLetterClick(letter.num);
                 }}
               >
-                <span className="the-letters">{letter.char}</span>
+                <span className="medical-the-letters">{letter.char}</span>
               </div>
             ))}
           </div>
