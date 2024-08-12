@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -21,6 +21,17 @@ import painImg from "../../public/pain.png";
 import stomachImg from "../../public/stomach.png";
 import safetyImg from "../../public/prevention.png";
 import medicalImg from "../../public/medical.png";
+// import grayMobilityImg from "../../public/gray_mobility.png"; // Gray images
+// import grayEarImg from "../../public/gray_ear.png";
+// import grayBrainImg from "../../public/gray_brain.png";
+// import grayMentalImg from "../../public/gray_mental.png";
+// import graySensorImg from "../../public/gray_sensor.png";
+// import grayAllergyImg from "../../public/gray_allergy.png";
+// import grayVisionImg from "../../public/gray_vision.png";
+// import grayPainImg from "../../public/gray_pain.png";
+// import grayStomachImg from "../../public/gray_stomach.png";
+// import graySafetyImg from "../../public/gray_safety.png";
+// import grayMedicalImg from "../../public/gray_medical.png";
 
 const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
@@ -30,7 +41,7 @@ const AccessMenu = () => {
   const location = queryParams.get("location");
   const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
-  const [myAccessibilityCat,setMyAccessibilityCat] =useState('');
+  const [myAccessibilityCat, setMyAccessibilityCat] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -51,15 +62,15 @@ const AccessMenu = () => {
             const url = host + '/iPots/iAccess-Server/myAccessibility.php';
             const response = await axios.get(url, { params });
             
-            setMyAccessibilityCat(response.data);
-            console.log(myAccessibilityCat);
+            setMyAccessibilityCat(response.data.map(item => item.category));
+            // console.log(response.data.map(item => item.category));
             
           } catch (error) {
             console.error("Error fetching Accommodation:", error);
           }
     };
     fetchmyAccessibilityCat();
-}, [location]);
+  }, [location]);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -93,71 +104,56 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg },
-    { name: "Hearing", img: earImg },
-    { name: "Cognitive", img: brainImg },
-    { name: "Mental Health", img: mentalImg },
-    { name: "Sensory", img: sensorImg },
-    { name: "Allergy", img: allergyImg },
-    { name: "Vision", img: visionImg },
-    { name: "Pain", img: painImg },
-    { name: "Digestion", img: stomachImg },
-    { name: "Safety", img: safetyImg },
-    { name: "Medical Devices", img: medicalImg },
+    { name: "Mobility", img: mobilityImg, grayImg: "grayMobilityImg" },
+    { name: "Hearing", img: earImg, grayImg:" grayEarImg" },
+    { name: "Cognitive", img: brainImg, grayImg: "grayBrainImg" },
+    { name: "Mental Health", img: mentalImg, grayImg: "grayMentalImg "},
+    { name: "Sensory", img: sensorImg, grayImg: "graySensorImg" },
+    { name: "Allergy", img: allergyImg, grayImg: "grayAllergyImg" },
+    { name: "Vision", img: visionImg, grayImg: "grayVisionImg" },
+    { name: "Pain", img: painImg, grayImg: "grayPainImg" },
+    { name: "Digestion", img: stomachImg, grayImg: "grayStomachImg" },
+    { name: "Safety", img: safetyImg, grayImg: "graySafetyImg" },
+    { name: "Medical Devices", img: medicalImg, grayImg: "grayMedicalImg" },
   ];
 
-  const displayNames = {
-    Mobility: "Mobility",
-    Hearing: "Hearing",
-    Cognitive: "Cognitive",
-    MentalHealth: "Mental Health",
-    Sensory: "Sensory",
-    Allergy: "Allergy",
-    Vision: "Vision",
-    Pain: "Pain",
-    Digestion: "Digestion",
-    Safety: "Safety",
-    MedicalDevices: "Medical Devices",
-  };
-
   return (
-    <>
-      <div className="access-menu-page">
-        <h1 className="header-access-menu-title">
-         My Accessibility Categories
-        </h1>
-        {medicalCondition && (
-                    <h1 className="medical-condition"> {medicalCondition}</h1>
-                )}
-        <div className="navbar-access-menu-container">
-          {locations.map((location) => (
-            <div
-              key={location.name}
-              className={`location-access-menu ${
-                selectedLocation === location.name ? "selected" : ""
-              }`}
-              onClick={() => handleLocationClick(location.name)}
-            >
-              <img
-                src={location.img}
-                alt={location.name}
-                className="location-access-menu-img"
-              />
-              <span className="location-access-menu-name">{location.name}</span>
-            </div>
-          ))}
-        </div>
-        <div className="categories-access-menu-container">
-          {
-            categories.map((category) => (
-            
+    <div className="access-menu-page">
+      <h1 className="header-access-menu-title">
+        My Accessibility Categories
+      </h1>
+      {medicalCondition && (
+        <h1 className="medical-condition">{medicalCondition}</h1>
+      )}
+      <div className="navbar-access-menu-container">
+        {locations.map((loc) => (
+          <div
+            key={loc.name}
+            className={`location-access-menu ${
+              selectedLocation === loc.name ? "selected" : ""
+            }`}
+            onClick={() => handleLocationClick(loc.name)}
+          >
+            <img
+              src={loc.img}
+              alt={loc.name}
+              className="location-access-menu-img"
+            />
+            <span className="location-access-menu-name">{loc.name}</span>
+          </div>
+        ))}
+      </div>
+      <div className="categories-access-menu-container">
+        {categories.map((category) => {
+          const isCategoryAvailable = myAccessibilityCat.includes(category.name);
+          return (
             <div
               key={category.name}
-              className="category-access-menu"
-              onClick={(event) => checkBeforeNavigate(category.name, event)}
+              className={`category-access-menu ${isCategoryAvailable ? "" : "category-access-gray-menu"}`}
+              onClick={(event) => isCategoryAvailable && checkBeforeNavigate(category.name, event)}
             >
               <img
-                src={category.img}
+                src={isCategoryAvailable ? category.img : category.grayImg}
                 alt={category.name}
                 className="category-access-menu-icon"
               />
@@ -165,10 +161,10 @@ const AccessMenu = () => {
                 {category.name}
               </span>
             </div>
-          ))}
-        </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 };
 

@@ -9,8 +9,8 @@ header('Content-Type: application/json');
 require_once('includes/database.php');
 // include('includes/config.php');
 
-$category = isset($_GET['category']) ? $_GET['category'] : 'Cognitive';
-$location = isset($_GET['location']) ? $_GET['location'] : 'Work';
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+$location = isset($_GET['location']) ? $_GET['location'] : '';
 $medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
 
 if ($category == "Medical Devices") {
