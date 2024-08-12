@@ -18,6 +18,24 @@ $medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] 
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 
 
+
+if ($category == "Medical Devices") {
+    $category = "Medical_devices";
+}
+
+if ($category == "Mental Health") {
+    $category = "Mental_Health";
+}
+// because for now school_lecture and school_test both has same data
+if ($location == "School") {
+    $location = "School_lecture";
+}
+
+// for making sql query dynamic for disability category and location
+$temp_cat= "a." . $category ;
+$temp_locat = "a." . $location;
+
+
 if ($method == 'All') {
     $stmt = $connect->prepare("SELECT * FROM my_accessibilties WHERE user_id = ?");
     $stmt->bind_param("i", $userId);
@@ -38,16 +56,17 @@ if ($method == 'All') {
     if ($location == "All") {
         // If medicalCondition is set
         if (isset($medicalCondition)) {
+            
             $stmt = $connect->prepare("
                 SELECT a.* 
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
                 AND a.medical_condition = ?
-                And a.disability_category=?");
+                And $temp_cat = '1'");
             
             if ($stmt) {
-                $stmt->bind_param("iss", $userId, $medicalCondition,$category);
+                $stmt->bind_param("is", $userId, $medicalCondition);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -62,10 +81,10 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ?
-                And a.disability_category=?");
+                And $temp_cat='1'");
             
             if ($stmt) {
-                $stmt->bind_param("is", $userId,$category);
+                $stmt->bind_param("i", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -83,12 +102,12 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.location = ? 
+                AND $temp_locat = '1' 
                 AND a.medical_condition = ?
-                And a.disability_category=?");
+                And $temp_cat='1'");
             
             if ($stmt) {
-                $stmt->bind_param("isss", $userId, $location, $medicalCondition,$category);
+                $stmt->bind_param("is", $userId, $medicalCondition);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
@@ -103,11 +122,11 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.location = ?
-                And a.disability_category=?");
+                AND $temp_locat = '1'
+                And $temp_cat='1'");
             
             if ($stmt) {
-                $stmt->bind_param("iss", $userId, $location,$category);
+                $stmt->bind_param("i", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
     
