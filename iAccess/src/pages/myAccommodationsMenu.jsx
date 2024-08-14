@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../styles/homepage.css";
+import { useLocation } from "react-router-dom";
+import "../styles/myAccommodations.css";
 
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
@@ -13,11 +14,15 @@ import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
 import lawImg from "../../public/Law.png";
 import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/unsave.png";
+import saveImg from "../../public/save.png";
 import backImg from "../../public/Back.png";
 
-const HomePage = () => {
-  const [selectedLocation, setSelectedLocation] = useState("");
+const MyAccommodations = () => {
+  const locat = useLocation();
+  const queryParams = new URLSearchParams(locat.search);
+  const location = queryParams.get("location");
+
+  const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
@@ -49,22 +54,23 @@ const HomePage = () => {
     {
       name: "Accessibility Category",
       img: assistiveTechImg,
-      url: "/accessmenu",
+      url: "/myaccessmenu",
     },
-    { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
-    { name: "Legal", img: lawImg, url: "/legalpage" },
-    { name: "Dictionary", img: dictionaryImg, url: "" },
-    { name: "My Accommodations", img: saveImg, url: "/myaccommodationsmenu" },
+    {
+      name: "Medical Conditions",
+      img: caduceusImg,
+      url: "/mymedicalconditions",
+    },
   ];
 
   return (
-    <div className="homepage">
-      <h1 className="homepage-home-title">iAccess</h1>
-      <div className="navbar-home-container">
+    <div className="myAccommodations">
+      <h1 className="myAccommodations-title">My Accommodations</h1>
+      <div className="myNavbar-container">
         {locations.map((location) => (
           <div
             key={location.name}
-            className={`location-home ${
+            className={`myLocation ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
@@ -72,29 +78,31 @@ const HomePage = () => {
             <img
               src={location.img}
               alt={location.name}
-              className="location-home-img"
+              className="myLocation-img"
             />
-            <span className="location-home-name">{location.name}</span>
+            <span className="myLocation-name">{location.name}</span>
           </div>
         ))}
       </div>
-      <div className="accessibility-categories-container">
+      <div className="myAccessibility-categories-container">
         {categories.map((category) => (
           <div
             key={category.name}
-            className="accessibility-category"
+            className="myAccessibility-category"
             onClick={(event) => checkBeforeNavigate(category.url, event)}
           >
             <img
               src={category.img}
               alt={category.name}
-              className="accessibility-category-icon"
+              className="myAccessibility-category-icon"
             />
-            <span className="accessibility-category-name">{category.name}</span>
+            <span className="myAccessibility-category-name">
+              {category.name}
+            </span>
             <img
               src={backImg}
               alt="Back"
-              className="accessibility-category-back"
+              className="myAccessibility-category-back"
             />
           </div>
         ))}
@@ -103,4 +111,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default MyAccommodations;

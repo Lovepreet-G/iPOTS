@@ -30,7 +30,7 @@ export default function LegalPage() {
                 aria-expanded="false"
                 aria-controls="flush-collapseOne"
               >
-                Lorem Ipsum
+                The Accessibility for Ontarians with Disabilities Act, 2005
               </button>
             </h2>
             <div
@@ -39,10 +39,20 @@ export default function LegalPage() {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Suscipit est officia ea eum tempore unde, mollitia quam
-                veritatis repudiandae quo. Minus pariatur illo officia! Quam
-                excepturi deserunt cum dolore optio.
+                The Accessibility for Ontarians with Disabilities Act (AODA) is
+                a law that sets out a process for developing and enforcing
+                accessibility standards. Persons with disabilities and industry
+                representatives work together with the government to develop the
+                standards. Under the AODA, the government is responsible for
+                creating accessibility standards that organizations must follow.
+                Implementing and enforcing these standards will help us work
+                together to make Ontario more accessible and inclusive by 2025.{" "}
+                <a
+                  href="https://www.ontario.ca/laws/statute/05a11"
+                  target="_blank"
+                >
+                  Read more here
+                </a>
               </div>
             </div>
           </div>
@@ -56,7 +66,7 @@ export default function LegalPage() {
                 aria-expanded="false"
                 aria-controls="flush-collapseTwo"
               >
-                Lorem Ipsum
+                Information and communications standard
               </button>
             </h2>
             <div
@@ -65,10 +75,14 @@ export default function LegalPage() {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex
-                unde nihil dolorem aperiam odio atque harum quidem quae cum
-                distinctio magni similique ab maxime, repellat ipsum et, labore
-                totam quis?
+                This standard helps organizations make their information
+                accessible to people with disabilities.{" "}
+                <a
+                  href="https://www.ontario.ca/laws/regulation/110191#BK9"
+                  target="_blank"
+                >
+                  Read more here
+                </a>
               </div>
             </div>
           </div>
@@ -82,7 +96,7 @@ export default function LegalPage() {
                 aria-expanded="false"
                 aria-controls="flush-collapseThree"
               >
-                Lorem Ipsum
+                Transportation standard
               </button>
             </h2>
             <div
@@ -91,10 +105,14 @@ export default function LegalPage() {
               data-bs-parent="#accordionFlushExample"
             >
               <div class="accordion-body">
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quam
-                corporis ratione aliquid. Iste obcaecati mollitia, voluptatem
-                asperiores omnis delectus soluta, impedit dolorem enim nemo ad
-                debitis similique? Eius, optio in!
+                This standard makes it easier for everyone to travel in the
+                province.{" "}
+                <a
+                  href="https://www.ontario.ca/laws/regulation/110191#BK35"
+                  target="_blank"
+                >
+                  Read more here
+                </a>
               </div>
             </div>
           </div>
