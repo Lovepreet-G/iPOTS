@@ -12,7 +12,6 @@ import backpackImg from "../../public/backpack.png";
 import transitImg from "../../public/image 18.png";
 import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
-import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 import mobilityImg from "../../public/mobility.png";
 import earImg from "../../public/ear.png";
@@ -28,7 +27,6 @@ import medicalImg from "../../public/medical.png";
 
 const Accommodation2 = () => {
     const host = "http://localhost";
-    const userId = '1';
     const [accommodations, setAccommodations] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
@@ -56,7 +54,8 @@ const Accommodation2 = () => {
                 if (medicalCondition) {
                     params.medicalCondition = medicalCondition;
                 }
-                const url = host + '/iPots/iAccess-Server/accommodation.php';
+
+                const url = host + 'iPots/iAccess-Server/accommodation.php';
                 const response = await axios.get(url, { params });
                 if (Array.isArray(response.data)) {
                     setAccommodations(response.data);
@@ -195,7 +194,7 @@ const Accommodation2 = () => {
                                 )}
                             </div>
                             {selectedItem === accommodation.id && (
-                                <div className="item-details" onClick={() => handleItemClick(accommodation)}>
+                                <div className="item-details">
                                     <img src={iconImg} alt={accommodation.title} className="item-image" />
                                     <p>{accommodation.description}</p>
                                 </div>

@@ -132,7 +132,7 @@ input {
   width: 50px;
   height: 50px;
   pointer-events: none;
-  color: #C0C0C0;
+  color: #000;
 }
 
 .medical-letter {
@@ -206,11 +206,6 @@ input {
     padding-top: 2.75rem ;
 
   }
-  .medical-search-bar{
-    
-    
-
-  }
   .medical-search-icon{
     width: 1.5rem;
     height: 1.5rem;
@@ -241,9 +236,8 @@ input {
     margin: 0.781rem;
   }
   .medical-the-letters{
-    /* width: 1.188rem; */
-    height: 1rem;
-    font-size: 2.65rem;
+    height: 2.5rem;
+    font-size: 2.6rem;
   }
 }
 
