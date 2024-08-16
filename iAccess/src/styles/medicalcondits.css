@@ -11,7 +11,7 @@
   padding-top: 0.625rem;
 }
 
-.medical-condit-title{
+.medical-condit-title {
   width: 104.461rem;
   height: 9.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
@@ -172,6 +172,13 @@ input {
 
 /* Tablet */
 @media (max-width: 1024px) {
+  .medical-condit-name {
+    font-family: "Inter", sans-serif;
+    font-size: 1.563rem;
+    font-weight: 500;
+    padding-left: 0;
+  }
+
   .nav-medical-condit-container {
     /* flex-direction: column;
     align-items: center; */
@@ -200,42 +207,40 @@ input {
     font-size: 0.75rem;
   }
 
-  .medical-search-bar-container{
+  .medical-search-bar-container {
     width: 20.188rem;
     height: 8rem; /* 3.688rem */
-    padding-top: 2.75rem ;
-
+    padding-top: 2.75rem;
   }
-  .medical-search-icon{
+  .medical-search-icon {
     width: 1.5rem;
     height: 1.5rem;
-    
   }
   .medical-microphone-icon {
     height: 1.875rem;
- 
   }
-  .medical-searchbox{
+  .medical-searchbox {
     width: 20.188rem;
     height: 3.625rem;
     font-size: 16px;
     /* height: 4rem; */
     padding-left: 3rem;
     padding-right: 3.625rem;
-
   }
- 
 
   .medical-letters-container {
     grid-template-columns: repeat(4, 1fr); /* 3 columns for tablets */
     width: 19.688rem; /* Adjust width for tablets */
+    height: 35.313rem;
+    grid-gap: 0;
   }
-  .medical-letter{
-    width:3.75rem;
+  .medical-letter {
+    width: 3.75rem;
     height: 3.688rem;
     margin: 0.781rem;
+    border-radius: 0.625rem;
   }
-  .medical-the-letters{
+  .medical-the-letters {
     height: 2.5rem;
     font-size: 2.6rem;
   }
@@ -272,7 +277,8 @@ input {
     width: calc(100% - 3.5rem); /* Adjust width for phones */
   }
 
-  .search-icon, .microphone-icon {
+  .search-icon,
+  .microphone-icon {
     width: 30px; /* Adjust icon size for phones */
     height: 30px;
   }
