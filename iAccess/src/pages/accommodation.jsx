@@ -13,6 +13,7 @@ import transitImg from "../../public/image 18.png";
 import hospitalImg from "../../public/hospital-sign.png";
 import earthImg from "../../public/planet-earth.png";
 import saveImg from '../../public/save.png';
+import unsaveImg from '../../public/unsave.png';
 import mobilityImg from "../../public/mobility.png";
 import earImg from "../../public/ear.png";
 import brainImg from "../../public/brain.png";
@@ -27,6 +28,7 @@ import medicalImg from "../../public/medical.png";
 
 const Accommodation2 = () => {
     const host = "http://localhost";
+    const userId = '1';
     const [accommodations, setAccommodations] = useState([]);
     const [bookmarks, setBookmarks] = useState([]);
     const [selectedItem, setSelectedItem] = useState(null);
