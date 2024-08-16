@@ -3,100 +3,36 @@ import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/dictionary.css";
 import { CiSearch } from "react-icons/ci";
-import { PiMicrophoneFill } from "react-icons/pi";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
-import unsaveImg from "../../public/unsave.png";
-import saveImg from "../../public/save.png";
 import dictionaryImg from "../../public/Dictionary.png";
 
 const Dictionary = () => {
   const host = "http://localhost";
   const userId = "1";
-  const locat = useLocation();
-  const queryParams = new URLSearchParams(locat.search);
-  const location = queryParams.get("location");
-  const [selectedLocation, setSelectedLocation] = useState(location);
   const [selectedLetter, setSelectedLetter] = useState("");
-  const [definition, setDefinition] = useState([]);
+  const [dictionary, setdictionary] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchDefinitions = async () => {
+    const fetchdictionaries = async () => {
       try {
-        const url = host + "/iPots/iAccess-Server/definitions.php?method=All";
+        const url = host + "/iPots/iAccess-Server/dictionary.php?method=All";
         const response = await axios.get(url);
-        setDefinition(response.data);
+        setdictionary(response.data);
       } catch (error) {
-        console.error("Error fetching medical conditions:", error);
+        console.error("Error fetching medical dictionarys:", error);
       }
-    };
-    const fetchBookmarks = async () => {
-      const url =
-        host +
-        "/iPots/iAccess-Server/myDefinitions.php?method=All&userId=" +
-        userId;
-      const response = await axios.get(url);
-      if (Array.isArray(response.data)) {
-        setBookmarks(response.data);
-      }
-    };
-
-    fetchDefinitions();
-    fetchDefinitions();
+    };    
+    fetchdictionaries();
   }, []);
 
-  const handleBookmark = async (conditionId) => {
-    const url = host + "/iPots/iAccess-Server/myDefinitions.php";
-    const params = {
-      userId: userId,
-      medicalConditionId: conditionId,
-      method: "Add",
-    };
-    const response = await axios.get(url, { params });
-
-    setBookmarks([...bookmarks, conditionId]);
-  };
-
-  const handleUnbookmark = async (conditionId) => {
-    const url = host + "/iPots/iAccess-Server/myDefinitions.php";
-    const params = {
-      userId: userId,
-      medicalConditionId: conditionId,
-      method: "Delete",
-    };
-    const response = await axios.get(url, { params });
-
-    setBookmarks(bookmarks.filter((id) => id !== conditionId));
-  };
-
-  const isBookmarked = (conditionId) => {
-    return bookmarks.includes(conditionId);
-  };
-
-  const handleLocationClick = (location) => {
-    setSelectedLocation(location);
-  };
-
   const checkBeforeNavigate = (letter, event) => {
-    if (!selectedLocation) {
-      alert("Please select a location first");
-      event.preventDefault();
-      return;
-    } else {
+   
       const Url =
         "/dictionaryreview?Method=Letter&letter=" +
-        letter +
-        "&location=" +
-        selectedLocation;
+        letter ;
       navigate(Url);
-    }
+    
   };
 
   const handleLetterClick = (letter) => {
@@ -107,18 +43,15 @@ const Dictionary = () => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredConditions = definition.filter((condition) =>
-    condition.term.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredDictionaries = dictionary.filter((dictionary) =>
+    dictionary.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
+  
+  const [selectedDictionary, setSelectedDictionary] = useState(null);
 
-  const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
-  ];
+  const handleDictionaryClick = (dictionary) => {
+    setSelectedDictionary(selectedDictionary === dictionary.id ? null : dictionary.id);
+  };
 
   const letters = [
     { num: 1, char: "A" },
@@ -158,24 +91,6 @@ const Dictionary = () => {
           </span>
           <span className="page-name"> Dictionary</span>
         </div>
-        <div className="nav-container">
-          {locations.map((location) => (
-            <div
-              key={location.name}
-              className={`location-condits ${
-                selectedLocation === location.name ? "selected" : ""
-              }`}
-              onClick={() => handleLocationClick(location.name)}
-            >
-              <img
-                src={location.img}
-                alt={location.name}
-                className="location-condits-img"
-              />
-              <span className="location-condits-name">{location.name}</span>
-            </div>
-          ))}
-        </div>
         <div className="search-bar-container">
           <div className="search-bar">
             <CiSearch className="search-icon" />
@@ -186,41 +101,29 @@ const Dictionary = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <PiMicrophoneFill className="microphone-icon" />
+            {/* <PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         {searchTerm ? (
-          <div className="conditions-container">
-            {filteredConditions.length > 0 ? (
-              filteredConditions.map((condition) => (
-                <div key={condition.id} className="condition-box">
+          <div className="dictionary-container">
+            {filteredDictionaries.length > 0 ? (
+              filteredDictionaries.map((dictionary) => (
+                <div key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
                   <div
-                    className="condition"
-                    onClick={() => handleConditionClick(condition)}
+                    className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
+                    
                   >
-                    {condition.term}
+                    {dictionary.term}
                   </div>
-                  <div className="icons">
-                    {isBookmarked(condition.id) ? (
-                      <img
-                        className="img"
-                        src={saveImg}
-                        onClick={() => handleUnbookmark(condition.id)}
-                        alt="Save"
-                      />
-                    ) : (
-                      <img
-                        className="img"
-                        src={unsaveImg}
-                        onClick={() => handleBookmark(condition.id)}
-                        alt="UnSave"
-                      />
-                    )}
-                  </div>
+                  {selectedDictionary === dictionary.id && (
+                      <div className="item-details">
+                        <p>{dictionary.definition}</p>
+                      </div>                    
+                  )}
                 </div>
               ))
             ) : (
-              <p className="Error">No definitions matchs {searchTerm}.</p>
+              <p className="Error">No Term matches {searchTerm}.</p>
             )}
           </div>
         ) : (

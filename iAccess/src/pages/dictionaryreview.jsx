@@ -11,8 +11,7 @@ import "../styles/dictionaryreview.css";
 const DictionaryReview = () => {
   const host = "http://localhost";
   const userId = "1";
-  const [conditions, setConditions] = useState([]);
-  const [bookmarks, setBookmarks] = useState([]);
+  const [dictionary, setdictionary] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const locat = useLocation();
   const navigate = useNavigate();
@@ -20,79 +19,36 @@ const DictionaryReview = () => {
   const queryParams = new URLSearchParams(locat.search);
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
-  const location = queryParams.get("location");
 
   useEffect(() => {
-    const fetchConditions = async () => {
+    const fetchterm = async () => {
       try {
         const url =
           host +
-          "/iPots/iAccess-Server/medical_conditions.php?method=" +
+          "/iPots/iAccess-Server/dictionary.php?method=" +
           method +
           "&letter=" +
           letter;
         const response = await axios.get(url);
-        setConditions(response.data);
+        setdictionary(response.data);
       } catch (error) {
-        console.error("Error fetching medical conditions:", error);
+        console.error("Error fetching medical term:", error);
       }
     };
-
-    const fetchBookmarks = async () => {
-      const url =
-        host +
-        "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" +
-        userId;
-      const response = await axios.get(url);
-      if (Array.isArray(response.data)) {
-        setBookmarks(response.data);
-      }
-    };
-
-    fetchConditions();
-    fetchBookmarks();
+    fetchterm();
   }, [method, letter]);
+  const [selectedDictionary, setSelectedDictionary] = useState(null);
 
-  const handleConditionClick = (condition) => {
-    navigate(
-      `/accessmenu?medicalCondition=${condition.term}&location=${location}`
-    );
-  };
-
-  const handleBookmark = async (conditionId) => {
-    const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
-    const params = {
-      userId: userId,
-      medicalConditionId: conditionId,
-      method: "Add",
-    };
-    const response = await axios.get(url, { params });
-    console.log(response);
-    setBookmarks([...bookmarks, conditionId]);
-  };
-
-  const handleUnbookmark = async (conditionId) => {
-    const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
-    const params = {
-      userId: userId,
-      medicalConditionId: conditionId,
-      method: "Delete",
-    };
-    const response = await axios.get(url, { params });
-    console.log(response);
-    setBookmarks(bookmarks.filter((id) => id !== conditionId));
-  };
-
-  const isBookmarked = (conditionId) => {
-    return bookmarks.includes(conditionId);
+  const handleDictionaryClick = (dictionary) => {
+    setSelectedDictionary(selectedDictionary === dictionary.id ? null : dictionary.id);
   };
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
-  const filteredConditions = conditions.filter((condition) =>
-    condition.term.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredDictionaries = dictionary.filter((dictionary) =>
+    dictionary.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -117,42 +73,30 @@ const DictionaryReview = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <PiIcons.PiMicrophoneFill className="microphone-icon" />
+            {/* <PiIcons.PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         <div className="dictionary-container">
-          {filteredConditions.length > 0 ? (
-            filteredConditions.map((condition) => (
-              <div key={condition.id} className="dictionary-box">
-                <div
-                  className="dictionary"
-                  onClick={() => handleConditionClick(condition)}
-                >
-                  {condition.term}
-                </div>
-                <div className="icons">
-                  {isBookmarked(condition.id) ? (
-                    <img
-                      className="img"
-                      src={saveImg}
-                      onClick={() => handleUnbookmark(condition.id)}
-                      alt="Save"
-                    />
-                  ) : (
-                    <img
-                      className="img"
-                      src={unsaveImg}
-                      onClick={() => handleBookmark(condition.id)}
-                      alt="UnSave"
-                    />
+            {filteredDictionaries.length > 0 ? (
+              filteredDictionaries.map((dictionary) => (
+                <div key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
+                  <div
+                    className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
+                    
+                  >
+                    {dictionary.term}
+                  </div>
+                  {selectedDictionary === dictionary.id && (
+                      <div className="item-details">
+                        <p>{dictionary.definition}</p>
+                      </div>                    
                   )}
                 </div>
-              </div>
-            ))
-          ) : (
-            <p className="Error">No definitions match your search.</p>
-          )}
-        </div>
+              ))
+            ) : (
+              <p className="Error">No Term matches {searchTerm}.</p>
+            )}
+          </div>
       </div>
     </>
   );
