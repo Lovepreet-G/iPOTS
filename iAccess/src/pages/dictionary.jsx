@@ -22,17 +22,13 @@ const Dictionary = () => {
       } catch (error) {
         console.error("Error fetching medical dictionarys:", error);
       }
-    };    
+    };
     fetchdictionaries();
   }, []);
 
   const checkBeforeNavigate = (letter, event) => {
-   
-      const Url =
-        "/dictionaryreview?Method=Letter&letter=" +
-        letter ;
-      navigate(Url);
-    
+    const Url = "/dictionaryreview?Method=Letter&letter=" + letter;
+    navigate(Url);
   };
 
   const handleLetterClick = (letter) => {
@@ -46,11 +42,13 @@ const Dictionary = () => {
   const filteredDictionaries = dictionary.filter((dictionary) =>
     dictionary.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
-  
+
   const [selectedDictionary, setSelectedDictionary] = useState(null);
 
   const handleDictionaryClick = (dictionary) => {
-    setSelectedDictionary(selectedDictionary === dictionary.id ? null : dictionary.id);
+    setSelectedDictionary(
+      selectedDictionary === dictionary.id ? null : dictionary.id
+    );
   };
 
   const letters = [
@@ -108,17 +106,22 @@ const Dictionary = () => {
           <div className="dictionary-container">
             {filteredDictionaries.length > 0 ? (
               filteredDictionaries.map((dictionary) => (
-                <div key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
+                <div
+                  key={dictionary.id}
+                  className="item dictionary-box "
+                  onClick={() => handleDictionaryClick(dictionary)}
+                >
                   <div
-                    className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
-                    
+                    className={`dictionary item-header ${
+                      selectedDictionary === dictionary.id ? "expanded" : ""
+                    }`}
                   >
                     {dictionary.term}
                   </div>
                   {selectedDictionary === dictionary.id && (
-                      <div className="item-details">
-                        <p>{dictionary.definition}</p>
-                      </div>                    
+                    <div className="item-details">
+                      <p>{dictionary.definition}</p>
+                    </div>
                   )}
                 </div>
               ))
