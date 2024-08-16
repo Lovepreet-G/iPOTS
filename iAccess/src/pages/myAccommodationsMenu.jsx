@@ -12,9 +12,7 @@ import earthImg from "../../public/planet-earth.png";
 
 import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
-import lawImg from "../../public/Law.png";
-import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/save.png";
+import allergyImg from "../../public/allergies.png";
 import backImg from "../../public/Back.png";
 
 const MyAccommodations = () => {
@@ -61,6 +59,7 @@ const MyAccommodations = () => {
       img: caduceusImg,
       url: "/mymedicalconditions",
     },
+    { name: "My Allergies", img: allergyImg, url: "/myallergies" },
   ];
 
   return (

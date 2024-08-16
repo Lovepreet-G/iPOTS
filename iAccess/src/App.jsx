@@ -9,6 +9,7 @@ import MyAccommodationsMenu from "./pages/myAccommodationsMenu";
 import MyMedicalConditions from "./pages/myMedicalCondtions";
 import MyAccommodations from "./pages/myAccommodations";
 import MyAccessMenu from "./pages/myaccessmenu";
+import MyAllergies from "./pages/myallergies";
 
 
 
@@ -27,6 +28,7 @@ function App() {
             <Route path="/accommodation" element={<Accommodation />} />
             <Route path="/myaccommodationsmenu" element={<MyAccommodationsMenu />} />
             <Route path="/myaccommodations" element={<MyAccommodations />} />
+            <Route path="/myallergies" element={<MyAllergies />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
             <Route path="/myaccessmenu" element={<MyAccessMenu />} />
             <Route path="/mymedicalconditions" element={<MyMedicalConditions />} />
