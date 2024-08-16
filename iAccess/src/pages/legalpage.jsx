@@ -50,6 +50,7 @@ export default function LegalPage() {
                 <a
                   href="https://www.ontario.ca/laws/statute/05a11"
                   target="_blank"
+                  aria-label="Link to Ontario AODA page"
                 >
                   Read more here
                 </a>
@@ -80,6 +81,7 @@ export default function LegalPage() {
                 <a
                   href="https://www.ontario.ca/laws/regulation/110191#BK9"
                   target="_blank"
+                  aria-label="Link to Information and communications standard in Ontario"
                 >
                   Read more here
                 </a>
@@ -110,6 +112,7 @@ export default function LegalPage() {
                 <a
                   href="https://www.ontario.ca/laws/regulation/110191#BK35"
                   target="_blank"
+                  aria-label="Link to Transportation standard in Ontario"
                 >
                   Read more here
                 </a>
