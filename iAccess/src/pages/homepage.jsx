@@ -18,6 +18,7 @@ import saveImg from "../../public/unsave.png";
 import backImg from "../../public/Back.png";
 
 const HomePage = () => {
+  const userId =1;
   const [selectedLocation, setSelectedLocation] = useState("");
   const [open, setOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState("");
@@ -30,11 +31,18 @@ const HomePage = () => {
   };
 
   const checkBeforeNavigate = (category, event) => {
+
+    //Check if the user is trying to access "My Accommodations"
+    if (category.url === "/myaccommodationsmenu" && !userId) {
+      setSignInOpen(true);
+      event.preventDefault();
+      return;
+    }
      // Skip location check if category is "Dictionary" or "Legal"
     if (category.name !== "Dictionary" && category.name !== "Legal") {
       // Check if the user selected the location
       if (!selectedLocation) {
-        alert("Please select a location first");
+        setOpen(true);
         event.preventDefault(); // Prevent the default link click behavior
         return;
       }
@@ -43,27 +51,9 @@ const HomePage = () => {
       navigate(newUrl);
       return;
     }
-    
+
     navigate(category.url);
-    
-  const checkBeforeNavigate = (url, event) => {
-    //Check if the user is trying to access "My Accommodations"
-    if (url === "/myaccommodationsmenu") {
-      setSignInOpen(true);
-      event.preventDefault();
-      return;
-    }
-
-    //checking if the user selected the location
-    if (!selectedLocation) {
-      setOpen(true);
-      event.preventDefault(); // Prevent the default link click behavior
-      return;
-    }
-
-    const newUrl = url + "?location=" + selectedLocation;
-    navigate(newUrl);
-  };
+  }
 
   const locations = [
     { name: "Home", img: homeImg },
