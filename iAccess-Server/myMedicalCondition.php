@@ -25,6 +25,21 @@ if ($method == 'All') {
 
     echo json_encode($medicalConditions);
 
+}
+elseif ($method == 'showAll') {
+    
+    // Fetching medical conditions
+    $stmt = $connect->prepare("SELECT mc.id, mc.term, mc.definition FROM medical_conditions mc JOIN my_medical_condition mmc ON mc.id = mmc.medical_condition_id WHERE mmc.user_id = ? ");
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    $medicalConditions = [];
+    while ($row = $result->fetch_assoc()) {
+        $medicalConditions[] = $row;
+    }
+
+    echo json_encode($medicalConditions);
 } elseif ($method == 'Add') {
 
     $stmt = $connect->prepare("INSERT INTO my_medical_condition (user_id, medical_condition_id) VALUES (?, ?)");
