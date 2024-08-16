@@ -29,6 +29,23 @@ const HomePage = () => {
     setSelectedLocation(location);
   };
 
+  const checkBeforeNavigate = (category, event) => {
+     // Skip location check if category is "Dictionary" or "Legal"
+    if (category.name !== "Dictionary" && category.name !== "Legal") {
+      // Check if the user selected the location
+      if (!selectedLocation) {
+        alert("Please select a location first");
+        event.preventDefault(); // Prevent the default link click behavior
+        return;
+      }
+      const newUrl = category.url + "?location=" + selectedLocation;
+
+      navigate(newUrl);
+      return;
+    }
+    
+    navigate(category.url);
+    
   const checkBeforeNavigate = (url, event) => {
     //Check if the user is trying to access "My Accommodations"
     if (url === "/myaccommodationsmenu") {
@@ -65,7 +82,7 @@ const HomePage = () => {
     },
     { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
     { name: "Legal", img: lawImg, url: "" },
-    { name: "Dictionary", img: dictionaryImg, url: "" },
+    { name: "Dictionary", img: dictionaryImg, url: "/dictionary" },
     { name: "My Accommodations", img: saveImg, url: "/myaccommodationsmenu" },
   ];
 
@@ -95,7 +112,7 @@ const HomePage = () => {
           <div
             key={category.name}
             className="accessibility-category"
-            onClick={(event) => checkBeforeNavigate(category.url, event)}
+            onClick={(event) => checkBeforeNavigate(category, event)}
           >
             <img
               src={category.img}

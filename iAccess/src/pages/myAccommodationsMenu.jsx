@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import "../styles/myAccommodations.css";
 
 import homeImg from "../../public/home.png";
@@ -18,10 +18,9 @@ import saveImg from "../../public/save.png";
 import backImg from "../../public/Back.png";
 
 const MyAccommodations = () => {
-
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
-  const location = queryParams.get('location');
+  const location = queryParams.get("location");
 
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
@@ -57,17 +56,21 @@ const MyAccommodations = () => {
       img: assistiveTechImg,
       url: "/myaccessmenu",
     },
-    { name: "Medical Conditions", img: caduceusImg, url: "/mymedicalconditions" },
+    {
+      name: "Medical Conditions",
+      img: caduceusImg,
+      url: "/mymedicalconditions",
+    },
   ];
 
   return (
     <div className="myAccommodations">
       <h1 className="myAccommodations-title">My Accommodations</h1>
-      <div className="navbar-container">
+      <div className="myNavbar-container">
         {locations.map((location) => (
           <div
             key={location.name}
-            className={`location ${
+            className={`myLocation ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
@@ -75,29 +78,31 @@ const MyAccommodations = () => {
             <img
               src={location.img}
               alt={location.name}
-              className="location-img"
+              className="myLocation-img"
             />
-            <span className="location-name">{location.name}</span>
+            <span className="myLocation-name">{location.name}</span>
           </div>
         ))}
       </div>
-      <div className="accessibility-categories-container">
+      <div className="myAccessibility-categories-container">
         {categories.map((category) => (
           <div
             key={category.name}
-            className="accessibility-category"
+            className="myAccessibility-category"
             onClick={(event) => checkBeforeNavigate(category.url, event)}
           >
             <img
               src={category.img}
               alt={category.name}
-              className="accessibility-category-icon"
+              className="myAccessibility-category-icon"
             />
-            <span className="accessibility-category-name">{category.name}</span>
+            <span className="myAccessibility-category-name">
+              {category.name}
+            </span>
             <img
               src={backImg}
               alt="Back"
-              className="accessibility-category-back"
+              className="myAccessibility-category-back"
             />
           </div>
         ))}

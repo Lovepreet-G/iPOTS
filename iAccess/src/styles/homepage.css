@@ -253,3 +253,53 @@
   text-align: center;
   color: #000;
 }
+
+/* Mobile Design */
+@media (max-width: 971px) {
+  .navbar-home-container {
+    margin-top: 2.4rem;
+    width: 17.2rem;
+    height: 14.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .location-home {
+    margin: 0.82rem;
+    width: 5.164rem;
+    height: 6.994rem;
+    border-radius: 0.375rem;
+  }
+
+  .location-home-img {
+    width: 3.791rem;
+    height: 3.791rem;
+    /* margin-top: 0.654rem; */
+    margin-right: 0.654rem;
+    margin-left: 0.719rem;
+    /* margin-bottom: 2.549rem; */
+  }
+
+  .location-home-name {
+    font-size: 0.75rem;
+  }
+
+  .accessibility-categories-container {
+    margin-top: 3rem;
+    width: 21.39rem;
+    height: 25.188rem;
+  }
+
+  .accessibility-category {
+    width: 21.39rem;
+    height: 4.263rem;
+  }
+
+  .accessibility-category-name {
+    width: 15.236rem;
+    height: 1.55rem;
+    font-size: 1.18rem;
+  }
+}
