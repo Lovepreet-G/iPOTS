@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Popup from "reactjs-popup";
 import "../styles/homepage.css";
 
 import homeImg from "../../public/home.png";
@@ -17,7 +18,12 @@ import saveImg from "../../public/unsave.png";
 import backImg from "../../public/Back.png";
 
 const HomePage = () => {
+  const userId =1;
   const [selectedLocation, setSelectedLocation] = useState("");
+  const [open, setOpen] = useState(false);
+  const [signInOpen, setSignInOpen] = useState("");
+  const closeModal = () => setOpen(false);
+  const closeSignInModal = () => setSignInOpen(false);
   const navigate = useNavigate();
 
   const handleLocationClick = (location) => {
@@ -25,11 +31,18 @@ const HomePage = () => {
   };
 
   const checkBeforeNavigate = (category, event) => {
+
+    //Check if the user is trying to access "My Accommodations"
+    if (category.url === "/myaccommodationsmenu" && !userId) {
+      setSignInOpen(true);
+      event.preventDefault();
+      return;
+    }
      // Skip location check if category is "Dictionary" or "Legal"
     if (category.name !== "Dictionary" && category.name !== "Legal") {
       // Check if the user selected the location
       if (!selectedLocation) {
-        alert("Please select a location first");
+        setOpen(true);
         event.preventDefault(); // Prevent the default link click behavior
         return;
       }
@@ -38,10 +51,10 @@ const HomePage = () => {
       navigate(newUrl);
       return;
     }
-    
+
     navigate(category.url);
-    
-  };
+  }
+
   const locations = [
     { name: "Home", img: homeImg },
     { name: "Work", img: briefcaseImg },
@@ -105,6 +118,54 @@ const HomePage = () => {
           </div>
         ))}
       </div>
+      <Popup
+        open={open}
+        closeOnDocumentClick
+        onClose={closeModal}
+        overlayClassName="popup-overlay"
+        contentClassName="popup-content"
+      >
+        <div className="popup-message">
+          <ul className="popup-location-list">
+            {locations.map((location) => (
+              <li key={location.name} className="popup-location-item">
+                <img
+                  src={location.img}
+                  alt={location.name}
+                  className="popup-location-img"
+                />
+                <span className="popup-location-name">{location.name}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="message">
+            Select the location where these accommodations will be used
+          </div>
+          <button className="close" onClick={closeModal}>
+            OK
+          </button>
+        </div>
+      </Popup>
+      <Popup
+        open={signInOpen}
+        closeOnDocumentClick
+        onClose={closeSignInModal}
+        overlayClassName="popup-overlay"
+        contentClassName="popup-content"
+      >
+        <div className="popup-message">
+          <h2 className="popup-title">SIGN IN REQUIRED</h2>
+          <div className="message">
+            Please sign in to access My Accommodation
+          </div>
+          <button className="sign-in" onClick={closeSignInModal}>
+            Sign In
+          </button>
+          <button className="cancel" onClick={closeSignInModal}>
+            Cancel
+          </button>
+        </div>
+      </Popup>
     </div>
   );
 };
