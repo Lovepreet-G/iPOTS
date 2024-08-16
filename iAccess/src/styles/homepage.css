@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
 
 .homepage {
   display: flex;
@@ -111,9 +112,146 @@
 }
 
 .accessibility-category-back {
-  width: 1.875rem;
-  height: 1.875rem;
-  margin-left: 1.25rem;
+  width: 33.63px;
+  height: 43.73px;
+  margin-left: 20px;
+}
+
+/* Styles for the popup overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Styles for the popup content */
+.popup-content {
+  padding: 20px;
+  background: #fff; /* Ensure the background is white */
+  border-radius: 16px;
+  max-width: 32.874rem; /* Set a maximum width */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Ensure it appears above the overlay */
+}
+
+.popup-message {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 700;
+  font-size: 24;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.popup-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.message {
+  text-wrap: wrap;
+  max-width: 13.125rem;
+  margin-top: 4.002rem;
+}
+.close {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  /* margin-bottom: 2.502rem; */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0fc0fc;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  width: 27.713rem;
+  margin-top: 4.07rem;
+}
+.sign-in {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  /* margin-bottom: 2.502rem; */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0fc0fc;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  width: 27.713rem;
+  margin-top: 4.07rem;
+}
+.cancel {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  margin-top: 1.25rem;
+  /* margin-bottom: 2.502rem; */
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #0fc0fc;
+  border: none;
+  border-radius: 10px;
+  color: black;
+  width: 27.713rem;
+  margin-top: 0.518rem;
+}
+.popup-location-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; /* This allows the items to wrap to the next line if they overflow */
+  justify-content: center; /* Centers the items horizontally */
+  padding: 0;
+  list-style-type: none;
+  margin: 0;
+}
+
+.popup-location-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 5px; /* Adjust the margin as needed for spacing */
+  width: 65.6px;
+  height: 65.97px;
+  border-radius: 5px;
+  background-color: #c0c0c0;
+}
+
+.popup-location-img {
+  margin-top: 0.563rem;
+  width: 2.188rem;
+  height: 2.188rem;
+  object-fit: cover;
+}
+
+.popup-location-name {
+  margin-top: 0.25rem;
+  margin-bottom: 0.561rem;
+  font-size: 9px;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-align: center;
+  color: #000;
 }
 
 /* Mobile Design */

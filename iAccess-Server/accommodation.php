@@ -9,58 +9,45 @@ header('Content-Type: application/json');
 require_once('includes/database.php');
 // include('includes/config.php');
 
-$category = isset($_GET['category']) ? $_GET['category'] : '';
-$location = isset($_GET['location']) ? $_GET['location'] : '';
-$medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
+$category = isset($_GET['category']) ? $_GET['category'] : 'Cognitive';
+$location = isset($_GET['location']) ? $_GET['location'] : 'Work';
+$medicalCondition = isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] : NULL;
 
+if ($category == "Medical Devices") {
+    $category = "Medical_devices";
+}
 
+if ($category == "Mental Health") {
+    $category = "Mental_Health";
+}
+// because for now school_lecture and school_test both has same data
+if ($location == "School") {
+    $location = "School_lecture";
+}
 
 $response = [];
-if($location=="All")
-{
-    if(isset($medicalCondition))
-    {
-        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE disability_category = ? And medical_condition = ?");
+if ($location == "All") {
+    if (isset($medicalCondition)) {
+        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE $category = '1' And medical_condition = ?");
         if ($stmt) {
-            $stmt->bind_param("ss", $category, $medicalCondition);
+            $stmt->bind_param("s", $medicalCondition);
             $stmt->execute();
             $result = $stmt->get_result();
-        
-            // Fetch data 
-            while ($row = $result->fetch_assoc()) {
-                $response[] = $row;
-            }
-            $stmt->close();
-        }
-    }
-    else
-    {
-        
-        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE disability_category = ? ");
-        if ($stmt) {
-            $stmt->bind_param("s", $category);
-            $stmt->execute();
-            $result = $stmt->get_result();
-        
-            // Fetch data 
-            while ($row = $result->fetch_assoc()) {
-                $response[] = $row;
-            }
-            $stmt->close();
-        }
-    }
-}
-else
-{
 
-    if(isset($medicalCondition))
-    {
-        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE disability_category = ? AND location = ? And medical_condition = ?");
+            // Fetch data 
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row;
+            }
+            $stmt->close();
+        }
+    } else {
+
+        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE $category = 1 ");
         if ($stmt) {
-            $stmt->bind_param("sss", $category, $location, $medicalCondition);
+            // $stmt->bind_param("s", $category);
             $stmt->execute();
             $result = $stmt->get_result();
-        
+
             // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
@@ -68,22 +55,35 @@ else
             $stmt->close();
         }
     }
-    else
-    {
-        
-        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE disability_category = ? AND location = ? ");
+} else {
+
+    if (isset($medicalCondition)) {
+        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE $category = 1 AND $location = 1 And medical_condition = ?");
         if ($stmt) {
-            $stmt->bind_param("ss", $category, $location);
+            $stmt->bind_param("s", $medicalCondition);
             $stmt->execute();
             $result = $stmt->get_result();
-        
+
             // Fetch data 
             while ($row = $result->fetch_assoc()) {
                 $response[] = $row;
             }
             $stmt->close();
         }
+    } else {
 
+        $stmt = $connect->prepare("SELECT * FROM `accommodations` WHERE $category = 1 AND $location = 1 ");
+        if ($stmt) {
+            // $stmt->bind_param("ss", $category, $location);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            // Fetch data 
+            while ($row = $result->fetch_assoc()) {
+                $response[] = $row;
+            }
+            $stmt->close();
+        }
     }
 }
 
@@ -94,6 +94,3 @@ mysqli_close($connect);
 
 // Send the response as JSON
 echo json_encode($response);
-
-
-?>

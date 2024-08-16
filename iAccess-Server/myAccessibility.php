@@ -10,12 +10,30 @@ require_once('includes/database.php');
 // include('includes/config.php');
 
 
-$method = isset($_GET['method']) ? $_GET['method'] : ''; 
-$userId = isset($_GET['userId']) ? $_GET['userId'] : ''  ;
-$accommodationId = isset($_GET['accommodationId']) ? $_GET['accommodationId'] : ''  ;
+$method = isset($_GET['method']) ? $_GET['method'] : '';
+$userId = isset($_GET['userId']) ? $_GET['userId'] : '';
+$accommodationId = isset($_GET['accommodationId']) ? $_GET['accommodationId'] : '';
 $location = isset($_GET['location']) ? $_GET['location'] : '';
-$medicalCondition =isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] :NULL;
+$medicalCondition = isset($_GET['medicalCondition']) ? $_GET['medicalCondition'] : NULL;
 $category = isset($_GET['category']) ? $_GET['category'] : '';
+
+
+
+if ($category == "Medical Devices") {
+    $category = "Medical_devices";
+}
+
+if ($category == "Mental Health") {
+    $category = "Mental_Health";
+}
+// because for now school_lecture and school_test both has same data
+if ($location == "School") {
+    $location = "School_lecture";
+}
+
+// for making sql query dynamic for disability category and location
+$temp_cat = "a." . $category;
+$temp_locat = "a." . $location;
 
 
 if ($method == 'All') {
@@ -30,27 +48,27 @@ if ($method == 'All') {
     }
 
     echo json_encode($bookmarks);
-
-}elseif ($method == 'showAll') {
+} elseif ($method == 'showAll') {
     $response = [];
 
     // Check if the location is "All"
     if ($location == "All") {
         // If medicalCondition is set
         if (isset($medicalCondition)) {
+
             $stmt = $connect->prepare("
                 SELECT a.* 
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
                 AND a.medical_condition = ?
-                And a.disability_category=?");
-            
+                And $temp_cat = '1'");
+
             if ($stmt) {
-                $stmt->bind_param("iss", $userId, $medicalCondition,$category);
+                $stmt->bind_param("is", $userId, $medicalCondition);
                 $stmt->execute();
                 $result = $stmt->get_result();
-    
+
                 while ($row = $result->fetch_assoc()) {
                     $response[] = $row;
                 }
@@ -62,13 +80,13 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ?
-                And a.disability_category=?");
-            
+                And $temp_cat='1'");
+
             if ($stmt) {
-                $stmt->bind_param("is", $userId,$category);
+                $stmt->bind_param("i", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
-    
+
                 while ($row = $result->fetch_assoc()) {
                     $response[] = $row;
                 }
@@ -83,15 +101,15 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.location = ? 
+                AND $temp_locat = '1' 
                 AND a.medical_condition = ?
-                And a.disability_category=?");
-            
+                And $temp_cat='1'");
+
             if ($stmt) {
-                $stmt->bind_param("isss", $userId, $location, $medicalCondition,$category);
+                $stmt->bind_param("is", $userId, $medicalCondition);
                 $stmt->execute();
                 $result = $stmt->get_result();
-    
+
                 while ($row = $result->fetch_assoc()) {
                     $response[] = $row;
                 }
@@ -103,14 +121,14 @@ if ($method == 'All') {
                 FROM accommodations a 
                 JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
                 WHERE ma.user_id = ? 
-                AND a.location = ?
-                And a.disability_category=?");
-            
+                AND $temp_locat = '1'
+                And $temp_cat='1'");
+
             if ($stmt) {
-                $stmt->bind_param("iss", $userId, $location,$category);
+                $stmt->bind_param("i", $userId);
                 $stmt->execute();
                 $result = $stmt->get_result();
-    
+
                 while ($row = $result->fetch_assoc()) {
                     $response[] = $row;
                 }
@@ -118,12 +136,10 @@ if ($method == 'All') {
             }
         }
     }
-    
-    echo json_encode($response);    
-}
- 
-elseif ($method == 'Add') {
-    
+
+    echo json_encode($response);
+} elseif ($method == 'Add') {
+
 
     $stmt = $connect->prepare("INSERT INTO my_accessibilties (user_id, accommodation_id) VALUES (?, ?)");
     $stmt->bind_param("ii", $userId, $accommodationId);
@@ -133,7 +149,6 @@ elseif ($method == 'Add') {
     } else {
         echo json_encode(["error" => $stmt->error]);
     }
-
 } elseif ($method == 'Delete') {
 
     $stmt = $connect->prepare("DELETE FROM my_accessibilties WHERE user_id = ? AND accommodation_id = ?");
@@ -144,9 +159,7 @@ elseif ($method == 'Add') {
     } else {
         echo json_encode(["error" => $stmt->error]);
     }
-}
-elseif ($method == 'Category')
-{
+} elseif ($method == 'Category') {
     $response = [];
     // If medicalCondition is set
     if (isset($medicalCondition)) {
@@ -157,7 +170,7 @@ elseif ($method == 'Category')
             WHERE ma.user_id = ? 
             AND a.location = ? 
             AND a.medical_condition = ?");
-        
+
         if ($stmt) {
             $stmt->bind_param("iss", $userId, $location, $medicalCondition);
             $stmt->execute();
@@ -175,7 +188,7 @@ elseif ($method == 'Category')
             JOIN my_accessibilties ma ON a.id = ma.accommodation_id 
             WHERE ma.user_id = ? 
             AND a.location = ?");
-        
+
         if ($stmt) {
             $stmt->bind_param("is", $userId, $location);
             $stmt->execute();
@@ -192,4 +205,3 @@ elseif ($method == 'Category')
 
 
 $connect->close();
-?>
