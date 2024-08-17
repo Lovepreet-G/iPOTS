@@ -52,12 +52,12 @@ const MyAccommodations = () => {
 
   const categories = [
     {
-      name: "Accessibility Category",
+      name: "My Accessibility Category",
       img: assistiveTechImg,
       url: "/myaccessmenu",
     },
     {
-      name: "Medical Conditions",
+      name: "My Medical Conditions",
       img: caduceusImg,
       url: "/mymedicalconditions",
     },
