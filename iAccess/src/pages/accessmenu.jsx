@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import "../styles/accessmenu.css";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
 import mobilityImg from "../../public/mobility.png";
 import earImg from "../../public/ear.png";
 import brainImg from "../../public/brain.png";

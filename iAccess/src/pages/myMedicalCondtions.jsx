@@ -4,12 +4,13 @@ import axios from "axios";
 import "../styles/medicalcondits.css";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 
