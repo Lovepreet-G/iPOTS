@@ -15,17 +15,18 @@ import earthImg from "../../public/06-all.png";
 
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
-import mobilityImg from "../../public/mobility.png";
-import earImg from "../../public/ear.png";
-import brainImg from "../../public/brain.png";
-import mentalImg from "../../public/mental.png";
-import sensorImg from "../../public/sensorial.png";
-import allergyImg from "../../public/allergies.png";
-import visionImg from "../../public/witness.png";
-import painImg from "../../public/pain.png";
-import stomachImg from "../../public/stomach.png";
-import safetyImg from "../../public/prevention.png";
-import medicalImg from "../../public/medical.png";
+import visionImg from "../../public/01-vision.png";
+import earImg from "../../public/02-hearing.png";
+import mobilityImg from "../../public/03-mobility.png";
+import brainImg from "../../public/04-cognitive.png";
+import sensorImg from "../../public/05-sensory.png";
+import allergyImg from "../../public/06-allergy.png";
+import safetyImg from "../../public/07-safety.png";
+import stomachImg from "../../public/08-digestion.png";
+import painImg from "../../public/9-pain.png";
+import medicalImg from "../../public/10-medical devices.png";
+import mentalImg from "../../public/11-mental health.png";
+import medicationImg from "../../public/12-medication.png";
 
 const myAccommodations = () => {
     const host = "http://localhost";
@@ -169,6 +170,7 @@ const myAccommodations = () => {
         { name: "Digestion", img: stomachImg },
         { name: "Safety", img: safetyImg },
         { name: "MedicalDevices", img: medicalImg },
+        { name: "Medication", img: medicationImg },
       ];  
     const categoryObject = categories.find(cat => cat.name === category);
     const iconImg = categoryObject ? categoryObject.img : null;
