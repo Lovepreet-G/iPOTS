@@ -19,7 +19,7 @@ const ProfileEdit = () => {
       <div className="profile-header2">
         <img src={plantImg} alt="Profile" className="profile-picture2" />
         <p className="change-picture2">Change profile picture</p>
-        <h2>@iaccessuser</h2>
+        <h2 className='user-name'>@iaccessuser</h2>
       </div>
       <div className="profile-form">
         <div className="form-group">

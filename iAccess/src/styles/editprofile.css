@@ -27,7 +27,7 @@
   margin-top: 10px;
 }
 
-h2 {
+.user-name {
     font-family: 'Inter', sans-serif;
     font-size: 40px;
     font-weight: medium;
@@ -35,10 +35,10 @@ h2 {
 }
 
 .profile-form {
-    width: 80%; /* Set width relative to parent container */
-  max-width: 798px; /* Maximum width */
-  height: 60vh; /* Set height relative to viewport height */
-  max-height: 475px; /* Maximum height */
+    width: 80%; 
+  max-width: 798px; 
+  height: 60vh; 
+  max-height: 475px; 
 }
 
 .form-group {

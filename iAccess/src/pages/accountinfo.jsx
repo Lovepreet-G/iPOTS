@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/accountinfo.css';
 
 import plantImg from '../../public/Joseph.png'; // Replace with the correct path to your image
-import accommodationsImg from '../../public/save-instagram.png';
+import accommodationsImg from '../../public/save.png';
 import medicalConditionsImg from '../../public/Caduceus.png';
 import allergiesImg from '../../public/allergies.png';
 import legalImg from "../../public/Law.png";
@@ -24,8 +24,10 @@ const ProfilePage = () => {
 
   const navigate = useNavigate();
 
-  const handleEditProfile = () => {
-    navigate('/editprofile');
+  const handleOptionClick = (url) => {
+    if (url) {
+      navigate(url);
+    }
   };
 
   const options = [
@@ -52,7 +54,7 @@ const ProfilePage = () => {
       </div>
       <div className="options-list">
         {options.map((option, index) => (
-          <div key={index} className="option" onClick={handleEditProfile}>
+          <div key={index} className="option" onClick={() => handleOptionClick(option.url)}>
             <img src={option.img} alt={option.name} className="option-icon" />
             <span className="option-name">{option.name}</span>
             <img

@@ -66,3 +66,15 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+.Error
+{
+  height: 80vh;
+  /* text-align: justify; */
+  margin-top: 10px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  padding: 0 1.563rem 0 1.563rem;
+  line-height: 3.5rem;
+
+}
