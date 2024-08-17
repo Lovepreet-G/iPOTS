@@ -21,17 +21,21 @@ import painImg from "../../public/pain.png";
 import stomachImg from "../../public/stomach.png";
 import safetyImg from "../../public/prevention.png";
 import medicalImg from "../../public/medical.png";
-// import grayMobilityImg from "../../public/gray_mobility.png"; // Gray images
-// import grayEarImg from "../../public/gray_ear.png";
-// import grayBrainImg from "../../public/gray_brain.png";
-// import grayMentalImg from "../../public/gray_mental.png";
-// import graySensorImg from "../../public/gray_sensor.png";
-// import grayAllergyImg from "../../public/gray_allergy.png";
-// import grayVisionImg from "../../public/gray_vision.png";
-// import grayPainImg from "../../public/gray_pain.png";
-// import grayStomachImg from "../../public/gray_stomach.png";
-// import graySafetyImg from "../../public/gray_safety.png";
-// import grayMedicalImg from "../../public/gray_medical.png";
+import medicationImg from "../../public/12-medication.png";
+
+
+import grayVisionImg from "../../public/01-vision-grey.png";
+import grayEarImg from "../../public/02-hearing-grey.png";
+import grayMobilityImg from "../../public/03-mobility-grey.png"; // Gray images
+import grayBrainImg from "../../public/04-cognitive-grey.png";
+import graySensorImg from "../../public/05-sensory-grey.png";
+import grayAllergyImg from "../../public/06-allergy-grey.png";
+import graySafetyImg from "../../public/07-safety-grey.png";
+import grayStomachImg from "../../public/08-digestion-grey.png";
+import grayPainImg from "../../public/09-pain-grey.png";
+import grayMedicalImg from "../../public/10-medical devices-grey.png";
+import grayMentalImg from "../../public/11-mental health-grey.png";
+import grayMedicationImg from "../../public/12-medication-grey.png";
 
 const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
@@ -104,17 +108,18 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg, grayImg: "grayMobilityImg" },
-    { name: "Hearing", img: earImg, grayImg:" grayEarImg" },
-    { name: "Cognitive", img: brainImg, grayImg: "grayBrainImg" },
-    { name: "Mental Health", img: mentalImg, grayImg: "grayMentalImg "},
-    { name: "Sensory", img: sensorImg, grayImg: "graySensorImg" },
-    { name: "Allergy", img: allergyImg, grayImg: "grayAllergyImg" },
-    { name: "Vision", img: visionImg, grayImg: "grayVisionImg" },
-    { name: "Pain", img: painImg, grayImg: "grayPainImg" },
-    { name: "Digestion", img: stomachImg, grayImg: "grayStomachImg" },
-    { name: "Safety", img: safetyImg, grayImg: "graySafetyImg" },
-    { name: "Medical Devices", img: medicalImg, grayImg: "grayMedicalImg" },
+    { name: "Mobility", img: mobilityImg, grayImg: grayMobilityImg },
+    { name: "Hearing", img: earImg, grayImg: grayEarImg },
+    { name: "Cognitive", img: brainImg, grayImg: grayBrainImg },
+    { name: "Mental Health", img: mentalImg, grayImg: grayMentalImg},
+    { name: "Sensory", img: sensorImg, grayImg: graySensorImg},
+    { name: "Allergy", img: allergyImg, grayImg: grayAllergyImg},
+    { name: "Vision", img: visionImg, grayImg: grayVisionImg },
+    { name: "Pain", img: painImg, grayImg: grayPainImg },
+    { name: "Digestion", img: stomachImg, grayImg: grayStomachImg },
+    { name: "Safety", img: safetyImg, grayImg: graySafetyImg },
+    { name: "Medical Devices", img: medicalImg, grayImg: grayMedicalImg },
+    { name: "Medication", img: medicationImg, grayImg: grayMedicationImg },
   ];
 
   return (
