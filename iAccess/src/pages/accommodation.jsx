@@ -196,7 +196,6 @@ const Accommodation2 = () => {
             value={searchTerm}
             onChange={handleSearchChange}
           />
-          <PiMicrophoneFill className="microphone-icon" />
         </div>
       </div>
       <div className="item-list">
