@@ -12,7 +12,7 @@ import earthImg from "../../public/planet-earth.png";
 
 import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
-import allergyImg from "../../public/allergies.png";
+import allergyImg from "../../public/06-allergy.png";
 import backImg from "../../public/Back.png";
 
 const MyAccommodations = () => {

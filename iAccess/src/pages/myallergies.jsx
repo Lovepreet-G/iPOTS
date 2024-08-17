@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../styles/myallergies.css'; 
-import allergiesImg from "../../public/allergies.png";
+import allergiesImg from "../../public/06-allergy.png";
 import downImg from "../../public/arrowDown.png";
 import upImg from "../../public/arrowUp.png";
 
