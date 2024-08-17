@@ -61,17 +61,17 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg },
+    { name: "Vision", img: visionImg },
     { name: "Hearing", img: earImg },
+    { name: "Mobility", img: mobilityImg },
     { name: "Cognitive", img: brainImg },
-    { name: "Mental Health", img: mentalImg },
     { name: "Sensory", img: sensorImg },
     { name: "Allergy", img: allergyImg },
-    { name: "Vision", img: visionImg },
-    { name: "Pain", img: painImg },
-    { name: "Digestion", img: stomachImg },
     { name: "Safety", img: safetyImg },
+    { name: "Digestion", img: stomachImg },
+    { name: "Pain", img: painImg },
     { name: "Medical Devices", img: medicalImg },
+    { name: "Mental Health", img: mentalImg },
   ];
 
 
