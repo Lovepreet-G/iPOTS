@@ -162,3 +162,122 @@ input {
   font-weight: bold;
   text-align: center;
 }
+
+@media (max-width: 1024px) {
+  .page-name {
+    font-family: "Inter", sans-serif;
+    font-size: 1.563rem;
+    font-weight: 500;
+    padding-left: 0;
+  }
+
+  .nav-container {
+    /* flex-direction: column;
+    align-items: center; */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+    width: 17.114rem;
+    height: 14.8rem;
+    margin: 0.375rem;
+  }
+
+  .location-condits {
+    width: 5.164rem; /* Adjust width for tablets */
+    height: 6.994rem; /* Adjust height for tablets */
+    margin: 0.375rem; /* Adjust margin for tablets */
+  }
+
+  .location-condits-img {
+    width: 3.791rem;
+    height: 3.791rem;
+    /* margin-top: 0.654rem; */
+    margin-right: 0.654rem;
+    margin-left: 0.719rem;
+    /* margin-bottom: 2.549rem; */
+  }
+  .location-condits-name {
+    font-size: 0.75rem;
+  }
+
+  .search-bar-container {
+    width: 20.188rem;
+    height: 8rem; /* 3.688rem */
+    padding-top: 2.75rem;
+  }
+
+  .search-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .microphone-icon {
+    height: 1.875rem;
+  }
+
+  .searchbox {
+    width: 20.188rem;
+    height: 3.625rem;
+    font-size: 16px;
+    /* height: 4rem; */
+    padding-left: 3rem;
+    padding-right: 3.625rem;
+  }
+
+  .letters-container {
+    grid-template-columns: repeat(4, 1fr); /* 3 columns for tablets */
+    width: 19.688rem; /* Adjust width for tablets */
+    height: 35.313rem;
+    grid-gap: 0;
+  }
+
+  .letter {
+    width: 3.75rem;
+    height: 3.688rem;
+    margin: 0.781rem;
+    border-radius: 0.625rem;
+  }
+
+  .the-letters {
+    height: 2.5rem;
+    font-size: 2.6rem;
+  }
+}
+
+/* Phone Styles (max-width: 767px) */
+@media (max-width: 767px) {
+  .page-title {
+    font-size: 1.5rem; /* Adjust font size for phones */
+    width: 100%; /* Full width for phones */
+  }
+
+  .nav-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .location-condits {
+    width: 6rem; /* Adjust width for phones */
+    height: 7rem; /* Adjust height for phones */
+    margin: 0.5rem; /* Adjust margin for phones */
+  }
+
+  .letters-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for phones */
+    width: 90%; /* Adjust width for phones */
+  }
+
+  .search-bar {
+    width: 100%; /* Full width for phones */
+  }
+
+  .searchbox {
+    width: calc(100% - 3.5rem); /* Adjust width for phones */
+  }
+
+  .search-icon,
+  .microphone-icon {
+    width: 30px; /* Adjust icon size for phones */
+    height: 30px;
+  }
+}
