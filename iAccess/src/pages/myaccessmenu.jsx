@@ -119,7 +119,7 @@ const AccessMenu = () => {
     { name: "Digestion", img: stomachImg, grayImg: grayStomachImg },
     { name: "Safety", img: safetyImg, grayImg: graySafetyImg },
     { name: "Medical Devices", img: medicalImg, grayImg: grayMedicalImg },
-    { name: "Medication", img: medicationImg, grayImg: grayMedicationImg },
+    { name: "Medicine", img: medicationImg, grayImg: grayMedicationImg },
   ];
 
   return (
