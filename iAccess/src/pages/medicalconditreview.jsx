@@ -106,7 +106,6 @@ const MedicalConditsReview = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <PiIcons.PiMicrophoneFill className="microphone-icon" />
           </div>
         </div>
         <div className="conditions-container">

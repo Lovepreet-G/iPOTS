@@ -3,23 +3,25 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
 import "../styles/accessmenu.css";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
-import mobilityImg from "../../public/mobility.png";
-import earImg from "../../public/ear.png";
-import brainImg from "../../public/brain.png";
-import mentalImg from "../../public/mental.png";
-import sensorImg from "../../public/sensorial.png";
-import allergyImg from "../../public/allergies.png";
-import visionImg from "../../public/witness.png";
-import painImg from "../../public/pain.png";
-import stomachImg from "../../public/stomach.png";
-import safetyImg from "../../public/prevention.png";
-import medicalImg from "../../public/medical.png";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
+import visionImg from "../../public/01-vision.png";
+import earImg from "../../public/02-hearing.png";
+import mobilityImg from "../../public/03-mobility.png";
+import brainImg from "../../public/04-cognitive.png";
+import sensorImg from "../../public/05-sensory.png";
+import allergyImg from "../../public/06-allergy.png";
+import safetyImg from "../../public/07-safety.png";
+import stomachImg from "../../public/08-digestion.png";
+import painImg from "../../public/9-pain.png";
+import medicalImg from "../../public/10-medical devices.png";
+import mentalImg from "../../public/11-mental health.png";
+import medicationImg from "../../public/12-medication.png";
 
 const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
@@ -61,17 +63,18 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg },
+    { name: "Vision", img: visionImg },
     { name: "Hearing", img: earImg },
+    { name: "Mobility", img: mobilityImg },
     { name: "Cognitive", img: brainImg },
-    { name: "Mental Health", img: mentalImg },
     { name: "Sensory", img: sensorImg },
     { name: "Allergy", img: allergyImg },
-    { name: "Vision", img: visionImg },
-    { name: "Pain", img: painImg },
-    { name: "Digestion", img: stomachImg },
     { name: "Safety", img: safetyImg },
+    { name: "Digestion", img: stomachImg },
+    { name: "Pain", img: painImg },
     { name: "Medical Devices", img: medicalImg },
+    { name: "Mental Health", img: mentalImg },
+    { name: "Medication", img: medicationImg },
   ];
 
 

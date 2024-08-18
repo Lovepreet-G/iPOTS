@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "../styles/myAccommodations.css";
 
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
 
 import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
@@ -52,12 +52,12 @@ const MyAccommodations = () => {
 
   const categories = [
     {
-      name: "Accessibility Category",
+      name: "My Accessibility Category",
       img: assistiveTechImg,
       url: "/myaccessmenu",
     },
     {
-      name: "Medical Conditions",
+      name: "My Medical Conditions",
       img: caduceusImg,
       url: "/mymedicalconditions",
     },
