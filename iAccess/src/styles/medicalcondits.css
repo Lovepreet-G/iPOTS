@@ -28,9 +28,9 @@
 .nav-medical-condit-container {
   display: flex;
   justify-content: center;
-  width: 82.813rem;
-  height: 14.25rem;
-  margin-top: 5.188rem;
+  width: 56.625rem;
+  height: 9.744rem;
+  margin-top: 2.5rem;
 }
 
 .location-condits {
@@ -38,10 +38,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 8.4rem;
-  height: 9.7rem;
-  margin: 0 0.938rem;
-  padding: 0.625rem;
+  width: 8.375rem;
+  height: 9.688rem;
+  margin: 0 0.625rem;
   cursor: pointer;
   border-radius: 0.625rem;
   background-color: #c0c0c0;

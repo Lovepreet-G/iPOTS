@@ -25,58 +25,6 @@
   padding-left: 1.25rem;
 }
 
-.nav-container {
-  display: flex;
-  justify-content: center;
-  width: 82.813rem;
-  height: 14.25rem;
-  margin-top: 5.188rem;
-}
-
-.location-condits {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 8.4rem;
-  height: 9.7rem;
-  margin: 0 0.938rem;
-  padding: 0.625rem;
-  cursor: pointer;
-  border-radius: 0.625rem;
-  background-color: #c0c0c0;
-  transition: background-color 0.3s, transform 0.3s;
-}
-
-.location-condits:hover {
-  background-color: #b0b0b0;
-  transform: scale(1.05);
-}
-
-.location-condits.selected {
-  background-color: #0fc0fc;
-}
-
-.location-condits-img {
-  width: 6.125rem;
-  height: 6.125rem;
-  margin-top: 1rem;
-  margin-left: 1.625rem;
-  margin-right: 1.625rem;
-}
-
-.location-condits-icon {
-  font-size: 1.5rem;
-}
-
-.location-condits-name {
-  margin-top: 0.313rem;
-  font-size: 1.5rem;
-  font-family: "Montserrat", sans-serif;
-  font-weight: bold;
-  color: black;
-}
-
 .dictionary-letters-container {
   margin-top: 3.75rem;
   width: 53rem; /* Had I use the Figma width, the screen would */
@@ -124,15 +72,6 @@ input {
   font-size: 1.5rem;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-}
-
-.microphone-icon {
-  position: absolute;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  pointer-events: none;
-  color: #000;
 }
 
 .dictionary-letter {
