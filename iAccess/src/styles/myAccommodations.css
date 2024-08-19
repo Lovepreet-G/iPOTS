@@ -9,10 +9,10 @@
 }
 
 .myAccommodations-title {
-  width: 1671px;
-  height: 146px;
+  width: 26.125rem;
+  height: 3.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 110px;
+  font-size: 2.5rem;
   font-weight: bold;
   color: #000000;
   margin: 0;
@@ -21,9 +21,9 @@
 .myNavbar-container {
   display: flex;
   justify-content: center;
-  width: 1325px;
-  height: 228px;
-  margin-top: 83px;
+  width: 56.625rem;
+  height: 9.744rem;
+  margin-top: 2.5rem;
 }
 
 .myLocation {
@@ -31,12 +31,12 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 196px;
-  height: 228px;
-  margin: 0 15px;
-  padding: 10px;
+  width: 8.375rem;
+  height: 9.688rem;
+  margin: 0 0.625rem;
+  /* padding: 10px; */
   cursor: pointer;
-  border-radius: 10px;
+  border-radius:  0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
 }
@@ -51,25 +51,21 @@
 }
 
 .myLocation-img {
-  width: 144.01px;
-  height: 143.74px;
-  margin-top: 16px;
-  margin-left: 26px;
-  margin-right: 26px;
-}
-
-.myLocation-icon {
-  font-size: 24px;
+  width: 6.2rem;
+  height: 6.2rem;
+  margin-top: 1rem;
+  margin-left: 1.625rem;
+  margin-right: 1.625rem;
 }
 
 .myLocation-name {
-  margin-top: 5px;
-  font-size: 35px;
+  margin-top: 0.313rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
 }
 .myAccessibility-categories-container {
-  margin-top: 60px;
+  margin-top: 2.5rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -82,12 +78,12 @@
   justify-content: space-between;
   background-color: #0fc0fc;
   color: black;
-  width: 760px;
-  height: 129px;
-  padding: 0 20px;
-  margin: 12px 0;
-  border-radius: 10px;
-  font-size: 45px;
+  width: 27.625rem;
+  height: 4rem;
+  padding: 0 0.625rem;
+  margin: 0.25rem 0;
+  border-radius: 0.625rem;
+  font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   cursor: pointer;
@@ -100,14 +96,14 @@
 }
 
 .myAccessibility-category-icon {
-  width: 85px;
-  height: 85px;
-  margin-right: 25px;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 0.813rem;
 }
 
 .myAccessibility-category-name {
-  width: 526px;
-  height: 46px;
+  width: 21.188rem;
+  height: 2.438rem;
   text-align: left;
   display: flex;
   align-items: center;
@@ -116,5 +112,4 @@
 .myAccessibility-category-back {
   width: 33.63px;
   height: 43.73px;
-  margin-left: 20px;
 }
