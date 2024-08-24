@@ -237,13 +237,6 @@ const Accommodation2 = () => {
                     alt="Save"
                   />
                 </a>
-                  // <img
-                  //   className="img"
-                  //   src={saveImg}
-                  //   onClick={() => handleUnbookmark(accommodation.id)}
-                  //   alt="Save"
-                  //   aria-label="Click to remove bookmark from this item"
-                  // />
                 ) : (
                   <a 
                     href="#" 
@@ -259,14 +252,6 @@ const Accommodation2 = () => {
                       alt="UnSave"
                     />
                   </a>
-
-                  // <img
-                  //   className="img"
-                  //   src={unsaveImg}
-                  //   onClick={() => handleBookmark(accommodation.id)}
-                  //   alt="UnSave"
-                  //   aria-label="Click to bookmark this item"
-                  // />
                 )}
               </div>
               {selectedItem === accommodation.id && (

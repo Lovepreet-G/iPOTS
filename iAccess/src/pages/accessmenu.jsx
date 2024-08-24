@@ -108,7 +108,9 @@ const AccessMenu = () => {
           ))}
         </div>
         <div className="categories-access-menu-container">
+          <ul aria-label="List of accessibilty categories">
           {categories.map((category) => (
+            <li className="category-access-menu-items">
             <a
               key={category.name}
               href="#"
@@ -124,7 +126,9 @@ const AccessMenu = () => {
                 {category.name}
               </span>
             </a>
+            </li>
           ))}
+          </ul>
         </div>
       </div>
     </>

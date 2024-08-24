@@ -113,6 +113,8 @@ input {
 .dictionary-list{
   width: 47.625rem;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .dictionary-box {

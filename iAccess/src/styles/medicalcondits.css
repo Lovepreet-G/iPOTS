@@ -102,16 +102,6 @@
   color: black;
 }
 
-.medical-letters-container {
-  margin-top: 3.75rem;
-  width: 53rem; /* Had I use the Figma width, the screen would */
-  height: 79rem; /* have been 2x2, instead of the 4x4 in the */
-  display: grid; /* design on the Figma. */
-  grid-template-columns: repeat(4, 0.01fr);
-  grid-gap: 0.5rem;
-  justify-content: center;
-}
-
 .medical-search-bar-container {
   margin-top: 2.5rem;
   padding-bottom: 0;
@@ -150,6 +140,24 @@ input {
   font-family: "Inter", sans-serif;
   font-weight: 400;
 }
+.medical-letters-container {
+  margin-top: 3.75rem;
+  width: 53rem; /* Had I use the Figma width, the screen would */
+  height: auto; /* have been 2x2, instead of the 4x4 in the */
+  display: flex;
+  justify-content: center;
+}
+.medical-letters-container ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid; /* design on the Figma. */
+  grid-template-columns: repeat(4, 0.01fr);
+  grid-gap: 0.5rem;
+}
+.letter-items{
+  list-style: none;
+}
 
 .medical-letter {
   display: flex;
@@ -160,7 +168,7 @@ input {
   color: black;
   width: 8.813rem;
   height: 9.875rem;
-  margin: 1rem; /*adjusted from figma to 24px*/
+   margin: 1rem; 
   border-radius: 1.25rem;
   font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;

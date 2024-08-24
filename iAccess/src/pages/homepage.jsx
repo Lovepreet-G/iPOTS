@@ -101,27 +101,31 @@ const HomePage = () => {
         ))}
       </div>
       <div className="accessibility-categories-container">
-        {categories.map((category) => (
-          <a
-            key={category.name}
-            href="#"
-            className="accessibility-category"
-            onClick={(event) => checkBeforeNavigate(category, event)}
-          >
-            <img
-              src={category.img}
-              alt={category.name}
-              className="accessibility-category-icon"
-            />
-            <span className="accessibility-category-name">{category.name}</span>
-            <img
-              src={backImg}
-              aria-label="Right Arrow"
-              alt="Right Arrow"
-              className="accessibility-category-back"
-            />
-          </a>
-        ))}
+        <ul aria-label="Main Menu Options ">
+          {categories.map((category) => (
+            <li key={category.name} className="accessibility-category-item">
+              <a
+                key={category.name}
+                href="#"
+                className="accessibility-category"
+                onClick={(event) => checkBeforeNavigate(category, event)}
+              >
+                <img
+                  src={category.img}
+                  alt={category.name}
+                  className="accessibility-category-icon"
+                />
+                <span className="accessibility-category-name">{category.name}</span>
+                <img
+                  src={backImg}
+                  aria-label="Right Arrow"
+                  alt="Right Arrow"
+                  className="accessibility-category-back"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <Popup
         open={open}

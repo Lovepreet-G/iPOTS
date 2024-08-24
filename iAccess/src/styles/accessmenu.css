@@ -76,11 +76,21 @@
 .categories-access-menu-container {
   margin-top: 3.75rem;
   width: 38rem;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
   justify-content: center;
 }
-
+.categories-access-menu-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  /* gap: 1rem;  */
+}
+.category-access-menu-items {
+  list-style: none;
+}
 .category-access-menu {
   display: flex;
   flex-direction: column;

@@ -151,9 +151,7 @@ const MedicalCondits = () => {
     <>
       <div className="medical-condit-page">
         <div className="medical-condit-title">
-          {/* <span className="medical-condit-logo"> */}
             <img src={caduceusImg} alt="Medical Conditions" className="medical-condit-logo" />
-          {/* </span> */}
           <h1 className="medical-condit-name"> Medical Conditions</h1>
         </div>
         <div className="nav-medical-condit-container">
@@ -210,7 +208,9 @@ const MedicalCondits = () => {
           </div>
         ) : (
           <div className="medical-letters-container">
+            <ul aria-label="List of letters">
             {letters.map((letter) => (
+              <li className="letter-items">
               <a
                 key={letter.num}
                 href="#"
@@ -225,7 +225,9 @@ const MedicalCondits = () => {
               >
                 <span className="medical-the-letters">{letter.char}</span>
               </a>
+              </li>
             ))}
+            </ul>
           </div>
         )}
       </div>

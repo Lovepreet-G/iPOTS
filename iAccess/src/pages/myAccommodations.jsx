@@ -261,7 +261,7 @@ const myAccommodations = () => {
                             </div>
                             {selectedItem === accommodation.id && (
                                 <div className="item-details" onClick={() => handleItemClick(accommodation)}>
-                                    <img src={iconImg} alt={accommodation.title} className="item-image" />
+                                    <img src={iconImg} alt={accommodation.accommodation} className="item-image" />
                                     <p>{accommodation.description}</p>
                                 </div>
                             )}

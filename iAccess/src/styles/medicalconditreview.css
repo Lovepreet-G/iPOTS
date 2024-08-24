@@ -114,6 +114,8 @@ input {
 .conditions-list{
   width: 47.625rem;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 .condition-box {

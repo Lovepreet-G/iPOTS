@@ -48,11 +48,17 @@
 .dictionary-letters-container {
   margin-top: 3.75rem;
   width: 53rem; /* Had I use the Figma width, the screen would */
-  height: 79rem; /* have been 2x2, instead of the 4x4 in the */
+  height: auto; /* have been 2x2, instead of the 4x4 in the */
+  display: flex;
+  justify-content: center;
+}
+.dictionary-letters-container ul{
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
   display: grid; /* design on the Figma. */
   grid-template-columns: repeat(4, 0.01fr);
   grid-gap: 0.5rem;
-  justify-content: center;
 }
 
 .search-bar-container {

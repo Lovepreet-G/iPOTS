@@ -137,7 +137,9 @@ const Dictionary = () => {
           </div>
         ) : (
           <div className="dictionary-letters-container">
+            <ul aria-label="List of letters">
             {letters.map((letter) => (
+              <li className="letter-items">
               <a
                 key={letter.num}
                 href="#"
@@ -152,7 +154,9 @@ const Dictionary = () => {
               >
                 <span className="dictionary-the-letters">{letter.char}</span>
               </a>
+              </li>
             ))}
+            </ul>
           </div>
         )}
       </div>

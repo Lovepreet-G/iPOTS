@@ -87,7 +87,9 @@ const MyAccommodations = () => {
         ))}
       </div>
       <div className="myAccessibility-categories-container">
+        <ul aria-label="My accommodation menu options">
         {categories.map((category) => (
+          <li className="myAccessibility-items">
           <a
             key={category.name}
             href="#"
@@ -109,7 +111,9 @@ const MyAccommodations = () => {
               className="myAccessibility-category-back"
             />
           </a>
+          </li>
         ))}
+        </ul>
       </div>
     </div>
   );

@@ -76,6 +76,11 @@
   flex-direction: column;
   align-items: center;
 }
+.accessibility-categories-container ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
 
 .accessibility-category {
   display: flex;
