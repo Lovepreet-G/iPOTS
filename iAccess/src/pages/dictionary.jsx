@@ -83,12 +83,17 @@ const Dictionary = () => {
   return (
     <>
       <div className="dictionary-total-page">
-        <div className="dictionary-page-title">
+        {/* <div className="dictionary-page-title">
           <span className="logo">
             <img src={dictionaryImg} />
           </span>
           <span className="page-name"> Dictionary</span>
+        </div> */}
+        <div className="dictionary-page-title">
+            <img src={dictionaryImg} alt="Dictionary" className="dic-logo" />
+          <h1 className="dic-page-name"> Dictionary</h1>
         </div>
+
         <div className="search-bar-container">
           <div className="search-bar">
             <CiSearch className="search-icon" />
@@ -98,6 +103,7 @@ const Dictionary = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label="Search for words or definitions in the dictionary"
             />
             {/* <PiMicrophoneFill className="microphone-icon" /> */}
           </div>
@@ -132,8 +138,10 @@ const Dictionary = () => {
         ) : (
           <div className="dictionary-letters-container">
             {letters.map((letter) => (
-              <div
+              <a
                 key={letter.num}
+                href="#"
+                aria-label={`Search with ${letter.char}`}
                 className={`dictionary-letter ${
                   selectedLetter === letter.num ? "selected" : ""
                 }`}
@@ -143,7 +151,7 @@ const Dictionary = () => {
                 }}
               >
                 <span className="dictionary-the-letters">{letter.char}</span>
-              </div>
+              </a>
             ))}
           </div>
         )}

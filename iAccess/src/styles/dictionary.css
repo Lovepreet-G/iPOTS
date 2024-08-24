@@ -10,12 +10,12 @@
   height: 100vh;
   padding-top: 0.625rem;
 }
-
+/* 
 .dictionary-page-title {
   width: 104.461rem;
   height: 9.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 2.5rem; /*40px*/
+  font-size: 2.5rem; 
   font-weight: bold;
   color: #000;
   margin: 0;
@@ -23,6 +23,26 @@
 
 .page-name {
   padding-left: 1.25rem;
+} */
+.dictionary-page-title {
+  display: flex;
+  align-items: center;
+}
+
+.dic-logo {
+  margin-right: 0.625rem;
+  width: 5rem;
+  height: 4.375rem;
+}
+
+.dic-page-name {
+  width: 18rem;
+  height: 3.125rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000000;
+  /* margin: 0; */
 }
 
 .dictionary-letters-container {
@@ -36,7 +56,7 @@
 }
 
 .search-bar-container {
-  padding-top: 2.5rem;
+  margin-top: 2.5rem;
   padding-bottom: 0;
   display: flex;
   justify-content: center;
@@ -90,6 +110,8 @@ input {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .dictionary-letter:hover {

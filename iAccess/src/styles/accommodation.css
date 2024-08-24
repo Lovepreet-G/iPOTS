@@ -84,7 +84,7 @@
 }
 
 .search-bar-container {
-  padding-top: 2.5rem;
+  margin-top: 2.5rem;
   padding-bottom: 0;
   display: flex;
   justify-content: center;
@@ -133,6 +133,7 @@ input {
 
 /* Items List */
 .item-container {
+  margin-top: 2.5rem;
   width: 100%;
   max-width: 47.5rem;
   height: 4rem;

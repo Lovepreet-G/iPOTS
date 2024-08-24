@@ -151,12 +151,12 @@ const myAccommodations = () => {
     );
 
     const locations = [
-        { name: "Home", img: homeImg },
-        { name: "Work", img: briefcaseImg },
-        { name: "School", img: backpackImg },
-        { name: "Transit", img: transitImg },
-        { name: "Medical", img: hospitalImg },
-        { name: "All", img: earthImg },
+        { name: "Home", img: homeImg, area: "Home" },
+        { name: "Work", img: briefcaseImg, area: "Work"},
+        { name: "School", img: backpackImg, area: "School" },
+        { name: "Transit", img: transitImg, area: "Transit" },
+        { name: "Medical", img: hospitalImg, area: "Medical" },
+        { name: "All", img: earthImg, area: "All Locations" },
     ];  
     const categories = [
         { name: "Mobility", img: mobilityImg },
@@ -177,7 +177,7 @@ const myAccommodations = () => {
         return (
             <div className="accommodations-page">
                 <div className="header-container2">
-                    <img src={iconImg} alt="Vision" className="vision-image" />
+                    <img src={iconImg} alt={category} className="category-image" />
                     <h1 className="accommodation-title">{category} </h1>
                     {medicalCondition && (
                         <h2 className="accommodation-title">  ({medicalCondition})</h2>
@@ -185,8 +185,10 @@ const myAccommodations = () => {
                 </div>
                 <div className="navbar-container">
                     {locations.map((location) => (
-                        <div
+                        <a
                             key={location.name}
+                            href="#"
+                            aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
                             className={`location ${selectedLocation === location.name ? "selected" : ""
                                 }`}
                             onClick={() => handleLocationClick(location.name)}
@@ -197,7 +199,7 @@ const myAccommodations = () => {
                                 className="location-img"
                             />
                             <span className="location-name">{location.name}</span>
-                        </div>
+                        </a>
                     ))}
                 </div>
                 <div className="search-bar-container">
@@ -209,13 +211,15 @@ const myAccommodations = () => {
                             placeholder="Search" 
                             value={searchQuery}
                             onChange={handleSearchChange}
+                            aria-label={`Search for my accommodations for ${category}`}
                         />
                     </div>
                 </div>
-                <div className="item-list">
+                <div className="item-container">
                     {filteredAccommodations.length > 0 ? (
-                    filteredAccommodations.map((accommodation) => (
-                        <div
+                    <ul className="item-list" aria-label="List of my accommodations">
+                    {filteredAccommodations.map((accommodation) => (
+                        <li
                             key={accommodation.id}
                             className={`item ${selectedItem === accommodation.id ? 'selected' : ''}`}
                             
@@ -223,9 +227,35 @@ const myAccommodations = () => {
                             <div className={`item-header ${selectedItem === accommodation.id ? 'expanded' : ''}`}>
                                 <span onClick={() => handleItemClick(accommodation)}>{accommodation.accommodation}</span>
                                 {isBookmarked(accommodation.id) ? (                                     
-                                    <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save"  />
+                                     <a 
+                                     href="#" 
+                                     onClick={(e) => {
+                                       e.preventDefault(); 
+                                       handleUnbookmark(accommodation.id);
+                                     }}
+                                     aria-label="Click to remove bookmark from this item"
+                                   >
+                                     <img
+                                       className="img"
+                                       src={saveImg}
+                                       alt="Save"
+                                     />
+                                   </a>
                                 ) : (
-                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Save"  />
+                                    <a 
+                                        href="#" 
+                                        onClick={(e) => {
+                                        e.preventDefault(); 
+                                        handleBookmark(accommodation.id);
+                                        }}
+                                        aria-label="Click to bookmark this item"
+                                    >
+                                        <img
+                                        className="img"
+                                        src={unsaveImg}
+                                        alt="UnSave"
+                                        />
+                                    </a>
                                 )}
                                
                             </div>
@@ -235,8 +265,9 @@ const myAccommodations = () => {
                                     <p>{accommodation.description}</p>
                                 </div>
                             )}
-                        </div>
-                    ))
+                        </li>
+                    ))}
+                    </ul>
                     ) : (
                         <p className='Error'>No My Accommodations available for {category} at {selectedLocation}.</p>
                     )}

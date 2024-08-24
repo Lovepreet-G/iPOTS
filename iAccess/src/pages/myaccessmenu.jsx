@@ -86,12 +86,12 @@ const AccessMenu = () => {
   };
 
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const categories = [
@@ -130,12 +130,14 @@ const AccessMenu = () => {
          My Accessibility Categories
         </h1>
         {medicalCondition && (
-                    <h1 className="medical-condition"> {medicalCondition}</h1>
+                    <h2 className="medical-condition"> {medicalCondition}</h2>
                 )}
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
-            <div
+            <a
               key={location.name}
+              href="#"
+              aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
               className={`location-access-menu ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
@@ -147,15 +149,16 @@ const AccessMenu = () => {
                 className="location-access-menu-img"
               />
               <span className="location-access-menu-name">{location.name}</span>
-            </div>
+            </a>
           ))}
         </div>
         <div className="categories-access-menu-container">
           {
             categories.map((category) => (
             
-            <div
+            <a
               key={category.name}
+              href="#"
               className="category-access-menu"
               onClick={(event) => checkBeforeNavigate(category.name, event)}
             >
@@ -167,7 +170,7 @@ const AccessMenu = () => {
               <span className="category-access-menu-names">
                 {category.name}
               </span>
-            </div>
+            </a>
           ))}
         </div>
       </div>

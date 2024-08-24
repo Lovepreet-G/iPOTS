@@ -68,7 +68,6 @@
 .search-bar-container {
   margin-top: 2.5rem;
   /* padding-top: 2.5rem; */
-  padding-bottom: 1rem;
   display: flex;
   justify-content: center;
 }
@@ -106,6 +105,7 @@ input {
 }
 
 .conditions-container {
+  margin-top: 2.5rem;
   width: 47.625rem;
   display: flex;
   flex-direction: column;
@@ -113,6 +113,7 @@ input {
 }
 .conditions-list{
   width: 47.625rem;
+  list-style-type: none;
 }
 
 .condition-box {

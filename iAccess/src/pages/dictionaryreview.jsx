@@ -54,15 +54,23 @@ const DictionaryReview = () => {
   return (
     <>
       <div className="dictionary-all-page">
-        <div className="dictionary-title-page">
+        {/* <div className="dictionary-title-page">
           <span className="icon">
             <img src={dictionaryImg} className="dictionary" />
           </span>
           <span className="dictionary-name-page">Dictionary</span>
+        </div> */}
+
+        <div className="dictionary-title-page">
+            <img src={dictionaryImg} alt="Dictionary" className="dictionary-logo" />
+          <h1 className="dictionary-name-page"> Dictionary</h1>
         </div>
+
         <div className="dictionary-letter-area">
-          <h1 className="dictionary-letter-style">{letter}</h1>
+          <div className="dictionary-letter-style">{letter}</div>
         </div>
+
+
         <div className="search-bar-container">
           <div className="search-bar">
             <CiIcons.CiSearch className="search-icon" />
@@ -72,14 +80,16 @@ const DictionaryReview = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label={`Search with ${letter}`}
             />
             {/* <PiIcons.PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         <div className="dictionary-container">
             {filteredDictionaries.length > 0 ? (
-              filteredDictionaries.map((dictionary) => (
-                <div key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
+              <ul className="dictionary-list" aria-label={`List of terms start with ${letter}`}>
+              {filteredDictionaries.map((dictionary) => (
+                <li key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
                   <div
                     className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
                     
@@ -91,8 +101,9 @@ const DictionaryReview = () => {
                         <p>{dictionary.definition}</p>
                       </div>                    
                   )}
-                </div>
-              ))
+                </li>
+              ))}
+              </ul>
             ) : (
               <p className="Error">No Term matches {searchTerm}.</p>
             )}

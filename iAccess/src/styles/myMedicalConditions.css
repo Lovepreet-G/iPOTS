@@ -81,7 +81,7 @@
 }
 
 .search-bar-container {
-  padding-top: 2.5rem;
+  margin-top: 2.5rem;
   padding-bottom: 0;
   display: flex;
   justify-content: center;
