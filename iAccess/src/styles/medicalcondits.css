@@ -11,18 +11,42 @@
   padding-top: 0.625rem;
 }
 
-.medical-condit-title {
+/* .medical-condit-title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.25rem;
   width: 104.461rem;
   height: 9.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 2.5rem; /*40px*/
+  font-size: 2.5rem; 
   font-weight: bold;
   color: #000;
   margin: 0;
+ 
 }
 
 .medical-condit-name {
   padding-left: 1.25rem;
+} */
+.medical-condit-title {
+  display: flex;
+  align-items: center;
+}
+
+.medical-condit-logo {
+  margin-right: 0.625rem;
+  width: 4.375rem;
+  height: 4.375rem;
+}
+
+.medical-condit-name {
+  width: 26rem;
+  height: 3.125rem;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000000;
+  margin: 0;
 }
 
 .nav-medical-condit-container {
@@ -45,6 +69,8 @@
   border-radius: 0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .location-condits:hover {
@@ -125,15 +151,6 @@ input {
   font-weight: 400;
 }
 
-.medical-microphone-icon {
-  position: absolute;
-  right: 10px;
-  width: 50px;
-  height: 50px;
-  pointer-events: none;
-  color: #000;
-}
-
 .medical-letter {
   display: flex;
   flex-direction: column;
@@ -150,6 +167,8 @@ input {
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .medical-letter:hover {
