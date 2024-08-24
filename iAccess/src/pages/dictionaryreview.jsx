@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
 import * as PiIcons from "react-icons/pi";
-import unsaveImg from "../../public/unsave.png";
-import saveImg from "../../public/save.png";
 import dictionaryImg from "../../public/Dictionary.png";
 import "../styles/dictionaryreview.css";
 

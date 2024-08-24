@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 import { CiSearch } from "react-icons/ci";
-import { PiMicrophoneFill } from "react-icons/pi";
 
 import "../styles/accommodation.css";
 import homeImg from "../../public/01-home.png";
