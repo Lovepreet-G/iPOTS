@@ -15,7 +15,7 @@
   margin-bottom: 1.25rem;
 }
 
-.vision-image {
+.category-image {
   margin-right: 0.625rem;
   width: 4.625rem;
   height: 4.625rem;
@@ -51,6 +51,8 @@
   border-radius: 0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
+  text-decoration: none;
+  color: inherit;
 }
 
 .location:hover {
@@ -130,11 +132,14 @@ input {
 }
 
 /* Items List */
-.item-list {
+.item-container {
   width: 100%;
   max-width: 47.5rem;
   height: 4rem;
   margin: 1.25rem auto;
+}
+.item-list{
+  list-style-type: none;
 }
 
 .item {
