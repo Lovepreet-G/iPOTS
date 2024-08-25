@@ -236,7 +236,6 @@ input {
   .medical-search-bar-container {
     width: 20.188rem;
     height: 8rem; /* 3.688rem */
-    padding-top: 2.75rem;
   }
   .medical-search-icon {
     width: 1.5rem;
@@ -300,8 +299,7 @@ input {
     width: calc(100% - 3.5rem); /* Adjust width for phones */
   }
 
-  .search-icon,
-  .microphone-icon {
+  .search-icon {
     width: 30px; /* Adjust icon size for phones */
     height: 30px;
   }

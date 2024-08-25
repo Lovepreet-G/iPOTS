@@ -231,7 +231,7 @@ const Accommodation2 = () => {
                   aria-label="Click to remove bookmark from this item"
                 >
                   <img
-                    className="img"
+                    className="bookmark-img"
                     src={saveImg}
                     alt="Save"
                   />
@@ -246,7 +246,7 @@ const Accommodation2 = () => {
                     aria-label="Click to bookmark this item"
                   >
                     <img
-                      className="img"
+                      className="unbookmarkimg"
                       src={unsaveImg}
                       alt="UnSave"
                     />

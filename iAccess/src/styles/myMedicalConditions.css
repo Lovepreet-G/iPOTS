@@ -212,8 +212,7 @@ input {
 
   .search-bar-container {
     width: 20.188rem;
-    height: 8rem; /* 3.688rem */
-    padding-top: 2.75rem;
+    height: 4rem; /* 3.688rem */
   }
 
   .search-icon {
