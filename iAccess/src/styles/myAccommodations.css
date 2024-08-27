@@ -5,7 +5,7 @@
   justify-content: flex-start;
   text-align: center;
   height: 100vh;
-  padding-top: 10px; /*changed it */
+  padding-top: 10px;
 }
 
 .myAccommodations-title {
@@ -34,7 +34,6 @@
   width: 8.375rem;
   height: 9.688rem;
   margin: 0 0.625rem;
-  /* padding: 10px; */
   cursor: pointer;
   border-radius:  0.625rem;
   background-color: #c0c0c0;
@@ -122,6 +121,8 @@
   width: 33.63px;
   height: 43.73px;
 }
+
+/* Mobile Design */
 @media (max-width: 971px) {
   .myAccommodations-title{
     font-size: 1.563rem;
@@ -146,10 +147,8 @@
   .myLocation-img {
     width: 3.791rem;
     height: 3.791rem;
-    /* margin-top: 0.654rem; */
     margin-right: 0.654rem;
     margin-left: 0.719rem;
-    /* margin-bottom: 2.549rem; */
   }
 
   .myLocation-name {

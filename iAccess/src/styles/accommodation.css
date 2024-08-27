@@ -121,13 +121,11 @@ input {
   font-weight: 400;
 }
 
-/* Items List */
 .item-container {
   margin-top: 2.5rem;
   width: 100%;
   max-width: 47.5rem;
   height: 4rem;
-  /* margin: 0rem ; */
 }
 .item-list{
   list-style-type: none;
@@ -222,10 +220,8 @@ img {
   .location-img {
     width: 3.791rem;
     height: 3.791rem;
-    /* margin-top: 0.654rem; */
     margin-right: 0.654rem;
     margin-left: 0.719rem;
-    /* margin-bottom: 2.549rem; */
   }
 
   .location-name {

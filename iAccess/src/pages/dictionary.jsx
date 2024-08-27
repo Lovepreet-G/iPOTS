@@ -83,12 +83,6 @@ const Dictionary = () => {
   return (
     <>
       <div className="dictionary-total-page">
-        {/* <div className="dictionary-page-title">
-          <span className="logo">
-            <img src={dictionaryImg} />
-          </span>
-          <span className="page-name"> Dictionary</span>
-        </div> */}
         <div className="dictionary-page-title">
             <img src={dictionaryImg} alt="Dictionary" className="dic-logo" />
           <h1 className="dic-page-name"> Dictionary</h1>
@@ -105,7 +99,6 @@ const Dictionary = () => {
               onChange={handleSearchChange}
               aria-label="Search for words or definitions in the dictionary"
             />
-            {/* <PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         {searchTerm ? (

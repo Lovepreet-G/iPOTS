@@ -83,49 +83,10 @@
   font-weight: bold;
   color: black;
 }
-
-/* .search-bar-container {
-  margin-top: 2.5rem;
-  padding-bottom: 0;
-  display: flex;
-  justify-content: center;
-}
-
-.search-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.searchbox {
-  width: 49rem;
-  height: 4rem;
-  border-radius: 0.5rem;
-  color: #b0b0b0;
-  border: 1px solid #b0b0b0;
-  padding-left: 2.5rem;
-  padding-right: 3.5rem;
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.75rem;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  color: #b0b0b0;
-}
-
-input {
-  text-indent: 1.1rem;
-  font-size: 1.5rem;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-} */
 .medical-letters-container {
   margin-top: 3.75rem;
-  width: 53rem; /* Had I use the Figma width, the screen would */
-  height: auto; /* have been 2x2, instead of the 4x4 in the */
+  width: 53rem; 
+  height: auto; 
   display: flex;
   justify-content: center;
 }
@@ -133,7 +94,7 @@ input {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  display: grid; /* design on the Figma. */
+  display: grid; 
   grid-template-columns: repeat(4, 0.01fr);
   grid-gap: 0.5rem;
 }
@@ -178,7 +139,7 @@ input {
   text-align: center;
 }
 
-/* Phone Styles (max-width: 767px) */
+/* Mobile Design */
 @media (max-width: 971px) {
   .medical-condit-logo{
     width:2.375rem ;
@@ -193,10 +154,6 @@ input {
     font-weight: 400;
     line-height: 150%;
   }
-  /* .page-title {
-    font-size: 1.5rem; 
-    width: 100%; 
-  } */
 
   .nav-medical-condit-container {
     margin-top: 2.063rem;
@@ -216,10 +173,8 @@ input {
   .location-condits-img{
     width: 3.791rem;
     height: 3.791rem;
-    /* margin-top: 0.654rem; */
     margin-right: 0.654rem;
     margin-left: 0.719rem;
-    /* margin-bottom: 2.549rem; */
   }
   .location-condits-name {
     font-size: 0.75rem;
@@ -227,8 +182,6 @@ input {
 
   .medical-letters-container {
     width: 20.188rem;
-    /* grid-template-columns: repeat(3, 1fr);
-    width: 90%;  */
   }
   .medical-letter{
     margin: 0.60rem;

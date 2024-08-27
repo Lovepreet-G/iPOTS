@@ -8,7 +8,7 @@
   justify-content: flex-start;
   text-align: center;
   height: 100vh;
-  padding-top: 0.625rem; /*changed it */
+  padding-top: 0.625rem; 
 }
 
 .homepage-home-title {
@@ -144,9 +144,9 @@
 /* Styles for the popup content */
 .popup-content {
   padding: 20px;
-  background: #fff; /* Ensure the background is white */
+  background: #fff; 
   border-radius: 16px;
-  max-width: 32.874rem; /* Set a maximum width */
+  max-width: 32.874rem; 
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   color: #000;
   font-size: 16px;
@@ -155,7 +155,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 1000; /* Ensure it appears above the overlay */
+  z-index: 1000; 
 }
 
 .popup-message {
@@ -182,7 +182,6 @@
   font-weight: 700;
   font-size: 24px;
   margin-top: 1.25rem;
-  /* margin-bottom: 2.502rem; */
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -198,7 +197,6 @@
   font-weight: 700;
   font-size: 24px;
   margin-top: 1.25rem;
-  /* margin-bottom: 2.502rem; */
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -214,7 +212,6 @@
   font-weight: 700;
   font-size: 24px;
   margin-top: 1.25rem;
-  /* margin-bottom: 2.502rem; */
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
@@ -228,8 +225,8 @@
 .popup-location-list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; /* This allows the items to wrap to the next line if they overflow */
-  justify-content: center; /* Centers the items horizontally */
+  flex-wrap: wrap; 
+  justify-content: center; 
   padding: 0;
   list-style-type: none;
   margin: 0;
@@ -240,7 +237,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 5px; /* Adjust the margin as needed for spacing */
+  margin: 5px; 
   width: 65.6px;
   height: 65.97px;
   border-radius: 5px;
@@ -290,10 +287,8 @@
   .location-home-img {
     width: 3.791rem;
     height: 3.791rem;
-    /* margin-top: 0.654rem; */
     margin-right: 0.654rem;
     margin-left: 0.719rem;
-    /* margin-bottom: 2.549rem; */
   }
 
   .location-home-name {

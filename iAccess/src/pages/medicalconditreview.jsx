@@ -88,12 +88,6 @@ const MedicalConditsReview = () => {
   return (
     <>
       <div className="all-page">
-        {/* <div className="title-page">
-          <span className="icon">
-            <img src="../../public/Caduceus.png" className="caduceus" />
-          </span>
-          <span className="name-page">Medical Conditions</span>
-        </div> */}
         <div className="title-page">
             <img src={caduceusImg} alt="Medical Conditions" className="medical-condit-logo" />
           <h1 className="name-page"> Medical Conditions</h1>

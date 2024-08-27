@@ -18,12 +18,6 @@
   margin-bottom: 40px;
 }
 
-/* .medical-condit-logo {
-  margin-right: 0.625rem;
-  width: 4.375rem;
-  height: 4.375rem;
-} */
-
 .name-page {
   width: 26rem;
   height: 3.125rem;
@@ -31,14 +25,11 @@
   font-size: 2.5rem;
   font-weight: bold;
   color: #000000;
-  /* margin: 0; */
 }
 
 .letter-area {
   width: 17.313rem;
   height: 14.313rem;
-  /* margin-top: 10px; */
-  /* margin-bottom: 30px; */
 }
 
 .letter-style {
@@ -47,48 +38,7 @@
   color: #0fc0fc;
   font-weight: 700;
   line-height: 10.5rem;
-  /* margin-top: 2.5rem; */
-  /* margin-bottom: 2.5rem; */
 }
-
-/* .search-bar-container {
-  margin-top: 2.5rem;
-  display: flex;
-  justify-content: center;
-}
-
-.search-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.searchbox {
-  width: 47.625rem;
-  height: 4rem;
-  border-radius: 0.5rem;
-  color: #b0b0b0;
-  border: 1px solid #b0b0b0;
-  padding-left: 2.5rem;
-  padding-right: 3.5rem;
-}
-
-.search-icon {
-  position: absolute;
-  left: 0.75rem;
-  width: 40px;
-  height: 40px;
-  pointer-events: none;
-  color: #b0b0b0;
-}
-
-input {
-  text-indent: 1.1rem;
-  font-size: 1.5rem;
-  font-family: "Inter", sans-serif;
-  font-weight: 400;
-} */
-
 .conditions-container {
   margin-top: 2.5rem;
   width: 47.625rem;
@@ -108,7 +58,6 @@ input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* margin-top: 2.5rem; */
   border-top: 1px solid #ddd;
   padding: 1rem;
 }
@@ -145,6 +94,7 @@ input {
   stroke-width: 1;
 }
 
+/* Mobile Design */
 @media (max-width: 971px) {
   .title-page{
     margin-bottom: 1.875rem;

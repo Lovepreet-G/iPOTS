@@ -52,13 +52,6 @@ const DictionaryReview = () => {
   return (
     <>
       <div className="dictionary-all-page">
-        {/* <div className="dictionary-title-page">
-          <span className="icon">
-            <img src={dictionaryImg} className="dictionary" />
-          </span>
-          <span className="dictionary-name-page">Dictionary</span>
-        </div> */}
-
         <div className="dictionary-title-page">
             <img src={dictionaryImg} alt="Dictionary" className="dictionary-logo" />
           <h1 className="dictionary-name-page"> Dictionary</h1>
@@ -80,7 +73,6 @@ const DictionaryReview = () => {
               onChange={handleSearchChange}
               aria-label={`Search with ${letter}`}
             />
-            {/* <PiIcons.PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         <div className="dictionary-container">
