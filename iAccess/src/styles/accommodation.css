@@ -127,7 +127,7 @@ input {
   width: 100%;
   max-width: 47.5rem;
   height: 4rem;
-  margin: 0rem ;
+  /* margin: 0rem ; */
 }
 .item-list{
   list-style-type: none;
@@ -257,7 +257,21 @@ img {
     padding: 0 0.938rem 0 0.938rem;
     line-height: 1.5rem;
   }
-  .search-bar, .search-bar-container {
-    height: 3.688rem;
+  .search-bar-container {
+    width: 20.188rem;
+    height: 4rem; 
+  }
+
+  .search-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .searchbox {
+    width: 20.188rem;
+    height: 3.625rem;
+    font-size: 16px;
+    padding-left: 3rem;
+    padding-right: 3.625rem;
   }
 }

@@ -174,12 +174,12 @@ const MedicalCondits = () => {
             </a>
           ))}
         </div>
-        <div className="medical-search-bar-container">
-          <div className="medical-search-bar">
-            <CiSearch className="medical-search-icon" />
+        <div className="search-bar-container">
+          <div className="search-bar">
+            <CiSearch className="search-icon" />
             <input
               type="search"
-              className="medical-searchbox"
+              className="searchbox"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}

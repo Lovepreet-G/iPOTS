@@ -65,7 +65,7 @@
   margin-bottom: 2.5rem; */
 }
 
-.search-bar-container {
+/* .search-bar-container {
   margin-top: 2.5rem;
   display: flex;
   justify-content: center;
@@ -94,14 +94,14 @@
   height: 40px;
   pointer-events: none;
   color: #b0b0b0;
-}
+} */
 
-input {
+/* input {
   text-indent: 1.1rem;
   font-size: 1.5rem;
   font-family: "Inter", sans-serif;
   font-weight: 400;
-}
+} */
 
 .dictionary-container {
   margin-top: 2.5rem;
@@ -158,4 +158,43 @@ input {
 
 .bookmark {
   stroke-width: 1;
+}
+@media (max-width: 971px) {
+  .dictionary-title-page{
+    margin-bottom: 1.875rem;
+  }
+  .dictionary-logo{
+    width:3rem ;
+    height:2.375rem ;
+  }
+  .dictionary-name-page{
+    width: 7.625rem;
+    height: 2.375rem;
+    font-family: "Inter", sans-serif;
+    font-size: 1.563rem;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  .dictionary-letter-area{
+    width:6.625rem ;
+    height: 7.375rem;
+  }
+  .dictionary-letter-style{
+    font-size: 8rem;
+  }
+  .dictionary-container
+  {
+    width:20.188rem ;
+    height: auto;
+  }
+  .dictionary-list{
+    width:20.188rem ;
+    height: auto;
+  }
+  .item-header{
+    font-size: 1.25rem ;
+    padding: 0 0.938rem 0 0.938rem;
+    text-align: left;
+  }
+
 }

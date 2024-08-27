@@ -122,3 +122,57 @@
   width: 33.63px;
   height: 43.73px;
 }
+@media (max-width: 971px) {
+  .myAccommodations-title{
+    font-size: 1.563rem;
+    height: 2.375rem;
+  }
+  .myNavbar-container {
+    margin-top: 2.063rem;
+    width: 17.2rem;
+    height: 14.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center;
+  }
+
+  .myLocation {
+    margin: 0.375rem;
+    width: 5.164rem;
+    height: 6.994rem;
+    border-radius: 0.375rem;
+  }
+
+  .myLocation-img {
+    width: 3.791rem;
+    height: 3.791rem;
+    /* margin-top: 0.654rem; */
+    margin-right: 0.654rem;
+    margin-left: 0.719rem;
+    /* margin-bottom: 2.549rem; */
+  }
+
+  .myLocation-name {
+    font-size: 0.75rem;
+  }
+  .myAccessibility-categories-container {
+    margin-top: 2.688rem;
+    width: 21.39rem;
+    height: 25.188rem;
+  }
+
+  .myAccessibility-category {
+    width: 21.39rem;
+    height: 4.263rem;
+  }
+
+  .myAccessibility-category-name {
+    width: 15.236rem;
+    height: 1.55rem;
+    font-size: 1.18rem;
+  }
+  .myAccessibility-category-icon {
+    margin-right: 0.5rem;
+  }
+
+}

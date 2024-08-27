@@ -61,7 +61,7 @@
   grid-gap: 0.5rem;
 }
 
-.search-bar-container {
+/* .search-bar-container {
   margin-top: 2.5rem;
   padding-bottom: 0;
   display: flex;
@@ -91,7 +91,7 @@
   height: 40px;
   pointer-events: none;
   color: #b0b0b0;
-}
+} */
 
 input {
   text-indent: 1.1rem;
@@ -135,4 +135,31 @@ input {
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
   text-align: center;
+}
+@media (max-width: 971px) {
+  .dic-logo{
+    width:3rem ;
+    height:2.375rem ;
+  }
+  .dic-page-name{
+    width: 7.625rem;
+    height: 2.375rem;
+    font-family: "Inter", sans-serif;
+    font-size: 1.563rem;
+    font-weight: 400;
+    line-height: 150%;
+  }
+  .dictionary-letters-container{
+    width: 20.188rem;
+  }
+  .dictionary-letter{
+    margin: 0.60rem;
+    width: 3.75rem;
+    height: 3.688rem;
+    border-radius: 0.625rem;
+  }
+  .dictionary-the-letters{
+    font-size: 3rem;
+    line-height: 3.8rem; 
+  }
 }
