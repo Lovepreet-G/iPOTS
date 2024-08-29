@@ -9,6 +9,8 @@ import MyAccommodationsMenu from "./pages/myAccommodationsMenu";
 import MyMedicalConditions from "./pages/myMedicalCondtions";
 import MyAccommodations from "./pages/myAccommodations";
 import MyAccessMenu from "./pages/myaccessmenu";
+import Dictionary from "./pages/dictionary";
+import DictionaryReview from "./pages/dictionaryreview";
 import MyAllergies from "./pages/myallergies";
 
 
@@ -33,8 +35,11 @@ function App() {
             <Route path="/myaccessmenu" element={<MyAccessMenu />} />
             <Route path="/mymedicalconditions" element={<MyMedicalConditions />} />
             <Route
-              path="/medicalconditreview" element={<MedicalConditsReview />}
+              path="/medicalconditreview"
+              element={<MedicalConditsReview />}
             />
+            <Route path="/dictionary" element={<Dictionary />} />
+            <Route path="/dictionaryreview" element={<DictionaryReview />} />
           </Routes>
         </main>
       </BrowserRouter>
