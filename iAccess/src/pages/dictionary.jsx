@@ -7,7 +7,6 @@ import dictionaryImg from "../../public/Dictionary.png";
 
 const Dictionary = () => {
   const host = "http://localhost";
-  const userId = "1";
   const [selectedLetter, setSelectedLetter] = useState("");
   const [dictionary, setdictionary] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");

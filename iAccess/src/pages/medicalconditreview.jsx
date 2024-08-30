@@ -6,10 +6,13 @@ import * as PiIcons from "react-icons/pi";
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 import "../styles/medicalconditreview.css";
+import Popup from "reactjs-popup";
+// import { AuthContext } from "./Auth";
 
 const MedicalConditsReview = () => {
   const host = "http://localhost";
-  const userId = '1'; 
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const [conditions, setConditions] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,6 +23,25 @@ const MedicalConditsReview = () => {
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
   const location = queryParams.get("location");
+  //   popup for bookmark
+  const [selectedLocation, setSelectedLocation] = useState(location);
+  const [signInOpen, setSignInOpen] = useState("");
+  const closeSignInModal = () => setSignInOpen(false);
+
+  const handleSignIn = () => {
+    closeSignInModal(); // Close the modal
+    navigate('/home'); // Redirect to /home
+  };
+
+  const openpopup = () => {
+    setSignInOpen(true);
+    return;   
+  }
+
+  //   set user id if user is logged in
+//   if (user) {
+//     setUserId(user.data.id);
+//     }
 
   useEffect(() => {
     const fetchConditions = async () => {
@@ -41,7 +63,10 @@ const MedicalConditsReview = () => {
     }
 
     fetchConditions();
-    fetchBookmarks();
+    if(userId)
+    {
+        fetchBookmarks();
+    }
   }, [method, letter]);
 
   const handleConditionClick = (condition) => {
@@ -114,10 +139,32 @@ const MedicalConditsReview = () => {
               <div key={condition.id} className="condition-box">
                 <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
                 <div className="icons">
-                  {isBookmarked(condition.id) ? (
-                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
-                  ) : (
-                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                  
+                  {/* bookmark works only if user is logged in */}
+                  {userId ? (
+                    isBookmarked(condition.id) ? (
+                        <img
+                        className="img"
+                        src={saveImg}
+                        onClick={() => handleUnbookmark(condition.id)}
+                        alt="Bookmarked"
+                        />
+                    ) : (
+                        <img
+                        className="img"
+                        src={unsaveImg}
+                        onClick={() => handleBookmark(condition.id)}
+                        alt="Not Bookmarked"
+                        />
+                    )
+                    ) : (
+                        // else popup for signup appears
+                    <img
+                        className="img"
+                        src={unsaveImg}
+                        onClick={() => openpopup()}
+                        alt="Not Bookmarked"
+                    />
                   )}
                 </div>
               </div>
@@ -126,6 +173,26 @@ const MedicalConditsReview = () => {
             <p className='Error'>No medical conditions match your search.</p>
           )}
         </div>
+        <Popup
+          open={signInOpen}
+          closeOnDocumentClick
+          onClose={closeSignInModal}
+          overlayClassName="popup-overlay"
+          contentClassName="popup-content"
+        >
+          <div className="popup-message">
+            <h2 className="popup-title">SIGN IN REQUIRED</h2>
+            <div className="message">
+              Please sign in to use BookMark Feature
+            </div>
+            <button className="sign-in" onClick={handleSignIn}>
+              Sign In
+            </button>
+            <button className="cancel" onClick={closeSignInModal}>
+              Cancel
+            </button>
+          </div>
+        </Popup>
       </div>
     </>
   );

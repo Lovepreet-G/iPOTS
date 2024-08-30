@@ -10,13 +10,16 @@ import backpackImg from "../../public/03-school.png";
 import transitImg from "../../public/04-transit.png";
 import hospitalImg from "../../public/05-medical.png";
 import earthImg from "../../public/06-all.png";
+import Popup from "reactjs-popup";
+// import { AuthContext } from "./Auth";
 
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 
 const MedicalCondits = () => {
   const host = "http://localhost";
-  const userId = '1'; 
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext); 
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
   const location = queryParams.get('location');
@@ -26,6 +29,18 @@ const MedicalCondits = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
+  //   popup for bookmark
+  const [signInOpen, setSignInOpen] = useState("");
+  const closeSignInModal = () => setSignInOpen(false);
+  const handleSignIn = () => {
+    closeSignInModal(); // Close the modal
+    navigate('/home'); // Redirect to /home
+  };
+  
+  const openpopup = () => {
+    setSignInOpen(true);
+    return;   
+  }
 
   useEffect(() => {
     const fetchMedicalConditions = async () => {
@@ -190,10 +205,31 @@ const MedicalCondits = () => {
                 <div key={condition.id} className="medical-condition-box">
                   <div className="medical-condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
                   <div className="medical-icons">
-                    {isBookmarked(condition.id) ? (
-                      <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
-                    ) : (
-                      <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                    {/* bookmark works only if user is logged in */}
+                    {userId ? (
+                      isBookmarked(condition.id) ? (
+                          <img
+                          className="img"
+                          src={saveImg}
+                          onClick={() => handleUnbookmark(condition.id)}
+                          alt="Bookmarked"
+                          />
+                      ) : (
+                          <img
+                          className="img"
+                          src={unsaveImg}
+                          onClick={() => handleBookmark(condition.id)}
+                          alt="Not Bookmarked"
+                          />
+                      )
+                      ) : (
+                          // else popup for signup appears
+                      <img
+                          className="img"
+                          src={unsaveImg}
+                          onClick={() => openpopup()}
+                          alt="Not Bookmarked"
+                      />
                     )}
                   </div>
                 </div>
@@ -220,6 +256,26 @@ const MedicalCondits = () => {
             ))}
           </div>
         )}
+        <Popup
+          open={signInOpen}
+          closeOnDocumentClick
+          onClose={closeSignInModal}
+          overlayClassName="popup-overlay"
+          contentClassName="popup-content"
+        >
+          <div className="popup-message">
+            <h2 className="popup-title">SIGN IN REQUIRED</h2>
+            <div className="message">
+              Please sign in to use BookMark Feature
+            </div>
+            <button className="sign-in" onClick={handleSignIn}>
+              Sign In
+            </button>
+            <button className="cancel" onClick={closeSignInModal}>
+              Cancel
+            </button>
+          </div>
+        </Popup>
       </div>
     </>
   );

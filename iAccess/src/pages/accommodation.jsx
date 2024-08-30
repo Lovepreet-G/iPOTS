@@ -42,8 +42,8 @@ const Accommodation2 = () => {
   const location = queryParams.get("location");
   const category = queryParams.get("category");
   const medicalCondition = queryParams.get("medicalCondition");
-//   popup for bookmark
   const [selectedLocation, setSelectedLocation] = useState(location);
+//   popup for bookmark
   const [signInOpen, setSignInOpen] = useState("");
   const closeSignInModal = () => setSignInOpen(false);
   const handleSignIn = () => {
@@ -247,14 +247,14 @@ const Accommodation2 = () => {
                         className="img"
                         src={saveImg}
                         onClick={() => handleUnbookmark(accommodation.id)}
-                        alt="Save"
+                        alt="Bookmarked"
                         />
                     ) : (
                         <img
                         className="img"
                         src={unsaveImg}
                         onClick={() => handleBookmark(accommodation.id)}
-                        alt="Save"
+                        alt="Not Bookmarked"
                         />
                     )
                     ) : (
@@ -263,7 +263,7 @@ const Accommodation2 = () => {
                         className="img"
                         src={unsaveImg}
                         onClick={() => openpopup()}
-                        alt="Save"
+                        alt="Not Bookmarked"
                     />
                     )}
               </div>

@@ -10,7 +10,6 @@ import "../styles/dictionaryreview.css";
 
 const DictionaryReview = () => {
   const host = "http://localhost";
-  const userId = "1";
   const [dictionary, setdictionary] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const locat = useLocation();
