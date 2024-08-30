@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
@@ -17,6 +17,22 @@ const DictionaryReview = () => {
   const queryParams = new URLSearchParams(locat.search);
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchterm = async () => {
@@ -77,9 +93,10 @@ const DictionaryReview = () => {
         </div>
         <div className="dictionary-container">
             {filteredDictionaries.length > 0 ? (
-              <ul className="dictionary-list" aria-label={`List of terms start with ${letter}`}>
+              <ul className="dictionary-list" aria-label={`List of terms start with ${letter}`} tabIndex="-1" ref={listRef}>
               {filteredDictionaries.map((dictionary) => (
-                <li key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
+                <li key={dictionary.id} className={`item dictionary-box ${selectedDictionary === dictionary.id ? "selected" : ""
+                }`}   onClick={() => handleDictionaryClick(dictionary)}>
                   <div
                     className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
                     

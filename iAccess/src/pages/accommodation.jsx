@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
@@ -40,6 +40,22 @@ const Accommodation2 = () => {
   const category = queryParams.get("category");
   const medicalCondition = queryParams.get("medicalCondition");
   const [selectedLocation, setSelectedLocation] = useState(location);
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchBookmarks = async () => {
@@ -163,12 +179,14 @@ const Accommodation2 = () => {
 
   return (
     <div className="accommodations-page">
-      <div className="header-container2">
-        <img src={iconImg} alt={category} className="category-image" />
-        <h1 className="accommodation-title">{category}</h1>
-        {medicalCondition && (
-          <h2 className="accommodation-title"> ({medicalCondition})</h2>
+      
+      {medicalCondition && (
+          <h1 className="accommodation-title"> {medicalCondition}</h1>
         )}
+        <div className="header-container2">
+        <img src={iconImg} alt={category} className="category-image" />
+        <h2 className="accommodation-title">{category}</h2>
+       
       </div>
       <div className="navbar-container">
         {locations.map((location) => (
@@ -205,7 +223,7 @@ const Accommodation2 = () => {
       </div>
       <div className="item-container" >
         {filteredAccommodations.length > 0 ? (
-          <ul className="item-list" aria-label="List of accommodations">
+          <ul className="item-list" aria-label="List of accommodations" tabIndex="-1" ref={listRef}>
           {filteredAccommodations.map((accommodation) => (
             <li
               key={accommodation.id}

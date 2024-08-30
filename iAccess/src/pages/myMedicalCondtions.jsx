@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/myMedicalConditions.css";
@@ -27,6 +27,22 @@ const myMedicalCondits = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchMyMedicalConditions = async () => {
@@ -157,7 +173,7 @@ const myMedicalCondits = () => {
 
         <div className="conditions-container">
           {filteredConditions.length > 0 ? (
-            <ul className="conditions-list" aria-label="List of my medical conditions">
+            <ul className="conditions-list" aria-label="List of my medical conditions" tabIndex="-1" ref={listRef}>
             {filteredConditions.map((condition) => (
                <li key={condition.id} className="condition-box">
                 <div

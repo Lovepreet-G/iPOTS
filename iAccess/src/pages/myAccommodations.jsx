@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -40,6 +40,22 @@ const myAccommodations = () => {
     const [selectedLocation, setSelectedLocation] = useState(location);
     const [selectedItem, setSelectedItem] = useState(null);
     const [bookmarks, setBookmarks] = useState([]);
+    const listRef = useRef(null); // Create a ref for the list
+
+    useEffect(() => {
+      const handleKeyPress = (event) => {
+        if (event.key.toLowerCase() === "l") {
+          if (listRef.current) {
+            listRef.current.focus(); // Focus the list when "L" is pressed
+          }
+        }
+      };
+  
+      window.addEventListener("keydown", handleKeyPress);
+      return () => {
+        window.removeEventListener("keydown", handleKeyPress);
+      };
+    }, []);
 
 
     useEffect(() => {
@@ -175,12 +191,13 @@ const myAccommodations = () => {
     const iconImg = categoryObject ? categoryObject.img : null;
         return (
             <div className="accommodations-page">
+                {medicalCondition && (
+                        <h1 className="accommodation-title">  {medicalCondition}</h1>
+                    )}
                 <div className="header-container2">
                     <img src={iconImg} alt={category} className="category-image" />
-                    <h1 className="accommodation-title">{category} </h1>
-                    {medicalCondition && (
-                        <h2 className="accommodation-title">  ({medicalCondition})</h2>
-                    )}
+                    <h2 className="accommodation-title">{category} </h2>
+                    
                 </div>
                 <div className="navbar-container">
                     {locations.map((location) => (
@@ -216,7 +233,7 @@ const myAccommodations = () => {
                 </div>
                 <div className="item-container">
                     {filteredAccommodations.length > 0 ? (
-                    <ul className="item-list" aria-label="List of my accommodations">
+                    <ul className="item-list" aria-label="List of my accommodations" tabIndex="-1" ref={listRef}>
                     {filteredAccommodations.map((accommodation) => (
                         <li
                             key={accommodation.id}

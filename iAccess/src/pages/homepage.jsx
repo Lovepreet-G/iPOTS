@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "../styles/homepage.css";
@@ -25,6 +25,22 @@ const HomePage = () => {
   const closeModal = () => setOpen(false);
   const closeSignInModal = () => setSignInOpen(false);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -101,7 +117,7 @@ const HomePage = () => {
         ))}
       </div>
       <div className="accessibility-categories-container">
-        <ul aria-label="Main Menu Options ">
+        <ul aria-label="Main Menu Options " tabIndex="-1" ref={listRef}>
           {categories.map((category) => (
             <li key={category.name} className="accessibility-category-item">
               <a

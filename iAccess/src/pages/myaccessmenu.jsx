@@ -1,4 +1,4 @@
-import React, { useState ,useEffect } from "react";
+import React, { useState ,useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
@@ -34,6 +34,22 @@ const AccessMenu = () => {
   const [selectedLocation, setSelectedLocation] = useState(location);
   const [myAccessibilityCat,setMyAccessibilityCat] =useState('');
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     // for fetching data from database when page loads 
@@ -126,12 +142,13 @@ const AccessMenu = () => {
   return (
     <>
       <div className="access-menu-page">
-        <h1 className="header-access-menu-title">
-         My Accessibility Categories
-        </h1>
-        {medicalCondition && (
-                    <h2 className="medical-condition"> {medicalCondition}</h2>
+      {medicalCondition && (
+                    <h1 className="header-access-menu-title"> {medicalCondition}</h1>
                 )}
+        <h2 className="header-access-menu-title">
+         My Accessibility Categories
+        </h2>
+       
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
             <a
@@ -153,10 +170,10 @@ const AccessMenu = () => {
           ))}
         </div>
         <div className="categories-access-menu-container">
-        <ul aria-label="List of accessibilty categories">
+        <ul aria-label="List of accessibilty categories" tabIndex="-1" ref={listRef}>
           {
             categories.map((category) => (
-              <li className="category-access-menu-items">
+              <li key={category.name} className="category-access-menu-items">
             <a
               key={category.name}
               href="#"

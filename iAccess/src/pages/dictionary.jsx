@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/dictionary.css";
@@ -12,6 +12,22 @@ const Dictionary = () => {
   const [dictionary, setdictionary] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchdictionaries = async () => {
@@ -130,9 +146,9 @@ const Dictionary = () => {
           </div>
         ) : (
           <div className="dictionary-letters-container">
-            <ul aria-label="List of letters">
+            <ul aria-label="List of letters" tabIndex="-1" ref={listRef}>
             {letters.map((letter) => (
-              <li className="letter-items">
+              <li key={letter.num} className="letter-items">
               <a
                 key={letter.num}
                 href="#"

@@ -78,11 +78,9 @@
   text-align: left;
   cursor: pointer;
 }
-
-.dictionary-box:hover {
-  border: 2px solid #0fc0fc;
-  border-radius: 16px;
+.item.selected {
   background-color: #0fc0fc;
+  color: #000000;
 }
 
 .icons {

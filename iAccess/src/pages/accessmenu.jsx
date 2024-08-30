@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -30,6 +30,24 @@ const AccessMenu = () => {
   const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
+
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
+
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -81,12 +99,13 @@ const AccessMenu = () => {
   return (
     <>
       <div className="access-menu-page">
-        <h1 className="header-access-menu-title">
-          Accessibility Categories
-        </h1>
-        {medicalCondition && (
-                        <h2 className="header-access-menu-title">  {medicalCondition}</h2>
+      {medicalCondition && (
+                        <h1 className="header-access-menu-title">  {medicalCondition}</h1>
                     )}
+        <h2 className="header-access-menu-title">
+          Accessibility Categories
+        </h2>
+        
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
             <a
@@ -108,9 +127,9 @@ const AccessMenu = () => {
           ))}
         </div>
         <div className="categories-access-menu-container">
-          <ul aria-label="List of accessibilty categories">
+          <ul aria-label="List of accessibilty categories" tabIndex="-1" ref={listRef}>
           {categories.map((category) => (
-            <li className="category-access-menu-items">
+            <li className="category-access-menu-items" key={category.name}>
             <a
               key={category.name}
               href="#"

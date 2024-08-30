@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation , useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
@@ -21,6 +21,22 @@ const MedicalConditsReview = () => {
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
   const location = queryParams.get("location");
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchConditions = async () => {
@@ -110,7 +126,7 @@ const MedicalConditsReview = () => {
         </div>
         <div className="conditions-container">
         {filteredConditions.length > 0 ? (
-        <ul className="conditions-list" aria-label={`List of conditions start with ${letter}`}>
+        <ul className="conditions-list" aria-label={`List of conditions start with ${letter}`} tabIndex="-1" ref={listRef}>
             {filteredConditions.map((condition) => (
               <li key={condition.id} className="condition-box">
                 <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
