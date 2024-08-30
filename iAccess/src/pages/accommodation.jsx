@@ -164,7 +164,7 @@ const Accommodation2 = () => {
 
   return (
     <div className="accommodations-page">
-      <div className="header-container2">
+      <div className="acc-header-container">
         <img src={iconImg} alt="Vision" className="vision-image" />
         <h1 className="accommodation-title">{category}</h1>
         {medicalCondition && (
