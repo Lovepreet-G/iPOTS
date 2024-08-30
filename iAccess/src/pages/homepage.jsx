@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "../styles/homepage.css";
+// import { AuthContext } from "./Auth";
+
 
 import homeImg from "../../public/01-home.png";
 import briefcaseImg from "../../public/02-work.png";
@@ -19,7 +21,8 @@ import saveImg from "../../public/unsave.png";
 import backImg from "../../public/Back.png";
 
 const HomePage = () => {
-  const userId =1;
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [open, setOpen] = useState(false);
   const [signInOpen, setSignInOpen] = useState("");
@@ -30,7 +33,10 @@ const HomePage = () => {
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
   };
-
+  // set user id if user is logged in
+  //   if (user) {
+  //     setUserId(user.data.id);
+  //     }
   const checkBeforeNavigate = (category, event) => {
 
     //Check if the user is trying to access "My Accommodations"
@@ -39,8 +45,14 @@ const HomePage = () => {
       event.preventDefault();
       return;
     }
+    //Check if the user is trying to access "My Allergies"
+    if (category.url === "/myallergies" && !userId) {
+      setSignInOpen(true);
+      event.preventDefault();
+      return;
+    }
      // Skip location check if category is "Dictionary" or "Legal"
-    if (category.name !== "Dictionary" && category.name !== "Legal") {
+    if (category.name !== "Dictionary" && category.name !== "Legal" & category.name !== "My Allergies") {
       // Check if the user selected the location
       if (!selectedLocation) {
         setOpen(true);
@@ -55,6 +67,10 @@ const HomePage = () => {
 
     navigate(category.url);
   }
+  const handleSignIn = () => {
+    closeSignInModal(); // Close the modal
+    navigate('/home'); // Redirect to /home
+  };
 
   const locations = [
     { name: "Home", img: homeImg },
@@ -160,7 +176,7 @@ const HomePage = () => {
           <div className="message">
             Please sign in to access My Accommodation
           </div>
-          <button className="sign-in" onClick={closeSignInModal}>
+          <button className="sign-in" onClick={handleSignIn}>
             Sign In
           </button>
           <button className="cancel" onClick={closeSignInModal}>
