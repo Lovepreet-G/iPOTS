@@ -23,25 +23,6 @@ import painImg from "../../public/9-pain.png";
 import medicalImg from "../../public/10-medical devices.png";
 import mentalImg from "../../public/11-mental health.png";
 import medicationImg from "../../public/12-medication.png";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
-import mobilityImg from "../../public/mobility.png";
-import earImg from "../../public/ear.png";
-import brainImg from "../../public/brain.png";
-import mentalImg from "../../public/mental.png";
-import sensorImg from "../../public/sensorial.png";
-import allergyImg from "../../public/allergies.png";
-import visionImg from "../../public/witness.png";
-import painImg from "../../public/pain.png";
-import stomachImg from "../../public/stomach.png";
-import safetyImg from "../../public/prevention.png";
-import medicalImg from "../../public/medical.png";
-import medicationImg from "../../public/12-medication.png";
-
 
 import grayVisionImg from "../../public/01-vision-grey.png";
 import grayEarImg from "../../public/02-hearing-grey.png";
