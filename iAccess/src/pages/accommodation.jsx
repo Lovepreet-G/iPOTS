@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+import Popup from "reactjs-popup";
+// import { AuthContext } from "./Auth";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
 
@@ -30,7 +31,8 @@ import medicationImg from "../../public/12-medication.png";
 
 const Accommodation2 = () => {
   const host = "http://localhost";
-  const userId = "1";
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const [accommodations, setAccommodations] = useState([]);
   const [bookmarks, setBookmarks] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
@@ -40,7 +42,25 @@ const Accommodation2 = () => {
   const location = queryParams.get("location");
   const category = queryParams.get("category");
   const medicalCondition = queryParams.get("medicalCondition");
+//   popup for bookmark
   const [selectedLocation, setSelectedLocation] = useState(location);
+  const [signInOpen, setSignInOpen] = useState("");
+  const closeSignInModal = () => setSignInOpen(false);
+  const handleSignIn = () => {
+    closeSignInModal(); // Close the modal
+    navigate('/home'); // Redirect to /home
+  };
+  
+  const openpopup = () => {
+    setSignInOpen(true);
+    return;   
+  }
+
+
+//   set user id if user is logged in
+//   if (user) {
+//     setUserId(user.data.id);
+//     }
 
   useEffect(() => {
     const fetchBookmarks = async () => {
@@ -71,8 +91,10 @@ const Accommodation2 = () => {
         console.error("There was an error fetching the data!", error);
       }
     };
-
-    fetchBookmarks();
+    if(userId)
+    {
+        fetchBookmarks();
+    }
     fetchData();
   }, [location, category]);
 
@@ -218,21 +240,32 @@ const Accommodation2 = () => {
                 <span onClick={() => handleItemClick(accommodation)}>
                   {accommodation.accommodation}
                 </span>
-                {isBookmarked(accommodation.id) ? (
-                  <img
-                    className="img"
-                    src={saveImg}
-                    onClick={() => handleUnbookmark(accommodation.id)}
-                    alt="Save"
-                  />
-                ) : (
-                  <img
-                    className="img"
-                    src={unsaveImg}
-                    onClick={() => handleBookmark(accommodation.id)}
-                    alt="Save"
-                  />
-                )}
+                {/* bookmark works only if user is logged in */}
+                {userId ? (
+                    isBookmarked(accommodation.id) ? (
+                        <img
+                        className="img"
+                        src={saveImg}
+                        onClick={() => handleUnbookmark(accommodation.id)}
+                        alt="Save"
+                        />
+                    ) : (
+                        <img
+                        className="img"
+                        src={unsaveImg}
+                        onClick={() => handleBookmark(accommodation.id)}
+                        alt="Save"
+                        />
+                    )
+                    ) : (
+                        // else popup for signup appears
+                    <img
+                        className="img"
+                        src={unsaveImg}
+                        onClick={() => openpopup()}
+                        alt="Save"
+                    />
+                    )}
               </div>
               {selectedItem === accommodation.id && (
                 <div
@@ -255,6 +288,26 @@ const Accommodation2 = () => {
           </p>
         )}
       </div>
+      <Popup
+        open={signInOpen}
+        closeOnDocumentClick
+        onClose={closeSignInModal}
+        overlayClassName="popup-overlay"
+        contentClassName="popup-content"
+      >
+        <div className="popup-message">
+          <h2 className="popup-title">SIGN IN REQUIRED</h2>
+          <div className="message">
+            Please sign in to use BookMark Feature
+          </div>
+          <button className="sign-in" onClick={handleSignIn}>
+            Sign In
+          </button>
+          <button className="cancel" onClick={closeSignInModal}>
+            Cancel
+          </button>
+        </div>
+      </Popup>
     </div>
   );
 };
