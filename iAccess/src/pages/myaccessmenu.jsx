@@ -4,6 +4,25 @@ import { useLocation } from "react-router-dom";
 import axios from 'axios';
 
 import "../styles/accessmenu.css";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
+import visionImg from "../../public/01-vision.png";
+import earImg from "../../public/02-hearing.png";
+import mobilityImg from "../../public/03-mobility.png";
+import brainImg from "../../public/04-cognitive.png";
+import sensorImg from "../../public/05-sensory.png";
+import allergyImg from "../../public/06-allergy.png";
+import safetyImg from "../../public/07-safety.png";
+import stomachImg from "../../public/08-digestion.png";
+import painImg from "../../public/9-pain.png";
+import medicalImg from "../../public/10-medical devices.png";
+import mentalImg from "../../public/11-mental health.png";
+import medicationImg from "../../public/12-medication.png";
 import homeImg from "../../public/home.png";
 import briefcaseImg from "../../public/briefcase.png";
 import backpackImg from "../../public/backpack.png";

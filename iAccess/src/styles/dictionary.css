@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@100..900&display=swap");
 
-.accommodations-page {
+.dictionary-total-page {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -9,76 +10,81 @@
   height: 100vh;
   padding-top: 0.625rem;
 }
-.acc-header-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1.25rem;
-}
 
-.vision-image {
-  margin-right: 0.625rem;
-  width: 4.625rem;
-  height: 4.625rem;
-}
-
-.accommodation-title {
-  width: 12rem;
-  height: 3.125rem;
+.dictionary-page-title {
+  width: 104.461rem;
+  height: 9.125rem;
   font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 2.5rem;
+  font-size: 2.5rem; /*40px*/
   font-weight: bold;
-  color: #000000;
+  color: #000;
   margin: 0;
 }
 
-.navbar-container {
-  display: flex;
-  justify-content: center;
-  width: 56.625rem;
-  height: 9.744rem;
-  margin-top: 2.5rem;
+.page-name {
+  padding-left: 1.25rem;
 }
 
-.location {
+.nav-container {
+  display: flex;
+  justify-content: center;
+  width: 82.813rem;
+  height: 14.25rem;
+  margin-top: 5.188rem;
+}
+
+.location-condits {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 8.375rem;
-  height: 9.688rem;
-  margin: 0 0.625rem;
+  width: 8.4rem;
+  height: 9.7rem;
+  margin: 0 0.938rem;
+  padding: 0.625rem;
   cursor: pointer;
   border-radius: 0.625rem;
   background-color: #c0c0c0;
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.location:hover {
+.location-condits:hover {
   background-color: #b0b0b0;
   transform: scale(1.05);
 }
 
-.location.selected {
+.location-condits.selected {
   background-color: #0fc0fc;
 }
 
-.location-img {
+.location-condits-img {
   width: 6.125rem;
-  height: 125rem;
+  height: 6.125rem;
   margin-top: 1rem;
   margin-left: 1.625rem;
   margin-right: 1.625rem;
 }
 
-.location-icon {
+.location-condits-icon {
   font-size: 1.5rem;
 }
 
-.location-name {
+.location-condits-name {
   margin-top: 0.313rem;
   font-size: 1.5rem;
   font-family: "Montserrat", sans-serif;
   font-weight: bold;
+  color: black;
+}
+
+.dictionary-letters-container {
+  margin-top: 3.75rem;
+  width: 53rem; /* Had I use the Figma width, the screen would */
+  height: 79rem; /* have been 2x2, instead of the 4x4 in the */
+  display: grid; /* design on the Figma. */
+  grid-template-columns: repeat(4, 0.01fr);
+  grid-gap: 0.5rem;
+  justify-content: center;
 }
 
 .search-bar-container {
@@ -95,11 +101,11 @@
 }
 
 .searchbox {
-  width: 47.5rem;
+  width: 49rem;
   height: 4rem;
   border-radius: 0.5rem;
   color: #b0b0b0;
-  border: 0.063rem solid #b0b0b0;
+  border: 1px solid #b0b0b0;
   padding-left: 2.5rem;
   padding-right: 3.5rem;
 }
@@ -107,8 +113,8 @@
 .search-icon {
   position: absolute;
   left: 0.75rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 40px;
+  height: 40px;
   pointer-events: none;
   color: #b0b0b0;
 }
@@ -122,75 +128,44 @@ input {
 
 .microphone-icon {
   position: absolute;
-  right: 0.625rem;
-  width: 3.125rem;
-  height: 3.125rem;
+  right: 10px;
+  width: 50px;
+  height: 50px;
   pointer-events: none;
-  color: #828282;
+  color: #000;
 }
 
-/* Items List */
-.item-list {
-  width: 100%;
-  max-width: 47.5rem;
-  height: 4rem;
-  margin: 1.25rem auto;
-}
-
-.item {
-  background-color: #e0e0e0;
-  padding: 0.625rem;
-  border-radius: 1rem;
-  margin-bottom: 0.25rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.item.selected {
-  background-color: #0fc0fc;
-  color: #000000;
-}
-
-.item-header {
+.dictionary-letter {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+  background-color: #c0c0c0;
+  color: black;
+  width: 8.813rem;
+  height: 9.875rem;
+  margin: 1rem; /*adjusted from figma to 24px*/
+  border-radius: 1.25rem;
+  font-size: 2.188rem;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5rem;
   font-weight: bold;
-  padding: 0 1.563rem 0 1.563rem;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
-.item-header.expanded {
-  font-size: 2.5rem;
-}
-.acommodation-save {
-  width: 2.5rem;
-  height: 2.5;
-  margin-left: 1.25rem;
+.dictionary-letter:hover {
+  background-color: #0fc0fc;
+  transform: scale(1.02);
 }
 
-.item-details {
-  margin-top: 0.625rem;
+.dictionary-letter.selected {
+  background-color: #0fc0fc;
 }
 
-.item-details img {
-  width: 16.938rem;
-  height: 16.938rem;
-  display: block;
-  margin: 0 auto;
-}
-
-.item-details p {
-  text-align: justify;
-  margin-top: 0.625rem;
+.dictionary-the-letters {
+  font-size: 6.25rem;
+  height: 3.023rem;
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5rem;
-  padding: 0 1.563rem 0 1.563rem;
-  line-height: 2.5rem;
-}
-
-img {
-  position: relative;
-  z-index: 10;
+  font-weight: bold;
+  text-align: center;
 }

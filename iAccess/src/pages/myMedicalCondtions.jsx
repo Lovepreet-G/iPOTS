@@ -1,24 +1,25 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import "../styles/medicalcondits.css";
+import "../styles/myMedicalConditions.css";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
-import unsaveImg from '../../public/unsave.png';
-import saveImg from '../../public/save.png';
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
+import unsaveImg from "../../public/unsave.png";
+import saveImg from "../../public/save.png";
 
 const myMedicalCondits = () => {
   const host = "http://localhost";
-  const userId = '1'; 
+  const userId = "1";
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
-  const location = queryParams.get('location');
+  const location = queryParams.get("location");
   const [selectedLocation, setSelectedLocation] = useState(location);
   const [selectedLetter, setSelectedLetter] = useState("");
   const [medicalConditions, setMedicalConditions] = useState([]);
@@ -29,36 +30,41 @@ const myMedicalCondits = () => {
   useEffect(() => {
     const fetchMyMedicalConditions = async () => {
       try {
-        const url = host + '/iPots/iAccess-Server/myMedicalCondition.php?method=showAll&userId=' + userId;;
+        const url =
+          host +
+          "/iPots/iAccess-Server/myMedicalCondition.php?method=showAll&userId=" +
+          userId;
         const response = await axios.get(url);
         setMedicalConditions(response.data);
         console.log(response.data);
-        
       } catch (error) {
         console.error("Error fetching medical conditions:", error);
       }
     };
     const fetchBookmarks = async () => {
-      const url = host + "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" + userId; 
+      const url =
+        host +
+        "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" +
+        userId;
       const response = await axios.get(url);
       if (Array.isArray(response.data)) {
         setBookmarks(response.data);
-      }           
-    }
+      }
+    };
 
-    fetchBookmarks ();
+    fetchBookmarks();
     fetchMyMedicalConditions();
   }, []);
 
   const handleBookmark = async (conditionId) => {
     const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
     const params = {
-      userId: userId, 
+      userId: userId,
       medicalConditionId: conditionId,
-      method: 'Add'
+      method: "Add",
     };
     const response = await axios.get(url, { params });
-    
+
     setBookmarks([...bookmarks, conditionId]);
   };
 
@@ -67,11 +73,11 @@ const myMedicalCondits = () => {
     const params = {
       userId: userId,
       medicalConditionId: conditionId,
-      method: "Delete"
+      method: "Delete",
     };
     const response = await axios.get(url, { params });
-    
-    setBookmarks(bookmarks.filter(id => id !== conditionId));
+
+    setBookmarks(bookmarks.filter((id) => id !== conditionId));
   };
 
   const isBookmarked = (conditionId) => {
@@ -87,10 +93,12 @@ const myMedicalCondits = () => {
   };
 
   const handleConditionClick = (condition) => {
-    navigate(`/myaccessmenu?medicalCondition=${condition.term}&location=${location}`);
+    navigate(
+      `/myaccessmenu?medicalCondition=${condition.term}&location=${location}`
+    );
   };
 
-  const filteredConditions = medicalConditions.filter(condition =>
+  const filteredConditions = medicalConditions.filter((condition) =>
     condition.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -140,20 +148,34 @@ const myMedicalCondits = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <PiMicrophoneFill className="microphone-icon" />
           </div>
         </div>
-        
+
         <div className="conditions-container">
           {filteredConditions.length > 0 ? (
             filteredConditions.map((condition) => (
               <div key={condition.id} className="condition-box">
-                <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
+                <div
+                  className="condition"
+                  onClick={() => handleConditionClick(condition)}
+                >
+                  {condition.term}
+                </div>
                 <div className="icons">
                   {isBookmarked(condition.id) ? (
-                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
+                    <img
+                      className="img"
+                      src={saveImg}
+                      onClick={() => handleUnbookmark(condition.id)}
+                      alt="Save"
+                    />
                   ) : (
-                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                    <img
+                      className="img"
+                      src={unsaveImg}
+                      onClick={() => handleBookmark(condition.id)}
+                      alt="UnSave"
+                    />
                   )}
                 </div>
               </div>
