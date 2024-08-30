@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
+// import { AuthContext } from "./Auth";
 
 import "../styles/accommodation.css";
 import homeImg from "../../public/01-home.png";
@@ -30,7 +31,8 @@ import medicationImg from "../../public/12-medication.png";
 
 const myAccommodations = () => {
     const host = "http://localhost";
-    const userId = '1';
+    const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
     const [accommodations, setAccommodations] = useState([]);
     const [searchQuery, setSearchQuery] = useState('');
     const locat = useLocation();
@@ -42,6 +44,13 @@ const myAccommodations = () => {
     const [selectedItem, setSelectedItem] = useState(null);
     const [bookmarks, setBookmarks] = useState([]);
 
+//  set user id if user is signed in else navigate to signin
+//   if (user) {
+//     setUserId(user.data.id);
+//   }
+// else {
+//   navigate('/home');
+// }
 
     useEffect(() => {
         const bookmark = async () => {
@@ -223,9 +232,9 @@ const myAccommodations = () => {
                             <div className={`item-header ${selectedItem === accommodation.id ? 'expanded' : ''}`}>
                                 <span onClick={() => handleItemClick(accommodation)}>{accommodation.accommodation}</span>
                                 {isBookmarked(accommodation.id) ? (                                     
-                                    <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="Save"  />
+                                    <img className="img"src={saveImg} onClick={() => handleUnbookmark(accommodation.id)} alt="BookMarked"  />
                                 ) : (
-                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Save"  />
+                                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(accommodation.id)} alt="Not Bookmarked"  />
                                 )}
                                
                             </div>

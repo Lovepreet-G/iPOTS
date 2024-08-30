@@ -2,6 +2,7 @@ import React, { useState ,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import axios from 'axios';
+// import { AuthContext } from "./Auth";
 
 import "../styles/accessmenu.css";
 import homeImg from "../../public/01-home.png";
@@ -26,14 +27,22 @@ import medicationImg from "../../public/12-medication.png";
 
 const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
-  const host = "http://localhost";
-  const userId = '1';
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const queryParams = new URLSearchParams(locat.search); // Parse the query string
   const location = queryParams.get("location");
   const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
   const [myAccessibilityCat,setMyAccessibilityCat] =useState('');
   const navigate = useNavigate();
+
+//  set user id if user is signed in else navigate to signin
+//   if (user) {
+//     setUserId(user.data.id);
+//   }
+// else {
+//   navigate('/home');
+// }
 
   useEffect(() => {
     // for fetching data from database when page loads 

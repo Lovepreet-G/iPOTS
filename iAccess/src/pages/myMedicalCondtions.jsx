@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+// import { AuthContext } from "./Auth";
 import "../styles/myMedicalConditions.css";
 import { CiSearch } from "react-icons/ci";
 import { PiMicrophoneFill } from "react-icons/pi";
@@ -16,7 +17,8 @@ import saveImg from "../../public/save.png";
 
 const myMedicalCondits = () => {
   const host = "http://localhost";
-  const userId = "1";
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
   const location = queryParams.get("location");
@@ -27,6 +29,13 @@ const myMedicalCondits = () => {
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
 
+//  set user id if user is signed in else navigate to signin
+//   if (user) {
+//     setUserId(user.data.id);
+//   }
+// else {
+//   navigate('/home');
+// }
   useEffect(() => {
     const fetchMyMedicalConditions = async () => {
       try {
@@ -167,14 +176,14 @@ const myMedicalCondits = () => {
                       className="img"
                       src={saveImg}
                       onClick={() => handleUnbookmark(condition.id)}
-                      alt="Save"
+                      alt="Bookmarked"
                     />
                   ) : (
                     <img
                       className="img"
                       src={unsaveImg}
                       onClick={() => handleBookmark(condition.id)}
-                      alt="UnSave"
+                      alt="Not Bookmarked"
                     />
                   )}
                 </div>

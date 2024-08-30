@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+// import { AuthContext } from "./Auth";
 import '../styles/myallergies.css'; 
 import allergiesImg from "../../public/06-allergy.png";
 import downImg from "../../public/arrowDown.png";
@@ -7,7 +8,8 @@ import upImg from "../../public/arrowUp.png";
 
 const MyAllergies = () => {
   const host = "http://localhost";
-  const userId =1;
+  const [userId , setUserId] = useState("1");
+//   const { user } = useContext(AuthContext);
   const [openCategory, setOpenCategory] = useState(null);
   const [allergies, setAllergies] = useState([]);
   const [otherAllergies, setOtherAllergies] = useState({
@@ -15,6 +17,13 @@ const MyAllergies = () => {
     otherEnvironmentalAllergies: [],
     otherMedicationAllergies: [],
   });
+//  set user id if user is signed in else navigate to signin
+//   if (user) {
+//     setUserId(user.data.id);
+//   }
+// else {
+//   navigate('/home');
+// }
 
   useEffect(() => {
     const fetchAllergies = async () => {

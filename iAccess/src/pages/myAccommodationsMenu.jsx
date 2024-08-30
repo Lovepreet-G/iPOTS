@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "../styles/myAccommodations.css";
+// import { AuthContext } from "./Auth";
 
 import homeImg from "../../public/01-home.png";
 import briefcaseImg from "../../public/02-work.png";
@@ -19,9 +20,19 @@ const MyAccommodations = () => {
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
   const location = queryParams.get("location");
+  const [userId , setUserId] = useState("1");
+  //   const { user } = useContext(AuthContext);
 
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
+
+//  set user id if user is signed in else navigate to signin
+//   if (user) {
+//     setUserId(user.data.id);
+//   }
+// else {
+//   navigate('/home');
+// }
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
