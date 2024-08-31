@@ -124,29 +124,31 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Mobility", img: mobilityImg, grayImg: grayMobilityImg },
+    { name: "Vision", img: visionImg, grayImg: grayVisionImg },
     { name: "Hearing", img: earImg, grayImg: grayEarImg },
+    { name: "Mobility", img: mobilityImg, grayImg: grayMobilityImg },
     { name: "Cognitive", img: brainImg, grayImg: grayBrainImg },
-    { name: "Mental Health", img: mentalImg, grayImg: grayMentalImg},
     { name: "Sensory", img: sensorImg, grayImg: graySensorImg},
     { name: "Allergy", img: allergyImg, grayImg: grayAllergyImg},
-    { name: "Vision", img: visionImg, grayImg: grayVisionImg },
-    { name: "Pain", img: painImg, grayImg: grayPainImg },
-    { name: "Digestion", img: stomachImg, grayImg: grayStomachImg },
     { name: "Safety", img: safetyImg, grayImg: graySafetyImg },
+    { name: "Digestion", img: stomachImg, grayImg: grayStomachImg },
+    { name: "Pain", img: painImg, grayImg: grayPainImg },
     { name: "Medical Devices", img: medicalImg, grayImg: grayMedicalImg },
+    { name: "Mental Health", img: mentalImg, grayImg: grayMentalImg},
     { name: "Medicine", img: medicationImg, grayImg: grayMedicationImg },
   ];
 
   return (
     <>
       <div className="access-menu-page">
-      {medicalCondition && (
-                    <h1 className="header-access-menu-title"> {medicalCondition}</h1>
-                )}
-        <h2 className="header-access-menu-title">
-         My Accessibility Categories
-        </h2>
+        {medicalCondition ? (
+          <>
+            <h1 className="header-access-menu-title">{medicalCondition}</h1>
+            <h2 className="header-access-menu-title">My Accessibility Categories</h2>
+          </>
+        ) : (
+          <h1 className="header-access-menu-title">My Accessibility Categories</h1>
+        )}
        
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
@@ -171,13 +173,16 @@ const AccessMenu = () => {
         <div className="categories-access-menu-container">
         <ul aria-label="List of accessibilty categories" tabIndex="-1" ref={listRef}>
           {
-            categories.map((category) => (
-              <li key={category.name} className="category-access-menu-items">
+            categories.map((category) => {
+               const isCategoryAvailable = myAccessibilityCat.includes(category.name);
+               return(
+              <li key={category.name} className="category-access-menu-items" aria-hidden={!isCategoryAvailable}>
             <a
               key={category.name}
               href="#"
-              className="category-access-menu"
-              onClick={(event) => checkBeforeNavigate(category.name, event)}
+              className={`category-access-menu ${isCategoryAvailable ? "" : "category-access-gray-menu"}`}
+              onClick={(event) => isCategoryAvailable && checkBeforeNavigate(category.name, event)}
+              tabIndex={isCategoryAvailable ? 0 : -1}
             >
               <img
                 src={isCategoryAvailable ? category.img : category.grayImg}
@@ -189,11 +194,12 @@ const AccessMenu = () => {
               </span>
             </a>
             </li>
-          ))}
+             ); }
+          )}
           </ul>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

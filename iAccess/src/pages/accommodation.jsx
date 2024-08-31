@@ -179,19 +179,25 @@ const Accommodation2 = () => {
 
   return (
     <div className="accommodations-page">
-      
-      {medicalCondition && (
-          <h1 className="accommodation-title"> {medicalCondition}</h1>
+        
+        {medicalCondition ? (
+          <>
+            <h1 className="accommodation-title">{medicalCondition}</h1>
+            <div className="header-container2">
+              <img src={iconImg} alt={category} className="category-image" />
+              <h2 className="accommodation-title">{category}</h2>
+            </div>
+          </>
+        ) : (
+          <div className="header-container2">
+              <img src={iconImg} alt={category} className="category-image" />
+              <h1 className="accommodation-title">{category}</h1>
+            </div>
         )}
-        <div className="header-container2">
-        <img src={iconImg} alt={category} className="category-image" />
-        <h2 className="accommodation-title">{category}</h2>
-       
-      </div>
       <div className="navbar-container">
         {locations.map((location) => (
           <a
-            key={location.name}
+            key={location.name}s
             href="#"
             aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
             className={`location ${

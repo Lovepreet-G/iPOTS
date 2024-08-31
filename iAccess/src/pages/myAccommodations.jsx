@@ -191,14 +191,20 @@ const myAccommodations = () => {
     const iconImg = categoryObject ? categoryObject.img : null;
         return (
             <div className="accommodations-page">
-                {medicalCondition && (
-                        <h1 className="accommodation-title">  {medicalCondition}</h1>
-                    )}
-                <div className="header-container2">
-                    <img src={iconImg} alt={category} className="category-image" />
-                    <h2 className="accommodation-title">{category} </h2>
-                    
-                </div>
+                {medicalCondition ? (
+                    <>
+                        <h1 className="accommodation-title">{medicalCondition}</h1>
+                        <div className="header-container2">
+                            <img src={iconImg} alt={category} className="category-image" />
+                            <h2 className="accommodation-title">{category}</h2>
+                        </div>
+                    </>
+                ) : (
+                    <div className="header-container2">
+                        <img src={iconImg} alt={category} className="category-image" />
+                        <h1 className="accommodation-title">{category}</h1>
+                    </div>
+                )}
                 <div className="navbar-container">
                     {locations.map((location) => (
                         <a

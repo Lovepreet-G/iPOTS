@@ -99,12 +99,14 @@ const AccessMenu = () => {
   return (
     <>
       <div className="access-menu-page">
-      {medicalCondition && (
-                        <h1 className="header-access-menu-title">  {medicalCondition}</h1>
-                    )}
-        <h2 className="header-access-menu-title">
-          Accessibility Categories
-        </h2>
+      {medicalCondition ? (
+          <>
+            <h1 className="header-access-menu-title">{medicalCondition}</h1>
+            <h2 className="header-access-menu-title">My Accessibility Categories</h2>
+          </>
+        ) : (
+          <h1 className="header-access-menu-title">My Accessibility Categories</h1>
+        )}
         
         <div className="navbar-access-menu-container">
           {locations.map((location) => (
