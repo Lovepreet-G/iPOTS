@@ -17,27 +17,27 @@ const ProfileEdit = () => {
   return (
     <div className="profile-edit-page">
       <div className="profile-header2">
-        <img src={plantImg} alt="Profile" className="profile-picture2" />
-        <p className="change-picture2">Change profile picture</p>
-        <h2 className='user-name'>@iaccessuser</h2>
+        <img src={plantImg} alt="Profile picture of user" className="profile-picture2" />
+        <a href="#change-profile-picture" className="change-picture2" aria-label="Change profile picture">Change profile picture</a>
+        <h1 aria-label="Username" className='user-name'>@iaccessuser</h1>
       </div>
       <div className="profile-form">
         <div className="form-group">
-          <input type="text" className="form-control" placeholder="John" />
-          <img src={editIcon} alt="Edit" className="edit-icon" />
+          <input type="text" className="form-control" placeholder="John" aria-label="Click to edit your first name"/>
+          <img src={editIcon} alt="" className="edit-icon" aria-hidden="true"/>
         </div>
         <div className="form-group">
-          <input type="text" className="form-control" placeholder="Smith" />
-          <img src={editIcon} alt="Edit" className="edit-icon" />
+          <input type="text" className="form-control" placeholder="Smith" aria-label="Click to edit your last name"/>
+          <img src={editIcon} alt="" className="edit-icon" aria-hidden="true"/>
         </div>
         <div className="form-group">
-          <input type="email" className="form-control" placeholder="iaccess@email.com" />
-          <img src={editIcon} alt="Edit" className="edit-icon" />
+          <input type="email" className="form-control" placeholder="iaccess@email.com" aria-label="Click to edit your email"/>
+          <img src={editIcon} alt="" className="edit-icon" aria-hidden="true"/>
         </div>
         <div className="form-group">
-          <input type="password" className="form-control" placeholder="************" />
-          <p className="change-password" onClick={handleEditProfile}>Change Password</p>
+          <input type="password" className="form-control" readOnly placeholder="************" aria-label='password'/>
         </div>
+        <a href="#" className="change-password" onClick={handleEditProfile} aria-label='click to change your password'>Change Password</a>
       </div>
     </div>
   );

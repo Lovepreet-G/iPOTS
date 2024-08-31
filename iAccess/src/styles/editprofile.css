@@ -25,6 +25,8 @@
 .change-picture2 {
   font-size: 20px;
   margin-top: 10px;
+  color: #000000;
+  cursor: pointer;
 }
 
 .user-name {
@@ -34,8 +36,11 @@
     margin-top: 10px;
 }
 
-.profile-form {
-    width: 80%; 
+.profile-form { 
+  display: flex;
+  flex-direction: column; /* Stack form items vertically */
+  align-items: flex-start;
+  width: 80%; 
   max-width: 798px; 
   height: 60vh; 
   max-height: 475px; 
@@ -43,6 +48,7 @@
 
 .form-group {
   position: relative;
+  width: 100%;
   margin-bottom: 20px;
 }
 
@@ -71,4 +77,16 @@
   cursor: pointer;
   text-align: left;
   margin-top: 10px;
+}
+@media (max-width: 971px) {
+  .profile-picture2{
+    width: 7.813rem;
+    height: 7.813rem;
+
+  }
+  .user-name{
+    width: 13.125rem;
+    height: 2.813rem;
+    font-size: 1.875rem;
+  }
 }
