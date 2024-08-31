@@ -1,15 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/medicalcondits.css";
 import { CiSearch } from "react-icons/ci";
-import { PiMicrophoneFill } from "react-icons/pi";
+
+import caduceusImg from "../../public/Caduceus.png";
+
 import homeImg from "../../public/01-home.png";
 import briefcaseImg from "../../public/02-work.png";
 import backpackImg from "../../public/03-school.png";
 import transitImg from "../../public/04-transit.png";
 import hospitalImg from "../../public/05-medical.png";
 import earthImg from "../../public/06-all.png";
+
 
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
@@ -26,6 +29,22 @@ const MedicalCondits = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchMedicalConditions = async () => {
@@ -107,12 +126,12 @@ const MedicalCondits = () => {
   );
 
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const letters = [
@@ -148,15 +167,15 @@ const MedicalCondits = () => {
     <>
       <div className="medical-condit-page">
         <div className="medical-condit-title">
-          <span className="medical-condit-logo">
-            <img src="../../public/Caduceus.png" className="caduceus" />
-          </span>
-          <span className="medical-condit-name"> Medical Conditions</span>
+            <img src={caduceusImg} alt="Medical Conditions" className="medical-condit-logo" />
+          <h1 className="medical-condit-name"> Medical Conditions</h1>
         </div>
         <div className="nav-medical-condit-container">
           {locations.map((location) => (
-            <div
+            <a
               key={location.name}
+              href="#"
+              aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
               className={`location-condits ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
@@ -168,18 +187,19 @@ const MedicalCondits = () => {
                 className="location-condits-img"
               />
               <span className="location-condits-name">{location.name}</span>
-            </div>
+            </a>
           ))}
         </div>
-        <div className="medical-search-bar-container">
-          <div className="medical-search-bar">
-            <CiSearch className="medical-search-icon" />
+        <div className="search-bar-container">
+          <div className="search-bar">
+            <CiSearch className="search-icon" />
             <input
               type="search"
-              className="medical-searchbox"
+              className="searchbox"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label="Search for medical conditions"
             />
           </div>
         </div>
@@ -204,9 +224,13 @@ const MedicalCondits = () => {
           </div>
         ) : (
           <div className="medical-letters-container">
+            <ul aria-label="List of letters" tabIndex="-1" ref={listRef}>
             {letters.map((letter) => (
-              <div
+              <li key={letter.num} className="letter-items">
+              <a
                 key={letter.num}
+                href="#"
+                aria-label={`Search with ${letter.char}`}
                 className={`medical-letter ${
                   selectedLetter === letter.num ? "selected" : ""
                 }`}
@@ -216,8 +240,10 @@ const MedicalCondits = () => {
                 }}
               >
                 <span className="medical-the-letters">{letter.char}</span>
-              </div>
+              </a>
+              </li>
             ))}
+            </ul>
           </div>
         )}
       </div>

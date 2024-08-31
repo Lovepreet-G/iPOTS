@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Popup from "reactjs-popup";
 import "../styles/homepage.css";
@@ -26,6 +26,22 @@ const HomePage = () => {
   const closeModal = () => setOpen(false);
   const closeSignInModal = () => setSignInOpen(false);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -57,12 +73,12 @@ const HomePage = () => {
   }
 
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const categories = [
@@ -80,15 +96,18 @@ const HomePage = () => {
 
   return (
     <div className="homepage">
-      <h1 className="homepage-home-title">iAccess</h1>
+      <h1 className="homepage-home-title">iACCESS</h1>
       <div className="navbar-home-container">
         {locations.map((location) => (
-          <div
-            key={location.name}
+          <a
+          key={location.name}
+          href="#"
+          aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
             className={`location-home ${
               selectedLocation === location.name ? "selected" : ""
             }`}
             onClick={() => handleLocationClick(location.name)}
+            
           >
             <img
               src={location.img}
@@ -96,29 +115,35 @@ const HomePage = () => {
               className="location-home-img"
             />
             <span className="location-home-name">{location.name}</span>
-          </div>
+          </a>
         ))}
       </div>
       <div className="accessibility-categories-container">
-        {categories.map((category) => (
-          <div
-            key={category.name}
-            className="accessibility-category"
-            onClick={(event) => checkBeforeNavigate(category, event)}
-          >
-            <img
-              src={category.img}
-              alt={category.name}
-              className="accessibility-category-icon"
-            />
-            <span className="accessibility-category-name">{category.name}</span>
-            <img
-              src={backImg}
-              alt="Back"
-              className="accessibility-category-back"
-            />
-          </div>
-        ))}
+        <ul aria-label="Main Menu Options " tabIndex="-1" ref={listRef}>
+          {categories.map((category) => (
+            <li key={category.name} className="accessibility-category-item">
+              <a
+                key={category.name}
+                href="#"
+                className="accessibility-category"
+                onClick={(event) => checkBeforeNavigate(category, event)}
+              >
+                <img
+                  src={category.img}
+                  alt={category.name}
+                  className="accessibility-category-icon"
+                />
+                <span className="accessibility-category-name">{category.name}</span>
+                <img
+                  src={backImg}
+                  aria-label="Right Arrow"
+                  alt="Right Arrow"
+                  className="accessibility-category-back"
+                />
+              </a>
+            </li>
+          ))}
+        </ul>
       </div>
       <Popup
         open={open}
@@ -128,9 +153,9 @@ const HomePage = () => {
         contentClassName="popup-content"
       >
         <div className="popup-message">
-          <ul className="popup-location-list">
+          <ul className="popup-location-list" aria-label="List of Locations">
             {locations.map((location) => (
-              <li key={location.name} className="popup-location-item">
+              <li key={location.name} className="popup-location-item" aria-label={location.area}>
                 <img
                   src={location.img}
                   alt={location.name}
@@ -143,9 +168,13 @@ const HomePage = () => {
           <div className="message">
             Select the location where these accommodations will be used
           </div>
-          <button className="close" onClick={closeModal}>
+          <div id="button-description" style={{ position: 'absolute', left: '-9999px' }}>
+      Button-
+    </div>
+          <button className="close" onClick={closeModal} aria-describedby="button-description">
             OK
           </button>
+         
         </div>
       </Popup>
       <Popup
@@ -160,9 +189,15 @@ const HomePage = () => {
           <div className="message">
             Please sign in to access My Accommodation
           </div>
-          <button className="sign-in" onClick={closeSignInModal}>
+          <div id="button-description" style={{ position: 'absolute', left: '-9999px' }}>
+            Button-
+          </div>
+          <button className="sign-in" onClick={closeSignInModal} aria-describedby="button-description">
             Sign In
           </button>
+          <div id="button-description" style={{ position: 'absolute', left: '-9999px' }}>
+            Button-
+           </div>
           <button className="cancel" onClick={closeSignInModal}>
             Cancel
           </button>

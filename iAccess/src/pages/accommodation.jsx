@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 import { CiSearch } from "react-icons/ci";
-import { PiMicrophoneFill } from "react-icons/pi";
 
 import "../styles/accommodation.css";
 import homeImg from "../../public/01-home.png";
@@ -41,6 +40,22 @@ const Accommodation2 = () => {
   const category = queryParams.get("category");
   const medicalCondition = queryParams.get("medicalCondition");
   const [selectedLocation, setSelectedLocation] = useState(location);
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchBookmarks = async () => {
@@ -136,12 +151,12 @@ const Accommodation2 = () => {
   );
 
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const categories = [
@@ -164,17 +179,27 @@ const Accommodation2 = () => {
 
   return (
     <div className="accommodations-page">
-      <div className="acc-header-container">
-        <img src={iconImg} alt="Vision" className="vision-image" />
-        <h1 className="accommodation-title">{category}</h1>
-        {medicalCondition && (
-          <h2 className="accommodation-title"> ({medicalCondition})</h2>
+        
+        {medicalCondition ? (
+          <>
+            <h1 className="accommodation-title">{medicalCondition}</h1>
+            <div className="header-container2">
+              <img src={iconImg} alt={category} className="category-image" />
+              <h2 className="accommodation-title">{category}</h2>
+            </div>
+          </>
+        ) : (
+          <div className="header-container2">
+              <img src={iconImg} alt={category} className="category-image" />
+              <h1 className="accommodation-title">{category}</h1>
+            </div>
         )}
-      </div>
       <div className="navbar-container">
         {locations.map((location) => (
-          <div
-            key={location.name}
+          <a
+            key={location.name}s
+            href="#"
+            aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
             className={`location ${
               selectedLocation === location.name ? "selected" : ""
             }`}
@@ -186,11 +211,11 @@ const Accommodation2 = () => {
               className="location-img"
             />
             <span className="location-name">{location.name}</span>
-          </div>
+          </a>
         ))}
       </div>
       <div className="search-bar-container">
-        <div className="search-bar">
+        <div className="search-bar" >
           <CiSearch className="search-icon" />
           <input
             type="search"
@@ -198,13 +223,15 @@ const Accommodation2 = () => {
             placeholder="Search"
             value={searchTerm}
             onChange={handleSearchChange}
+            aria-label={`Search for accommodations for ${category}`}
           />
         </div>
       </div>
-      <div className="item-list">
+      <div className="item-container" >
         {filteredAccommodations.length > 0 ? (
-          filteredAccommodations.map((accommodation) => (
-            <div
+          <ul className="item-list" aria-label="List of accommodations" tabIndex="-1" ref={listRef}>
+          {filteredAccommodations.map((accommodation) => (
+            <li
               key={accommodation.id}
               className={`item ${
                 selectedItem === accommodation.id ? "selected" : ""
@@ -219,19 +246,35 @@ const Accommodation2 = () => {
                   {accommodation.accommodation}
                 </span>
                 {isBookmarked(accommodation.id) ? (
+                  <a 
+                  href="#" 
+                  onClick={(e) => {
+                    e.preventDefault(); 
+                    handleUnbookmark(accommodation.id);
+                  }}
+                  aria-label="Click to remove bookmark from this item"
+                >
                   <img
-                    className="img"
+                    className="bookmark-img"
                     src={saveImg}
-                    onClick={() => handleUnbookmark(accommodation.id)}
                     alt="Save"
                   />
+                </a>
                 ) : (
-                  <img
-                    className="img"
-                    src={unsaveImg}
-                    onClick={() => handleBookmark(accommodation.id)}
-                    alt="Save"
-                  />
+                  <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      handleBookmark(accommodation.id);
+                    }}
+                    aria-label="Click to bookmark this item"
+                  >
+                    <img
+                      className="unbookmarkimg"
+                      src={unsaveImg}
+                      alt="UnSave"
+                    />
+                  </a>
                 )}
               </div>
               {selectedItem === accommodation.id && (
@@ -247,8 +290,9 @@ const Accommodation2 = () => {
                   <p>{accommodation.description}</p>
                 </div>
               )}
-            </div>
-          ))
+            </li>
+          ))}
+          </ul>
         ) : (
           <p className="Error">
             No accommodations available for {category} at {selectedLocation}.

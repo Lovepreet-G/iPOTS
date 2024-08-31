@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "../styles/myAccommodations.css";
@@ -22,6 +22,22 @@ const MyAccommodations = () => {
 
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -40,12 +56,12 @@ const MyAccommodations = () => {
     navigate(newUrl);
   };
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const categories = [
@@ -67,8 +83,10 @@ const MyAccommodations = () => {
       <h1 className="myAccommodations-title">My Accommodations</h1>
       <div className="myNavbar-container">
         {locations.map((location) => (
-          <div
+          <a
             key={location.name}
+            href="#"
+              aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
             className={`myLocation ${
               selectedLocation === location.name ? "selected" : ""
             }`}
@@ -80,13 +98,16 @@ const MyAccommodations = () => {
               className="myLocation-img"
             />
             <span className="myLocation-name">{location.name}</span>
-          </div>
+          </a>
         ))}
       </div>
       <div className="myAccessibility-categories-container">
+        <ul aria-label="My accommodation menu options" tabIndex="-1" ref={listRef}>
         {categories.map((category) => (
-          <div
+          <li key={category.name} className="myAccessibility-items">
+          <a
             key={category.name}
+            href="#"
             className="myAccessibility-category"
             onClick={(event) => checkBeforeNavigate(category.url, event)}
           >
@@ -100,11 +121,14 @@ const MyAccommodations = () => {
             </span>
             <img
               src={backImg}
-              alt="Back"
+              aria-label="Right Arrow"
+              alt="Right Arrow"
               className="myAccessibility-category-back"
             />
-          </div>
+          </a>
+          </li>
         ))}
+        </ul>
       </div>
     </div>
   );
