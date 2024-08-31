@@ -26,9 +26,11 @@
   font-family: 'Inter', sans-serif;
   font-size: 20px;
   margin-top: 10px;
+  color: #000000;
+  cursor: pointer;
 }
 
-h2 {
+.username {
   font-family: 'Inter', sans-serif;
   font-size: 40px;
   font-weight: medium;
@@ -41,6 +43,8 @@ h2 {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0;
+  padding: 0;
 }
 
 .option {
@@ -83,7 +87,7 @@ h2 {
   margin-left: 15px;/* 30 */
 }
 
-.next-button {
+.logout-button {
   background-color: #0FC0FC;
   color: #000000;
   border: none;
@@ -99,7 +103,44 @@ h2 {
   transition: background-color 0.3s, transform 0.3s;
 }
 
-.next-button:hover {
+.logout-button:hover {
   background-color: #0FC0FC;
   transform: scale(1.02);
+}
+
+@media (max-width: 971px) {
+  .profile-picture{
+    width: 7.813rem;
+    height: 7.813rem;
+
+  }
+  .username{
+    width: 13.125rem;
+    height: 2.813rem;
+    font-size: 1.875rem;
+  }
+  .options-list{
+    width: 20.875rem;
+    height: auto;
+  }
+  .option-icon{
+    margin-right: 0.625rem;
+  }
+  
+.option-name{
+  width: 12.313rem;
+  height: 1.563rem;
+  font-size: 1.25rem;
+}
+.option-arrow{
+  width: 0.875rem;
+  height: 1.438rem;
+  margin-left: 0.625rem;
+}
+.logout-button{
+  width: 13.625rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
+
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/accountinfo.css';
@@ -20,9 +20,26 @@ import aboutPoliciesImg from '../../public/Info.png';
 
 import backImg from "../../public/Back.png";
 
+
 const ProfilePage = () => {
 
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleOptionClick = (url) => {
     if (url) {
@@ -31,11 +48,11 @@ const ProfilePage = () => {
   };
 
   const options = [
-    { name: 'My Accommodations', img: accommodationsImg },
-    { name: 'My Medical Conditions', img: medicalConditionsImg },
-    { name: 'My Allergies', img: allergiesImg },
-    { name: 'Legal', img: legalImg },
-    { name: 'Dictionary', img: dictionaryImg },
+    { name: 'My Accommodations', img: accommodationsImg, url: "/myaccommodationsmenu"},
+    { name: 'My Medical Conditions', img: medicalConditionsImg, url: "/mymedicalconditions"  },
+    { name: 'My Allergies', img: allergiesImg, url: "/myallergies"  },
+    { name: 'Legal', img: legalImg, url: "/legalpage" },
+    { name: 'Dictionary', img: dictionaryImg, url: "/dictionary"},
     { name: 'Edit Profile', img: editProfileImg, url: "/editprofile" },
     { name: 'Location', img: locationImg },
     { name: 'Language', img: languageImg },
@@ -48,25 +65,28 @@ const ProfilePage = () => {
   return (
     <div className="profile-page">
       <div className="profile-header">
-        <img src={plantImg} alt="Profile" className="profile-picture" />
-        <p className="change-picture">Change profile picture</p>
-        <h2>@iaccessuser</h2>
+        <img src={plantImg} alt="Profile picture of user" className="profile-picture" />
+        <a href="#change-profile-picture" className="change-picture" aria-label="Change profile picture">Change profile picture</a>
+        <h1 aria-label="Username" className='username'>@iaccessuser</h1>
       </div>
-      <div className="options-list">
+      <ul className="options-list" aria-label='List of account info options' tabIndex="-1" ref={listRef}>
         {options.map((option, index) => (
-          <div key={index} className="option" onClick={() => handleOptionClick(option.url)}>
+          <li key={index} className="option" onClick={() => handleOptionClick(option.url)}
+          role="listitem"
+        tabIndex="0"
+        aria-label={`${option.name}, click to select`}
+          >
             <img src={option.img} alt={option.name} className="option-icon" />
             <span className="option-name">{option.name}</span>
             <img
               src={backImg}
-              alt="Back"
+              alt="Right Arrow"
               className="option-arrow"
             />
-            {/* <span className="option-arrow">➔</span> */}
-          </div>
+          </li>
         ))}
-      </div>
-      <button className="next-button">Next</button>
+      </ul>
+      <button className="logout-button" aria-label="Logout" tabIndex="0">Logout</button>
     </div>
   );
 };
