@@ -157,6 +157,7 @@ const Dictionary = () => {
                   selectedLetter === letter.num ? "selected" : ""
                 }`}
                 onClick={(event) => {
+                  event.preventDefault();
                   checkBeforeNavigate(letter.char, event);
                   handleLetterClick(letter.num);
                 }}

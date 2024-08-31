@@ -106,7 +106,9 @@ const HomePage = () => {
             className={`location-home ${
               selectedLocation === location.name ? "selected" : ""
             }`}
-            onClick={() => handleLocationClick(location.name)}
+            onClick={(event) => {
+              event.preventDefault();
+              handleLocationClick(location.name)}}
             
           >
             <img
@@ -126,7 +128,9 @@ const HomePage = () => {
                 key={category.name}
                 href="#"
                 className="accessibility-category"
-                onClick={(event) => checkBeforeNavigate(category, event)}
+                onClick={(event) => {
+                  event.preventDefault();
+                  checkBeforeNavigate(category, event)}}
               >
                 <img
                   src={category.img}

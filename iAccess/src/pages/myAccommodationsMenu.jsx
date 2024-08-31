@@ -90,7 +90,9 @@ const MyAccommodations = () => {
             className={`myLocation ${
               selectedLocation === location.name ? "selected" : ""
             }`}
-            onClick={() => handleLocationClick(location.name)}
+            onClick={(event) => {
+              event.preventDefault();
+              handleLocationClick(location.name)}}
           >
             <img
               src={location.img}
@@ -109,7 +111,9 @@ const MyAccommodations = () => {
             key={category.name}
             href="#"
             className="myAccessibility-category"
-            onClick={(event) => checkBeforeNavigate(category.url, event)}
+            onClick={(event) => {
+              event.preventDefault();
+              checkBeforeNavigate(category.url, event)}}
           >
             <img
               src={category.img}

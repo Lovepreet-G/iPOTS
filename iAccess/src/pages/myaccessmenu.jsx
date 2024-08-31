@@ -159,7 +159,9 @@ const AccessMenu = () => {
               className={`location-access-menu ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
-              onClick={() => handleLocationClick(location.name)}
+              onClick={(event) => {
+                event.preventDefault();
+                handleLocationClick(location.name)}}
             >
               <img
                 src={location.img}
@@ -181,7 +183,9 @@ const AccessMenu = () => {
               key={category.name}
               href="#"
               className={`category-access-menu ${isCategoryAvailable ? "" : "category-access-gray-menu"}`}
-              onClick={(event) => isCategoryAvailable && checkBeforeNavigate(category.name, event)}
+              onClick={(event) => {
+                event.preventDefault();
+                isCategoryAvailable && checkBeforeNavigate(category.name, event)}}
               tabIndex={isCategoryAvailable ? 0 : -1}
             >
               <img

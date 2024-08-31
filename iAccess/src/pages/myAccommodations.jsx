@@ -213,7 +213,9 @@ const myAccommodations = () => {
                             aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
                             className={`location ${selectedLocation === location.name ? "selected" : ""
                                 }`}
-                            onClick={() => handleLocationClick(location.name)}
+                            onClick={(event) => {
+                                event.preventDefault();
+                                handleLocationClick(location.name)}}
                         >
                             <img
                                 src={location.img}

@@ -179,7 +179,9 @@ const MedicalCondits = () => {
               className={`location-condits ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
-              onClick={() => handleLocationClick(location.name)}
+              onClick={(event) => {
+                event.preventDefault();
+                handleLocationClick(location.name)}}
             >
               <img
                 src={location.img}
@@ -235,6 +237,7 @@ const MedicalCondits = () => {
                   selectedLetter === letter.num ? "selected" : ""
                 }`}
                 onClick={(event) => {
+                  event.preventDefault();
                   checkBeforeNavigate(letter.char, event);
                   handleLetterClick(letter.num);
                 }}
