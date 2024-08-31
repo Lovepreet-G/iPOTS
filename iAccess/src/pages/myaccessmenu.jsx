@@ -24,6 +24,19 @@ import medicalImg from "../../public/10-medical devices.png";
 import mentalImg from "../../public/11-mental health.png";
 import medicationImg from "../../public/12-medication.png";
 
+import grayVisionImg from "../../public/01-vision-grey.png";
+import grayEarImg from "../../public/02-hearing-grey.png";
+import grayMobilityImg from "../../public/03-mobility-grey.png"; // Gray images
+import grayBrainImg from "../../public/04-cognitive-grey.png";
+import graySensorImg from "../../public/05-sensory-grey.png";
+import grayAllergyImg from "../../public/06-allergy-grey.png";
+import graySafetyImg from "../../public/07-safety-grey.png";
+import grayStomachImg from "../../public/08-digestion-grey.png";
+import grayPainImg from "../../public/09-pain-grey.png";
+import grayMedicalImg from "../../public/10-medical devices-grey.png";
+import grayMentalImg from "../../public/11-mental health-grey.png";
+import grayMedicationImg from "../../public/12-medication-grey.png";
+
 const AccessMenu = () => {
   const locat = useLocation(); // Get the current location object
   const host = "http://localhost";
@@ -32,7 +45,7 @@ const AccessMenu = () => {
   const location = queryParams.get("location");
   const medicalCondition = queryParams.get('medicalCondition');
   const [selectedLocation, setSelectedLocation] = useState(location);
-  const [myAccessibilityCat,setMyAccessibilityCat] =useState('');
+  const [myAccessibilityCat, setMyAccessibilityCat] = useState([]);
   const navigate = useNavigate();
   const listRef = useRef(null); // Create a ref for the list
 
@@ -69,15 +82,15 @@ const AccessMenu = () => {
             const url = host + '/iPots/iAccess-Server/myAccessibility.php';
             const response = await axios.get(url, { params });
             
-            setMyAccessibilityCat(response.data);
-            console.log(myAccessibilityCat);
+            setMyAccessibilityCat(response.data.map(item => item.category));
+            // console.log(response.data.map(item => item.category));
             
           } catch (error) {
             console.error("Error fetching Accommodation:", error);
           }
     };
     fetchmyAccessibilityCat();
-}, [location]);
+  }, [location]);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -111,33 +124,19 @@ const AccessMenu = () => {
   ];
 
   const categories = [
-    { name: "Vision", img: visionImg },
-    { name: "Hearing", img: earImg },
-    { name: "Mobility", img: mobilityImg },
-    { name: "Cognitive", img: brainImg },
-    { name: "Sensory", img: sensorImg },
-    { name: "Allergy", img: allergyImg },
-    { name: "Safety", img: safetyImg },
-    { name: "Digestion", img: stomachImg },
-    { name: "Pain", img: painImg },
-    { name: "Medical Devices", img: medicalImg },
-    { name: "Mental Health", img: mentalImg },
-    { name: "Medication", img: medicationImg },
+    { name: "Mobility", img: mobilityImg, grayImg: grayMobilityImg },
+    { name: "Hearing", img: earImg, grayImg: grayEarImg },
+    { name: "Cognitive", img: brainImg, grayImg: grayBrainImg },
+    { name: "Mental Health", img: mentalImg, grayImg: grayMentalImg},
+    { name: "Sensory", img: sensorImg, grayImg: graySensorImg},
+    { name: "Allergy", img: allergyImg, grayImg: grayAllergyImg},
+    { name: "Vision", img: visionImg, grayImg: grayVisionImg },
+    { name: "Pain", img: painImg, grayImg: grayPainImg },
+    { name: "Digestion", img: stomachImg, grayImg: grayStomachImg },
+    { name: "Safety", img: safetyImg, grayImg: graySafetyImg },
+    { name: "Medical Devices", img: medicalImg, grayImg: grayMedicalImg },
+    { name: "Medicine", img: medicationImg, grayImg: grayMedicationImg },
   ];
-
-  const displayNames = {
-    Mobility: "Mobility",
-    Hearing: "Hearing",
-    Cognitive: "Cognitive",
-    MentalHealth: "Mental Health",
-    Sensory: "Sensory",
-    Allergy: "Allergy",
-    Vision: "Vision",
-    Pain: "Pain",
-    Digestion: "Digestion",
-    Safety: "Safety",
-    MedicalDevices: "Medical Devices",
-  };
 
   return (
     <>
@@ -181,7 +180,7 @@ const AccessMenu = () => {
               onClick={(event) => checkBeforeNavigate(category.name, event)}
             >
               <img
-                src={category.img}
+                src={isCategoryAvailable ? category.img : category.grayImg}
                 alt={category.name}
                 className="category-access-menu-icon"
               />
@@ -194,7 +193,7 @@ const AccessMenu = () => {
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
