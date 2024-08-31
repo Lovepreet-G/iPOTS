@@ -295,7 +295,7 @@
     grid-template-columns: repeat(3, 1fr);
     justify-content: center; 
   }
-  .close{
+  .close, .sign-in, .cancel{
     width: 17rem;
   }
 
