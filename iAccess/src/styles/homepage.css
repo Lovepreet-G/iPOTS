@@ -218,8 +218,8 @@
 .popup-location-list {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; /* This allows the items to wrap to the next line if they overflow */
-  justify-content: center; /* Centers the items horizontally */
+  flex-wrap: wrap; 
+  justify-content: center; 
   padding: 0;
   list-style-type: none;
   margin: 0;
@@ -284,6 +284,19 @@
 
   .location-home-name {
     font-size: 0.75rem;
+  }
+
+  /* popup for mobile */
+  .popup-content{
+    width: 21.389rem;
+  }
+  .popup-location-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center; 
+  }
+  .close{
+    width: 17rem;
   }
 
   .accessibility-categories-container {
