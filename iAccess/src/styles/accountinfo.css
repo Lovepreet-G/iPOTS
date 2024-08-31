@@ -108,6 +108,7 @@
   transform: scale(1.02);
 }
 
+/* Mobile Design */
 @media (max-width: 971px) {
   .profile-picture{
     width: 7.813rem;

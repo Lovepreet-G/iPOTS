@@ -78,6 +78,8 @@
   text-align: left;
   margin-top: 10px;
 }
+
+/* Mobile Design */
 @media (max-width: 971px) {
   .profile-picture2{
     width: 7.813rem;
