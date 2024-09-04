@@ -295,6 +295,19 @@
     font-size: 0.75rem;
   }
 
+  /* popup for mobile */
+  .popup-content{
+    width: 21.389rem;
+  }
+  .popup-location-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: center; 
+  }
+  .close, .sign-in, .cancel{
+    width: 17rem;
+  }
+
   .accessibility-categories-container {
     margin-top: 2.688rem;
     width: 21.39rem;
