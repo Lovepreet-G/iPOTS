@@ -6,7 +6,7 @@ import '../styles/accountinfo.css';
 import plantImg from '../../public/Joseph.png'; // Replace with the correct path to your image
 import accommodationsImg from '../../public/save.png';
 import medicalConditionsImg from '../../public/Caduceus.png';
-import allergiesImg from '../../public/allergies.png';
+import allergiesImg from '../../public/06-allergy.png';
 import legalImg from "../../public/Law.png";
 
 import dictionaryImg from '../../public//Dictionary.png';
