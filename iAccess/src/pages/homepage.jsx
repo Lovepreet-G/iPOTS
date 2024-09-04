@@ -88,7 +88,7 @@ const HomePage = () => {
       url: "/accessmenu",
     },
     { name: "Medical Conditions", img: caduceusImg, url: "/medicalcondits" },
-    { name: "Legal", img: lawImg, url: "" },
+    { name: "Legal", img: lawImg, url: "/legalpage" },
     { name: "Dictionary", img: dictionaryImg, url: "/dictionary" },
     { name: "My Accommodations", img: saveImg, url: "/myaccommodationsmenu" },
     { name: "My Allergies", img: allergyImg, url: "/myallergies" },

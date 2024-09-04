@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/header";
 import HomePage from "./pages/homepage";
+import LegalPage from "./pages/legalpage";
 import AccessMenu from "./pages/accessmenu";
 import Accommodation from "./pages/accommodation";
 import MedicalCondits from "./pages/medicalcondits";
@@ -29,6 +30,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/legalpage" element={<LegalPage />} />
             <Route path="/accessmenu" element={<AccessMenu />} />
             <Route path="/accommodation" element={<Accommodation />} />
             <Route path="/myaccommodationsmenu" element={<MyAccommodationsMenu />} />
