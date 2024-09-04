@@ -1,64 +1,87 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import "../styles/medicalcondits.css";
+import "../styles/myMedicalConditions.css";
 import { CiSearch } from "react-icons/ci";
-import { PiMicrophoneFill } from "react-icons/pi";
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
-import unsaveImg from '../../public/unsave.png';
-import saveImg from '../../public/save.png';
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
+
+import caduceusImg from "../../public/Caduceus.png";
+
+import unsaveImg from "../../public/unsave.png";
+import saveImg from "../../public/save.png";
 
 const myMedicalCondits = () => {
   const host = "http://localhost";
-  const userId = '1'; 
+  const userId = "1";
   const locat = useLocation();
   const queryParams = new URLSearchParams(locat.search);
-  const location = queryParams.get('location');
+  const location = queryParams.get("location");
   const [selectedLocation, setSelectedLocation] = useState(location);
   const [selectedLetter, setSelectedLetter] = useState("");
   const [medicalConditions, setMedicalConditions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [bookmarks, setBookmarks] = useState([]);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchMyMedicalConditions = async () => {
       try {
-        const url = host + '/iPots/iAccess-Server/myMedicalCondition.php?method=showAll&userId=' + userId;;
+        const url =
+          host +
+          "/iPots/iAccess-Server/myMedicalCondition.php?method=showAll&userId=" +
+          userId;
         const response = await axios.get(url);
         setMedicalConditions(response.data);
         console.log(response.data);
-        
       } catch (error) {
         console.error("Error fetching medical conditions:", error);
       }
     };
     const fetchBookmarks = async () => {
-      const url = host + "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" + userId; 
+      const url =
+        host +
+        "/iPots/iAccess-Server/myMedicalCondition.php?method=All&userId=" +
+        userId;
       const response = await axios.get(url);
       if (Array.isArray(response.data)) {
         setBookmarks(response.data);
-      }           
-    }
+      }
+    };
 
-    fetchBookmarks ();
+    fetchBookmarks();
     fetchMyMedicalConditions();
   }, []);
 
   const handleBookmark = async (conditionId) => {
     const url = host + "/iPots/iAccess-Server/myMedicalCondition.php";
     const params = {
-      userId: userId, 
+      userId: userId,
       medicalConditionId: conditionId,
-      method: 'Add'
+      method: "Add",
     };
     const response = await axios.get(url, { params });
-    
+
     setBookmarks([...bookmarks, conditionId]);
   };
 
@@ -67,11 +90,11 @@ const myMedicalCondits = () => {
     const params = {
       userId: userId,
       medicalConditionId: conditionId,
-      method: "Delete"
+      method: "Delete",
     };
     const response = await axios.get(url, { params });
-    
-    setBookmarks(bookmarks.filter(id => id !== conditionId));
+
+    setBookmarks(bookmarks.filter((id) => id !== conditionId));
   };
 
   const isBookmarked = (conditionId) => {
@@ -87,39 +110,45 @@ const myMedicalCondits = () => {
   };
 
   const handleConditionClick = (condition) => {
-    navigate(`/myaccessmenu?medicalCondition=${condition.term}&location=${location}`);
+    navigate(
+      `/myaccessmenu?medicalCondition=${condition.term}&location=${location}`
+    );
   };
 
-  const filteredConditions = medicalConditions.filter(condition =>
+  const filteredConditions = medicalConditions.filter((condition) =>
     condition.term.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   return (
     <>
       <div className="total-page">
-        <div className="page-title">
-          <span className="logo">
-            <img src="../../public/Caduceus.png" className="caduceus" />
-          </span>
-          <span className="page-name">My Medical Conditions</span>
+
+        <div className="my-medical-condit-title">
+            <img src={caduceusImg} alt="Medical Conditions" className="my-medical-condit-logo" />
+          <h1 className="my-medical-condit-name">My Medical Conditions</h1>
         </div>
+
         <div className="nav-container">
           {locations.map((location) => (
-            <div
+            <a
               key={location.name}
+              href="#"
+              aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
               className={`location-condits ${
                 selectedLocation === location.name ? "selected" : ""
               }`}
-              onClick={() => handleLocationClick(location.name)}
+              onClick={(event) => {
+                event.preventDefault();
+                handleLocationClick(location.name)}}
             >
               <img
                 src={location.img}
@@ -127,7 +156,7 @@ const myMedicalCondits = () => {
                 className="location-condits-img"
               />
               <span className="location-condits-name">{location.name}</span>
-            </div>
+            </a>
           ))}
         </div>
         <div className="search-bar-container">
@@ -139,25 +168,58 @@ const myMedicalCondits = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label="Search for my medical conditions"
             />
-            <PiMicrophoneFill className="microphone-icon" />
           </div>
         </div>
-        
+
         <div className="conditions-container">
           {filteredConditions.length > 0 ? (
-            filteredConditions.map((condition) => (
-              <div key={condition.id} className="condition-box">
-                <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
+            <ul className="conditions-list" aria-label="List of my medical conditions" tabIndex="-1" ref={listRef}>
+            {filteredConditions.map((condition) => (
+               <li key={condition.id} className="condition-box">
+                <div
+                  className="condition"
+                  onClick={() => handleConditionClick(condition)}
+                >
+                  {condition.term}
+                </div>
                 <div className="icons">
                   {isBookmarked(condition.id) ? (
-                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
+                    <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      handleUnbookmark(condition.id);
+                    }}
+                    aria-label="Click to remove bookmark from this item"
+                  >
+                    <img
+                      className="bookmark-img"
+                      src={saveImg}
+                      alt="Save"
+                    />
+                  </a>
                   ) : (
-                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                    <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      handleBookmark(condition.id);
+                    }}
+                    aria-label="Click to bookmark this item"
+                  >
+                    <img
+                      className="unbookmarkimg"
+                      src={unsaveImg}
+                      alt="UnSave"
+                    />
+                  </a>
                   )}
                 </div>
-              </div>
-            ))
+              </li>
+            ))}
+            </ul>
           ) : (
             <p className="Error">No medical conditions match "{searchTerm}".</p>
           )}
