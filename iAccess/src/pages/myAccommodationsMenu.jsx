@@ -1,20 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import "../styles/myAccommodations.css";
 
-import homeImg from "../../public/home.png";
-import briefcaseImg from "../../public/briefcase.png";
-import backpackImg from "../../public/backpack.png";
-import transitImg from "../../public/image 18.png";
-import hospitalImg from "../../public/hospital-sign.png";
-import earthImg from "../../public/planet-earth.png";
+import homeImg from "../../public/01-home.png";
+import briefcaseImg from "../../public/02-work.png";
+import backpackImg from "../../public/03-school.png";
+import transitImg from "../../public/04-transit.png";
+import hospitalImg from "../../public/05-medical.png";
+import earthImg from "../../public/06-all.png";
 
 import assistiveTechImg from "../../public/Assistive Technology.png";
 import caduceusImg from "../../public/Caduceus.png";
-import lawImg from "../../public/Law.png";
-import dictionaryImg from "../../public/Dictionary.png";
-import saveImg from "../../public/save.png";
+import allergyImg from "../../public/06-allergy.png";
 import backImg from "../../public/Back.png";
 
 const MyAccommodations = () => {
@@ -24,6 +22,22 @@ const MyAccommodations = () => {
 
   const [selectedLocation, setSelectedLocation] = useState(location);
   const navigate = useNavigate();
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   const handleLocationClick = (location) => {
     setSelectedLocation(location);
@@ -42,25 +56,26 @@ const MyAccommodations = () => {
     navigate(newUrl);
   };
   const locations = [
-    { name: "Home", img: homeImg },
-    { name: "Work", img: briefcaseImg },
-    { name: "School", img: backpackImg },
-    { name: "Transit", img: transitImg },
-    { name: "Medical", img: hospitalImg },
-    { name: "All", img: earthImg },
+    { name: "Home", img: homeImg, area: "Home" },
+    { name: "Work", img: briefcaseImg, area: "Work"},
+    { name: "School", img: backpackImg, area: "School" },
+    { name: "Transit", img: transitImg, area: "Transit" },
+    { name: "Medical", img: hospitalImg, area: "Medical" },
+    { name: "All", img: earthImg, area: "All Locations" },
   ];
 
   const categories = [
     {
-      name: "Accessibility Category",
+      name: "My Accessibility Category",
       img: assistiveTechImg,
       url: "/myaccessmenu",
     },
     {
-      name: "Medical Conditions",
+      name: "My Medical Conditions",
       img: caduceusImg,
       url: "/mymedicalconditions",
     },
+    { name: "My Allergies", img: allergyImg, url: "/myallergies" },
   ];
 
   return (
@@ -68,12 +83,16 @@ const MyAccommodations = () => {
       <h1 className="myAccommodations-title">My Accommodations</h1>
       <div className="myNavbar-container">
         {locations.map((location) => (
-          <div
+          <a
             key={location.name}
+            href="#"
+              aria-label={`${location.area}${selectedLocation === location.name ? " (selected)" : ""}`}
             className={`myLocation ${
               selectedLocation === location.name ? "selected" : ""
             }`}
-            onClick={() => handleLocationClick(location.name)}
+            onClick={(event) => {
+              event.preventDefault();
+              handleLocationClick(location.name)}}
           >
             <img
               src={location.img}
@@ -81,15 +100,20 @@ const MyAccommodations = () => {
               className="myLocation-img"
             />
             <span className="myLocation-name">{location.name}</span>
-          </div>
+          </a>
         ))}
       </div>
       <div className="myAccessibility-categories-container">
+        <ul aria-label="My accommodation menu options" tabIndex="-1" ref={listRef}>
         {categories.map((category) => (
-          <div
+          <li key={category.name} className="myAccessibility-items">
+          <a
             key={category.name}
+            href="#"
             className="myAccessibility-category"
-            onClick={(event) => checkBeforeNavigate(category.url, event)}
+            onClick={(event) => {
+              event.preventDefault();
+              checkBeforeNavigate(category.url, event)}}
           >
             <img
               src={category.img}
@@ -101,11 +125,14 @@ const MyAccommodations = () => {
             </span>
             <img
               src={backImg}
-              alt="Back"
+              aria-label="Right Arrow"
+              alt="Right Arrow"
               className="myAccessibility-category-back"
             />
-          </div>
+          </a>
+          </li>
         ))}
+        </ul>
       </div>
     </div>
   );

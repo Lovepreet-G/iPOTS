@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation , useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
@@ -6,6 +6,7 @@ import * as PiIcons from "react-icons/pi";
 import unsaveImg from '../../public/unsave.png';
 import saveImg from '../../public/save.png';
 import "../styles/medicalconditreview.css";
+import caduceusImg from "../../public/Caduceus.png";
 
 const MedicalConditsReview = () => {
   const host = "http://localhost";
@@ -20,6 +21,22 @@ const MedicalConditsReview = () => {
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
   const location = queryParams.get("location");
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchConditions = async () => {
@@ -88,13 +105,11 @@ const MedicalConditsReview = () => {
     <>
       <div className="all-page">
         <div className="title-page">
-          <span className="icon">
-            <img src="../../public/Caduceus.png" className="caduceus" />
-          </span>
-          <span className="name-page">Medical Conditions</span>
+            <img src={caduceusImg} alt="Medical Conditions" className="medical-condit-logo" />
+          <h1 className="name-page"> Medical Conditions</h1>
         </div>
         <div className="letter-area">
-          <h1 className="letter-style">{letter}</h1>
+          <div className="letter-style">{letter}</div>
         </div>
         <div className="search-bar-container">
           <div className="search-bar">
@@ -105,24 +120,52 @@ const MedicalConditsReview = () => {
               placeholder="Search" 
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label={`Search with ${letter}`}
             />
-            <PiIcons.PiMicrophoneFill className="microphone-icon" />
           </div>
         </div>
         <div className="conditions-container">
         {filteredConditions.length > 0 ? (
-            filteredConditions.map((condition) => (
-              <div key={condition.id} className="condition-box">
+        <ul className="conditions-list" aria-label={`List of conditions start with ${letter}`} tabIndex="-1" ref={listRef}>
+            {filteredConditions.map((condition) => (
+              <li key={condition.id} className="condition-box">
                 <div className="condition" onClick={() => handleConditionClick(condition)}>{condition.term}</div>
                 <div className="icons">
                   {isBookmarked(condition.id) ? (
-                    <img className="img" src={saveImg} onClick={() => handleUnbookmark(condition.id)} alt="Save" />
+                     <a 
+                     href="#" 
+                     onClick={(e) => {
+                       e.preventDefault(); 
+                       handleUnbookmark(condition.id);
+                     }}
+                     aria-label="Click to remove bookmark from this item"
+                   >
+                     <img
+                       className="bookmark-img"
+                       src={saveImg}
+                       alt="Save"
+                     />
+                   </a>
                   ) : (
-                    <img className="img" src={unsaveImg} onClick={() => handleBookmark(condition.id)} alt="UnSave" />
+                    <a 
+                    href="#" 
+                    onClick={(e) => {
+                      e.preventDefault(); 
+                      handleBookmark(condition.id);
+                    }}
+                    aria-label="Click to bookmark this item"
+                  >
+                    <img
+                      className="unbookmarkimg"
+                      src={unsaveImg}
+                      alt="UnSave"
+                    />
+                  </a>
                   )}
                 </div>
-              </div>
-            ))
+              </li>
+            ))}
+            </ul>
           ) : (
             <p className='Error'>No medical conditions match your search.</p>
           )}

@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import * as CiIcons from "react-icons/ci";
 import * as PiIcons from "react-icons/pi";
-import unsaveImg from "../../public/unsave.png";
-import saveImg from "../../public/save.png";
 import dictionaryImg from "../../public/Dictionary.png";
 import "../styles/dictionaryreview.css";
 
@@ -19,6 +17,22 @@ const DictionaryReview = () => {
   const queryParams = new URLSearchParams(locat.search);
   const method = queryParams.get("Method");
   const letter = queryParams.get("letter");
+  const listRef = useRef(null); // Create a ref for the list
+
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key.toLowerCase() === "l") {
+        if (listRef.current) {
+          listRef.current.focus(); // Focus the list when "L" is pressed
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => {
+      window.removeEventListener("keydown", handleKeyPress);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchterm = async () => {
@@ -55,14 +69,15 @@ const DictionaryReview = () => {
     <>
       <div className="dictionary-all-page">
         <div className="dictionary-title-page">
-          <span className="icon">
-            <img src={dictionaryImg} className="dictionary" />
-          </span>
-          <span className="dictionary-name-page">Dictionary</span>
+            <img src={dictionaryImg} alt="Dictionary" className="dictionary-logo" />
+          <h1 className="dictionary-name-page"> Dictionary</h1>
         </div>
+
         <div className="dictionary-letter-area">
-          <h1 className="dictionary-letter-style">{letter}</h1>
+          <div className="dictionary-letter-style">{letter}</div>
         </div>
+
+
         <div className="search-bar-container">
           <div className="search-bar">
             <CiIcons.CiSearch className="search-icon" />
@@ -72,14 +87,16 @@ const DictionaryReview = () => {
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
+              aria-label={`Search with ${letter}`}
             />
-            {/* <PiIcons.PiMicrophoneFill className="microphone-icon" /> */}
           </div>
         </div>
         <div className="dictionary-container">
             {filteredDictionaries.length > 0 ? (
-              filteredDictionaries.map((dictionary) => (
-                <div key={dictionary.id} className="item dictionary-box " onClick={() => handleDictionaryClick(dictionary)}>
+              <ul className="dictionary-list" aria-label={`List of terms start with ${letter}`} tabIndex="-1" ref={listRef}>
+              {filteredDictionaries.map((dictionary) => (
+                <li key={dictionary.id} className={`item dictionary-box ${selectedDictionary === dictionary.id ? "selected" : ""
+                }`}   onClick={() => handleDictionaryClick(dictionary)}>
                   <div
                     className={`dictionary item-header ${selectedDictionary === dictionary.id ? 'expanded' : ''}`}
                     
@@ -91,8 +108,9 @@ const DictionaryReview = () => {
                         <p>{dictionary.definition}</p>
                       </div>                    
                   )}
-                </div>
-              ))
+                </li>
+              ))}
+              </ul>
             ) : (
               <p className="Error">No Term matches {searchTerm}.</p>
             )}
