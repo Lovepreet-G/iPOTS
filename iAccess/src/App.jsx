@@ -4,6 +4,9 @@ import HomePage from "./pages/homepage";
 import AccessMenu from "./pages/accessmenu";
 import Accommodation from "./pages/accommodation";
 import MedicalCondits from "./pages/medicalcondits";
+import ProfilePage from "./pages/accountinfo";
+import ProfileEdit from "./pages/editprofile";
+import ChangePassword from "./pages/changepassword";
 import MedicalConditsReview from "./pages/medicalconditreview";
 import MyAccommodationsMenu from "./pages/myAccommodationsMenu";
 import MyMedicalConditions from "./pages/myMedicalCondtions";
@@ -32,6 +35,9 @@ function App() {
             <Route path="/myaccommodations" element={<MyAccommodations />} />
             <Route path="/myallergies" element={<MyAllergies />} />
             <Route path="/medicalcondits" element={<MedicalCondits />} />
+            <Route path="/accountinfo" element={<ProfilePage />} />
+            <Route path="/editprofile" element={<ProfileEdit />} />
+            <Route path="/changepassword" element={<ChangePassword />} />
             <Route path="/myaccessmenu" element={<MyAccessMenu />} />
             <Route path="/mymedicalconditions" element={<MyMedicalConditions />} />
             <Route

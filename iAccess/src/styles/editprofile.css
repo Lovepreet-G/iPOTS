@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
+
+.profile-edit-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+}
+
+.profile-header2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.profile-picture2 {
+    width: 245px;
+    height: 245px;
+}
+
+.change-picture2 {
+  font-size: 20px;
+  margin-top: 10px;
+  color: #000000;
+  cursor: pointer;
+}
+
+.user-name {
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    font-weight: medium;
+    margin-top: 10px;
+}
+
+.profile-form { 
+  display: flex;
+  flex-direction: column; /* Stack form items vertically */
+  align-items: flex-start;
+  width: 80%; 
+  max-width: 798px; 
+  height: 60vh; 
+  max-height: 475px; 
+}
+
+.form-group {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 40px 10px 10px;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  outline: none;
+}
+
+.edit-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.change-password {
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: left;
+  margin-top: 10px;
+}
+
+/* Mobile Design */
+@media (max-width: 971px) {
+  .profile-picture2{
+    width: 7.813rem;
+    height: 7.813rem;
+
+  }
+  .user-name{
+    width: 13.125rem;
+    height: 2.813rem;
+    font-size: 1.875rem;
+  }
+}
